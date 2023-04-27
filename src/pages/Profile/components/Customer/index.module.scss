@@ -1,0 +1,55 @@
+.container {
+  position: relative;
+  transition: all 0.5 ease-in-out;
+  &:hover {
+    .tooltiptext {
+      visibility: visible;
+    }
+  }
+}
+
+.logo {
+  width: 180px;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -16px;
+    left: 10px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+  }
+}
+
+@media (max-width: 1024px) {
+  .h1_title {
+    margin: 18px 0;
+  }
+  .logo {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .h1_title {
+    margin: 10px 0;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 426px) {
+}

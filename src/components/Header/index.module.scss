@@ -1,0 +1,13 @@
+.wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+  img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 426px) {
+  .wrapper {
+    margin-bottom: 10px;
+  }
+}

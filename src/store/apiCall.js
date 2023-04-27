@@ -1,0 +1,72 @@
+import { DOMAIN } from '../constant/constant';
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  logoutUser,
+  registerSuccess,
+} from './authSlice';
+import axios from 'axios';
+
+export const loginCall = async (data, dispatch) => {
+  dispatch(loginStart());
+  try {
+    const res = await axios.post(`${DOMAIN}auth/login`, data);
+    await dispatch(loginSuccess(res.data));
+  } catch (error) {
+    dispatch(loginFailure());
+  }
+};
+
+export const registerCall = async (data, dispatch, navigate, success) => {
+  dispatch(loginStart());
+  try {
+    await axios.post(`${DOMAIN}auth/register`, data);
+    await dispatch(registerSuccess());
+    await success();
+    setTimeout(() => {
+      navigate('/profile');
+    }, 2000);
+  } catch (error) {
+    dispatch(loginFailure());
+  }
+};
+
+export const logout = dispatch => {
+  dispatch(logoutUser());
+};
+
+export const pushInfoCompany = async (data, navigate) => {
+  try {
+    const res = await axios.post(`${DOMAIN}profile/updateprofile`, data);
+    res && navigate('');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const pushSlotBooking = async data => {
+  try {
+    const res = await axios.post(`${DOMAIN}booking`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllCompany = async () => {
+  try {
+    const res = await axios.get(`${DOMAIN}getcompany/`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCompany = async data => {
+  try {
+    const res = await axios.get(`${DOMAIN}getcompany/${data}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

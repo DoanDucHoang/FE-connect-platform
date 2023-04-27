@@ -1,0 +1,20 @@
+.calendar_container {
+  display: flex;
+}
+.booking_delete_button {
+  color: black;
+  background-color: #ff0000;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  width: 70px;
+  font-size: 16px;
+  color: #ffff;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #ff7777;
+    color: #000;
+    transition: all 200ms ease-in-out;
+  }
+}

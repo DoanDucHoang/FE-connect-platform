@@ -1,0 +1,85 @@
+.backtop {
+  margin-left: 10px;
+  :global {
+    .ant-back-top {
+      right: 44px;
+    }
+    .ant-back-top-content {
+      background-color: #0c59db;
+      &:hover {
+        background-color: #0c59db;
+      }
+    }
+    .ant-float-btn-body {
+      position: relative;
+      background-color: #0c59db;
+      svg {
+        color: white;
+      }
+    }
+  }
+}
+
+.animation {
+  width: 40px;
+  height: 40px;
+  transition: all 0.2s ease-in-out;
+  animation: white-shadow 0.8s infinite, red-shadow 0.8s infinite;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 50px;
+  right: 44px;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes white-shadow {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+    -webkit-transition: box-shadow 0.3s ease-in-out;
+    -webkit-transition: -webkit-box-shadow 0.3s ease-in-out;
+    -o-transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
+  }
+
+  100% {
+    -webkit-box-shadow: 0 0 0 30px transparent;
+    box-shadow: 0 0 0 30px transparent;
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition: box-shadow 0.4s ease-in-out;
+    -webkit-transition: -webkit-box-shadow 0.4s ease-in-out;
+    -o-transition: box-shadow 0.4s ease-in-out;
+    transition: box-shadow 0.4s ease-in-out;
+    transition: box-shadow 0.4s ease-in-out, -webkit-box-shadow 0.4s ease-in-out;
+  }
+}
+
+@-webkit-keyframes red-shadow {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(31, 100, 188, 0.4);
+    box-shadow: 0 0 0 0 rgba(31, 100, 188, 0.4);
+  }
+
+  100% {
+    -webkit-box-shadow: 0 0 0 30px transparent;
+    box-shadow: 0 0 0 30px transparent;
+  }
+}
+
+@keyframes red-shadow {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(31, 100, 188, 0.4);
+    box-shadow: 0 0 0 0 rgba(31, 100, 188, 0.4);
+  }
+
+  100% {
+    -webkit-box-shadow: 0 0 0 30px transparent;
+    box-shadow: 0 0 0 30px transparent;
+  }
+}
