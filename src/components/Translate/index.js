@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ReactFlagsSelect from 'react-flags-select';
+import logoVN from '../../assets/logo2.png';
+import logoEN from '../../assets/logo3.png';
+import logoJP from '../../assets/logo4.png';
 import './index.scss';
 
 const Translate = () => {
@@ -37,10 +40,7 @@ const Translate = () => {
         />
         <label htmlFor="vn">
           <div className="flag_icon">
-            <img
-              src="http://localhost:3000/static/media/logo2.054728c8e7081cf4b673.png"
-              alt=""
-            />
+            <img src={logoVN} alt="" />
           </div>
         </label>
       </div>
@@ -55,10 +55,7 @@ const Translate = () => {
         />
         <label htmlFor="en">
           <div className="flag_icon">
-            <img
-              src="http://localhost:3000/static/media/logo3.f5dcebd68bc84a60a22d.png"
-              alt=""
-            />
+            <img src={logoEN} alt="" />
           </div>
         </label>
       </div>
@@ -73,10 +70,7 @@ const Translate = () => {
         />
         <label htmlFor="jp">
           <div className="flag_icon">
-            <img
-              src="http://localhost:3000/static/media/logo4.e589f7cf672eca3ebf6e.png"
-              alt=""
-            />
+            <img src={logoJP} alt="" />
           </div>
         </label>
       </div>
