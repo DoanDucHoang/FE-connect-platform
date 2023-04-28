@@ -55,7 +55,7 @@ const MemberProfile = () => {
       const formData = new FormData();
       formData.append('file', file);
       const res = await axios.post(
-        'http://localhost:8000/api/upload',
+        'https://server-vjc.onrender.com/api/upload',
         formData
       );
       return res.data;

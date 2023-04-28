@@ -65,12 +65,12 @@ const HistoryBooking = () => {
   const getCalendarBooking = async () => {
     if (user.country === 'Japan') {
       const res = await axios.get(
-        `http://localhost:8000/server/booking/${user.company_name}`
+        `https://server-vjc.onrender.com/server/booking/${user.company_name}`
       );
       setListBooking(res.data);
     } else {
       const res = await axios.get(
-        `http://localhost:8000/server/booking/vietnam/${user.company_name}`
+        `https://server-vjc.onrender.com/server/booking/vietnam/${user.company_name}`
       );
       console.log(
         '🚀 ~ file: index.jsx:75 ~ getCalendarBooking ~ res:',
@@ -90,7 +90,9 @@ const HistoryBooking = () => {
       setToggleCleared(!toggleCleared);
       selectRows.map(
         async item =>
-          await axios.delete(`http://localhost:8000/server/booking/${item.id}`)
+          await axios.delete(
+            `https://server-vjc.onrender.com/server/booking/${item.id}`
+          )
       );
       window.location.reload();
     };
