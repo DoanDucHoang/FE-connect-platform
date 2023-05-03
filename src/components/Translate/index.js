@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ReactFlagsSelect from 'react-flags-select';
-import { logoVN } from '../../assets/logo2.png';
-import { logoEN } from '../../assets/logo3.png';
-import { logoJP } from '../../assets/logo4.png';
+import logoVN from '../../assets/logo2.png';
+import logoEN from '../../assets/logo3.png';
+import logoJP from '../../assets/logo4.png';
 import './index.scss';
 
 const Translate = () => {
