@@ -83,6 +83,11 @@ const TimeAddress = () => {
               </div>
             </Col>
           ))}
+          {/* <FlipClock
+            type="countdown"
+            count_to="2023-06-08 00:00:00"
+            className={style.timeAddress__countdown}
+          /> */}
         </Row>
         <a className={style.linklogin} href="/">
           {t('REGISTRATION')}

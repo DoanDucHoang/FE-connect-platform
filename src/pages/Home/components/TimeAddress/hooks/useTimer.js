@@ -10,7 +10,7 @@ export default function useTimer(deadline, interval = SECOND) {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTimespan((_timespan) => _timespan - interval);
+      setTimespan(_timespan => _timespan - interval);
     }, interval);
 
     return () => {
@@ -24,9 +24,9 @@ export default function useTimer(deadline, interval = SECOND) {
   }, [deadline]);
 
   return [
-    { title: 'Ngày', time: Math.floor(timespan / DAY) },
-    { title: 'Giờ', time: Math.floor((timespan / HOUR) % 24) },
-    { title: 'Phút', time: Math.floor((timespan / MINUTE) % 60) },
-    { title: 'Giây', time: Math.floor((timespan / SECOND) % 60) },
+    { title: 'Day', time: Math.floor(timespan / DAY) },
+    { title: 'Hour', time: Math.floor((timespan / HOUR) % 24) },
+    { title: 'Minute', time: Math.floor((timespan / MINUTE) % 60) },
+    { title: 'second', time: Math.floor((timespan / SECOND) % 60) },
   ];
 }

@@ -1,5 +1,6 @@
 export const ROUTES = {
   HOME: '/',
+  EVENT: '/bm1',
   PROFILE: '/profile',
   DETAIL: 'profile/:username',
   UPDATE_PROFILE: '/update_profile',

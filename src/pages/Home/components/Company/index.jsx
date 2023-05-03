@@ -18,7 +18,6 @@ import logo3 from '../../../../assets/logo3.png';
 import logo4 from '../../../../assets/logo4.png';
 
 const Company = ({ companys, title }) => {
-  console.log('🚀 ~ file: index.jsx:21 ~ Company ~ companys:', companys);
   const { t, i18n } = useTranslation();
   return (
     <Container>

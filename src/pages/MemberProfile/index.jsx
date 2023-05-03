@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import './index.scss';
-import { Checkbox, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
 import { Editor } from '@tinymce/tinymce-react';
 import { useSelector } from 'react-redux';
-import { pushInfoCompany } from '../../store/apiCall';
+//import { pushInfoCompany } from '../../store/apiCall';
 import { useNavigate } from 'react-router-dom';
-import { Radio } from 'antd';
+//import { Radio } from 'antd';
 import {
-  translateSelectLanguage,
-  translateProfile,
-  translateObligatory,
-  translateInfoCompany,
+  //translateSelectLanguage,
+  //translateProfile,
+  //translateObligatory,
+  //translateInfoCompany,
   translateEstablishment,
   translateEmployee,
-  translateRequest,
+  //translateRequest,
   translateCompanyLogo,
   translatePreferred,
   translateLanguageWork,
   translateTypeOfBusiness,
   translateCapital,
-  translateAddress,
+  //translateAddress,
   translateAssociationlogo,
   translateDescription,
   translateServices,
-  translateName,
-  translateServiceName,
-  translateServiceDescription,
+  //translateName,
+  //translateServiceName,
+  //translateServiceDescription,
   translateServicePicture,
   translateDeleteButton,
   translateAddButton,
@@ -34,9 +34,9 @@ import {
   translateCompanyFeaturesDesc,
   translateCompanyCoreMembers,
   translateFullName,
-  translatePosition,
+  //translatePosition,
   translateMemberPicture,
-  translateMemberDescription,
+  //translateMemberDescription,
   translateCompanyClients,
   translateCompanyClientsName,
   translateCompanyClientsLogo,
@@ -47,15 +47,15 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
 const MemberProfile = () => {
-  const { t, i18n } = useTranslation();
-  const [file, setFile] = useState(null);
+  const { t } = useTranslation();
+  //const [file, setFile] = useState(null);
 
   const upload = async file => {
     try {
       const formData = new FormData();
       formData.append('file', file);
       const res = await axios.post(
-        'https://server-vjc.onrender.com/api/upload',
+        'http://localhost:8000/api/upload',
         formData
       );
       return res.data;
@@ -65,7 +65,7 @@ const MemberProfile = () => {
   };
 
   const user = useSelector(state => state.auth.currentUser);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const checkboxValue = [];
@@ -178,11 +178,6 @@ const MemberProfile = () => {
         },
       ]);
     }
-  };
-
-  const onChange = e => {
-    setLanguage(e.target.value);
-    console.log(language);
   };
 
   const handleChangeInfo = e => {

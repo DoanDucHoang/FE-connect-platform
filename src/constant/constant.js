@@ -1,6 +1,6 @@
 export const COUNTRY = { VN: 'VIỆT NAM', JP: 'NHẬT BẢN' };
 
-export const DOMAIN = 'https://server-vjc.onrender.com/server/';
+export const DOMAIN = 'http://localhost:8000/server/';
 
 export const LANGUAGES = ['jp', 'us'];
 

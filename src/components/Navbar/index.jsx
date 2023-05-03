@@ -64,7 +64,7 @@ const Navbar = () => {
         <Col span={4} className={style.logo}>
           <Link to="/">
             <img
-              src="https://vijaba.com/uploads/img/members/logo/1647828997-1647397913-1647329875-vjp-removebg-preview.png"
+              src="https://lh5.googleusercontent.com/-aE5Q7UG1qQ8/AAAAAAAAAAI/AAAAAAAAAAA/FT52yrqAETQ/s55-p-k-no-ns-nd/photo.jpg"
               alt=""
             />
           </Link>
@@ -73,10 +73,14 @@ const Navbar = () => {
           <div className={style.navbar__left_menu}>
             <Link to="/">{t('Home')}</Link>
             <Link to="/update_profile">{t('Event')}</Link>
+            <Link to="/">About Us</Link>
+            <Link to="/">Member List</Link>
+            <Link to="/">Hot Deals</Link>
+            <Link to="/">News</Link>
+            <Link to="/">Contact</Link>
+            <button className="button_member_register">Member register</button>
           </div>
-          <div className="right_menu">
-            <Translate />
-          </div>
+          <div className="right_menu">{/* <Translate /> */}</div>
         </Col>
         <Col span={2} className={style.button__login}>
           {user ? (

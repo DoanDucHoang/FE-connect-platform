@@ -2,6 +2,7 @@
   &__container {
     position: sticky;
     width: 100%;
+    padding: 20px 200px;
     background: white;
     z-index: 999;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -26,13 +27,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    button {
+      background: #002c90;
+      border: none;
+      color: white;
+      padding: 10px 26px;
+      border-radius: 4px;
+      font-weight: 700;
+      &:hover {
+        box-shadow: 4px 5px 10px 0px rgba(0, 22, 94, 0.6);
+        cursor: pointer;
+      }
+    }
   }
 }
 
 .logo {
   width: 200px;
   img {
-    width: 45%;
+    width: 50%;
   }
 }
 .button__login {

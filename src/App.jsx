@@ -13,6 +13,7 @@ import './i18n';
 import { ROUTES } from './constant/ROUTES';
 import store from './store';
 import Home from './pages/Home';
+import Landing from './pages/landing';
 import Profile from './pages/Profile';
 import Auth from './pages/RegisterLogin';
 import MemberProfile from './pages/MemberProfile';
@@ -25,7 +26,8 @@ function App() {
     <Router>
       <div className="wrapper">
         <Routes>
-          <Route exact path={ROUTES.HOME} element={<Home />} />
+          <Route exact path={ROUTES.HOME} element={<Landing />} />
+          <Route exact path={ROUTES.EVENT} element={<Home />} />
           <Route
             exact
             path={ROUTES.PROFILE}
