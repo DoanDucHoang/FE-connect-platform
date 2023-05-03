@@ -17,7 +17,6 @@ const Profile = () => {
             <div className="left_row"></div>
             <div className="right_row">
               <Translate />
-              <div>hello</div>
             </div>
           </div>
         </div>
