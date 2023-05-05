@@ -7,11 +7,11 @@ const Service = () => {
   const { t, i18n } = useTranslation();
   return (
     <Container>
-      <Row justify={'center'}>
+      {/* <Row justify={'center'}>
         <h1 className={style.service__title}>
           {t('GROUPS OF BUSINESS PARTICIPANTS')}
         </h1>
-      </Row>
+      </Row> */}
       <div className={style.wrapper}>
         <Row gutter={[32, 32]}>
           <Col xl={6} lg={12} md={12} xs={24}>

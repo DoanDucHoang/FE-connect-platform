@@ -18,6 +18,7 @@ import logo3 from '../../../../assets/logo3.png';
 import logo4 from '../../../../assets/logo4.png';
 
 const Company = ({ companys, title }) => {
+  console.log('🚀 ~ file: index.jsx:21 ~ Company ~ companys:', companys);
   const { t, i18n } = useTranslation();
   return (
     <Container>
@@ -45,7 +46,7 @@ const Company = ({ companys, title }) => {
       >
         {companys.map(item => (
           <SwiperSlide key={item.id}>
-            <Link to={`/profile/${item.company_name}`}>
+            <Link to={`/profile/${item.company_ID}`}>
               <div className={style.container}>
                 <Row justify={'space-between'} align={'middle'}>
                   <Col span={12}>

@@ -42,7 +42,7 @@ const Navbar = () => {
     {
       key: '2',
       label: (
-        <Link to={`/book/${user ? user.company_name : ''}`}>
+        <Link to={`/book/${user ? user.id : ''}`}>
           <CalendarOutlined style={{ marginRight: '18px' }} />{' '}
           {t('History Book')}
         </Link>

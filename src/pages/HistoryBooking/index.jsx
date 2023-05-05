@@ -61,11 +61,12 @@ const HistoryBooking = () => {
   const [toggleCleared, setToggleCleared] = useState(false);
   const [pending, setPending] = useState(true);
   const user = useSelector(state => state.auth.currentUser);
+  console.log('🚀 ~ file: index.jsx:64 ~ HistoryBooking ~ user:', user.id);
 
   const getCalendarBooking = async () => {
     if (user.country === 'Japan') {
       const res = await axios.get(
-        `http://localhost:8000/server/booking/${user.company_name}`
+        `http://localhost:8000/server/booking/${user.id}`
       );
       setListBooking(res.data);
     } else {

@@ -20,10 +20,12 @@ import Navbar from '../../components/Navbar';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
+  console.log('🚀 ~ file: index.jsx:23 ~ Profile ~ user:', user.id);
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const [slotBooking, setSlotBooking] = useState([]);
   const { username } = useParams();
+  console.log('🚀 ~ file: index.jsx:28 ~ Profile ~ username:', username);
   const {
     company_core_members,
     company_description,
@@ -43,7 +45,7 @@ const Profile = () => {
           .catch(err => {
             console.log(err);
           })
-      : getCompany(user.company_name)
+      : getCompany(user.id)
           .then(data => {
             setInfo(data);
           })
