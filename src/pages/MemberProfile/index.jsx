@@ -287,7 +287,7 @@ const MemberProfile = () => {
       core,
       clients,
     ];
-    //pushInfoCompany(data, navigate);
+    pushInfoCompany(data, navigate);
     localStorage.setItem('linkWebsite', JSON.stringify(data[0].info_url));
     console.log(data);
   };
