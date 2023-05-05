@@ -4,7 +4,7 @@ import './index.scss';
 import { Col, Row } from 'antd';
 import { Editor } from '@tinymce/tinymce-react';
 import { useSelector } from 'react-redux';
-//import { pushInfoCompany } from '../../store/apiCall';
+import { pushInfoCompany } from '../../store/apiCall';
 import { useNavigate } from 'react-router-dom';
 //import { Radio } from 'antd';
 import {
@@ -65,7 +65,7 @@ const MemberProfile = () => {
   };
 
   const user = useSelector(state => state.auth.currentUser);
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const checkboxValue = [];
