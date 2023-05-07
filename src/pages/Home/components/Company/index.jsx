@@ -49,10 +49,10 @@ const Company = ({ companys, title }) => {
             <Link to={`/profile/${item.company_ID}`}>
               <div className={style.container}>
                 <Row justify={'space-between'} align={'middle'}>
-                  <Col span={12}>
+                  <Col span={6}>
                     <img
                       className={style.banner}
-                      src="https://vj-partner.com/uploads/img/general/1638966072-logo-VJP-[306x75].png"
+                      src={item.company_logo}
                       alt=""
                     />
                   </Col>

@@ -6,6 +6,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useSelector } from 'react-redux';
 import { pushInfoCompany } from '../../store/apiCall';
 import { useNavigate } from 'react-router-dom';
+import { UPLOAD_IMAGE } from '../../constant/constant';
 //import { Radio } from 'antd';
 import {
   //translateSelectLanguage,
@@ -54,10 +55,7 @@ const MemberProfile = () => {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const res = await axios.post(
-        'http://localhost:8000/api/upload',
-        formData
-      );
+      const res = await axios.post(UPLOAD_IMAGE, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -70,8 +68,8 @@ const MemberProfile = () => {
   const [info, setInfo] = useState({});
   const checkboxValue = [];
   const [description, setDescription] = useState();
-  const [descriptionEnglish, setDescriptionEnglish] = useState();
-  const [descriptionJapanese, setDescriptionJapanese] = useState();
+  const [descriptionEN, setDescriptionEN] = useState();
+  const [descriptionJP, setDescriptionJP] = useState();
   const [language, setLanguage] = useState('en');
   const [services, setServices] = useState([
     {
@@ -184,8 +182,13 @@ const MemberProfile = () => {
     const { name, value } = e.target;
     if (e.target.name === 'language') {
       if (e.target.checked) {
-        checkboxValue.push(e.target.value);
-        setInfo({ ...info, [name]: checkboxValue });
+        //checkboxValue.unshift(e.target.value);
+
+        setInfo({ ...info, languages: [...checkboxValue, e.target.value] });
+        console.log(
+          '🚀 ~ file: index.jsx:190 ~ handleChangeInfo ~ info:',
+          info
+        );
       } else {
         let index = checkboxValue.indexOf(e.target.id);
         checkboxValue.splice(index, 1);
@@ -193,6 +196,7 @@ const MemberProfile = () => {
       }
     } else {
       setInfo({ ...info, [name]: value });
+      console.log(name + ': ' + value);
     }
   };
 
@@ -281,7 +285,13 @@ const MemberProfile = () => {
   const handleSubmit = () => {
     const data = [
       { ...info, email, company_name },
-      { description, email: email, company_name: company_name },
+      {
+        description,
+        descriptionEN,
+        descriptionJP,
+        email: email,
+        company_name: company_name,
+      },
       services,
       features,
       core,
@@ -295,7 +305,6 @@ const MemberProfile = () => {
   return (
     <div className="member__wrapper">
       <Navbar />
-
       <div className="member__container">
         <Row className="member__title" justify={'center'} align={'middle'}>
           <Col span={24}>
@@ -434,12 +443,32 @@ const MemberProfile = () => {
                   type="text"
                   placeholder="IT"
                 /> */}
-                <select name="ceategory" id="" className="ceategory_member">
-                  <option value="">Advancement Support</option>
-                  <option value="">System Development</option>
-                  <option value="">Recruitment</option>
-                  <option value="">Japanese Language Education</option>
-                  <option value="">Sightseeing</option>
+                <select
+                  name="ceategory"
+                  id=""
+                  className="ceategory_member"
+                  onChange={handleChangeInfo}
+                >
+                  <option value="Du lịch & giải trí & thiết kế">
+                    Du lịch & giải trí & thiết kế
+                  </option>
+                  <option value="Ngành thực phẩm & dịch vụ　">
+                    Ngành thực phẩm & dịch vụ　
+                  </option>
+                  <option value="Kinh doanh theo xu hướng">
+                    Kinh doanh theo xu hướng
+                  </option>
+                  <option value="Liên quan đến CNTT">Liên quan đến CNTT</option>
+                  <option value="Liên quan đến thực tập sinh kỹ năng">
+                    Liên quan đến thực tập sinh kỹ năng
+                  </option>
+                  <option value="Giáo dục & chăm sóc">
+                    Giáo dục & chăm sóc
+                  </option>
+                  <option value="Mở rộng sang Việt Nam">
+                    Mở rộng sang Việt Nam
+                  </option>
+                  <option value="Khác">Khác</option>
                 </select>
               </div>
               <div className="member__main_info_item">
@@ -548,7 +577,7 @@ const MemberProfile = () => {
           <Editor
             apiKey="llhgp2l4okfe8p5ocd3ies84wrt9rs82y4xdc69nlmm0rc58"
             onEditorChange={(content, editor) => {
-              setDescriptionEnglish(content);
+              setDescriptionEN(content);
             }}
             initialValue=""
             init={{
@@ -589,7 +618,7 @@ const MemberProfile = () => {
           <Editor
             apiKey="llhgp2l4okfe8p5ocd3ies84wrt9rs82y4xdc69nlmm0rc58"
             onEditorChange={(content, editor) => {
-              setDescriptionJapanese(content);
+              setDescriptionJP(content);
             }}
             initialValue=""
             init={{
@@ -659,14 +688,14 @@ const MemberProfile = () => {
                   <input
                     onChange={e => handelChangeService(e, item)}
                     type="text"
-                    name="product_name"
+                    name="product_name_EN"
                     required
                   />
                   <h5>{t('Service Name (Japanese)')}</h5>
                   <input
                     onChange={e => handelChangeService(e, item)}
                     type="text"
-                    name="product_name"
+                    name="product_name_JP"
                     required
                   />
                 </div>
@@ -733,7 +762,7 @@ const MemberProfile = () => {
                       let index = services.findIndex(
                         data => data.id === item.id
                       );
-                      newServices[index].product_description = content;
+                      newServices[index].product_description_EN = content;
                       setServices([...newServices]);
                     }}
                     initialValue=""
@@ -779,7 +808,7 @@ const MemberProfile = () => {
                       let index = services.findIndex(
                         data => data.id === item.id
                       );
-                      newServices[index].product_description = content;
+                      newServices[index].product_description_JP = content;
                       setServices([...newServices]);
                     }}
                     initialValue=""
@@ -859,7 +888,7 @@ const MemberProfile = () => {
                   onChange={e => handleChangeFeature(e, item)}
                   className="member__features_input2"
                   type="text"
-                  name="speciality_desc_vn"
+                  name="speciality_desc"
                 />
                 <h5>Mô Tả Đặc Trưng (Tiếng Anh)</h5>
                 <input
@@ -909,14 +938,14 @@ const MemberProfile = () => {
                   onChange={e => handleChangeCore(e, item)}
                   className="member__core_input"
                   type="text"
-                  name="member_position"
+                  name="member_position_EN"
                 />
                 <div className="member__core_title">Chức Vụ (Tiếng Nhật): </div>
                 <input
                   onChange={e => handleChangeCore(e, item)}
                   className="member__core_input"
                   type="text"
-                  name="member_position"
+                  name="member_position_JP"
                 />
               </Col>
               <Col span={7}>
@@ -953,7 +982,7 @@ const MemberProfile = () => {
                 </div>
                 <textarea
                   onChange={e => handleChangeCore(e, item)}
-                  name="member_desc"
+                  name="member_desc_EN"
                   id=""
                   cols="42"
                   rows="12"
@@ -963,7 +992,7 @@ const MemberProfile = () => {
                 </div>
                 <textarea
                   onChange={e => handleChangeCore(e, item)}
-                  name="member_desc"
+                  name="member_desc_JP"
                   id=""
                   cols="42"
                   rows="12"
@@ -1030,14 +1059,14 @@ const MemberProfile = () => {
                 <div className="member__core_title">URL (English)</div>
                 <input
                   onChange={e => handleChangeClient(e, item)}
-                  name="client_url"
+                  name="client_url_EN"
                   className="member__core_input"
                   type="text"
                 />
                 <div className="member__core_title">URL (Japan)</div>
                 <input
                   onChange={e => handleChangeClient(e, item)}
-                  name="client_url"
+                  name="client_url_JP"
                   className="member__core_input"
                   type="text"
                 />

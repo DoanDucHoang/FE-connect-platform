@@ -8,7 +8,6 @@ import image6 from '../../../../assets/InoueTadasu.jpg';
 import './index.scss';
 
 const SlideImage = props => {
-  console.log('🚀 ~ file: index.jsx:11 ~ SlideImage ~ props:', props);
   return (
     <div className="slide_container">
       {props.props === 'professional' ? (

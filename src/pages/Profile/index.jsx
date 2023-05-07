@@ -20,12 +20,10 @@ import Navbar from '../../components/Navbar';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
-  console.log('🚀 ~ file: index.jsx:23 ~ Profile ~ user:', user.id);
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const [slotBooking, setSlotBooking] = useState([]);
   const { username } = useParams();
-  console.log('🚀 ~ file: index.jsx:28 ~ Profile ~ username:', username);
   const {
     company_core_members,
     company_description,
@@ -35,6 +33,10 @@ const Profile = () => {
     company_specialties,
     slot_booking,
   } = info;
+  console.log(
+    '🚀 ~ file: index.jsx:36 ~ Profile ~ company_specialties:',
+    company_specialties
+  );
 
   useEffect(() => {
     username
@@ -79,7 +81,7 @@ const Profile = () => {
           <Col span={8}>
             <img
               className={style.banner}
-              src="https://vj-partner.com/uploads/img/general/1638966072-logo-VJP-[306x75].png"
+              src={{ ...company_info }[0]?.company_logo}
               alt=""
             />
           </Col>
@@ -114,7 +116,9 @@ const Profile = () => {
               <span>Capital: </span>
               <p>$ {{ ...company_info }[0]?.capital}</p>
             </Row>
-            <p className={style.addresss}>{{ ...company_info }[0]?.address}</p>
+            <p className={style.addresss}>
+              {{ ...company_info }[0]?.address_vn}
+            </p>
             <Row className={style.flag}>
               <img src={logo1} alt="" />
               <img src={logo2} alt="" />
@@ -130,7 +134,7 @@ const Profile = () => {
             <div style={{ marginTop: '20px', fontWeight: '600' }}>Needs :</div>
             <div className={style.customer}>
               <div className={style.customer__item}>
-                {{ ...company_info }[0]?.needs}
+                {{ ...company_info }[0]?.needs_vn}
               </div>
             </div>
           </Col>

@@ -21,19 +21,19 @@ const Home = () => {
   };
   const [companys, setCompanys] = useState([]);
 
-  const companyVN = companys.filter((item) => {
+  const companyVN = companys.filter(item => {
     return item.country === 'Viet Nam';
   });
-  const companyJP = companys.filter((item) => {
+  const companyJP = companys.filter(item => {
     return item.country === 'Japan';
   });
 
   useEffect(() => {
     getAllCompany()
-      .then((data) => {
+      .then(data => {
         setCompanys(data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }, []);
@@ -46,7 +46,7 @@ const Home = () => {
       <TimeAddress />
       <Donors />
       <Service />
-      <Company companys={companyVN} title={COUNTRY.VN} />
+      {/* <Company companys={companyVN} title={COUNTRY.VN} /> */}
       <Company companys={companyJP} title={COUNTRY.JP} />
       <Footer />
       <div className={isScrolled ? style.backtop : style.hidden}>
