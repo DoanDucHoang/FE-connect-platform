@@ -89,9 +89,14 @@ const Company = ({ companys, title }) => {
                     <p className={style.addresss}>{item.address}</p>
                     <Row className={style.flag}>
                       <img src={logo1} alt="" />
-                      <img src={logo2} alt="" />
+                      {item.languages === 'japan' ? (
+                        <img src={logo4} alt="" />
+                      ) : (
+                        ''
+                      )}
+                      {/* <img src={logo2} alt="" />
                       <img src={logo3} alt="" />
-                      <img src={logo4} alt="" />
+                      <img src={logo4} alt="" /> */}
                     </Row>
                   </Col>
                   <Col span={10} className={style.customer__container}>

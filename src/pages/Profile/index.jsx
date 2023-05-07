@@ -121,9 +121,15 @@ const Profile = () => {
             </p>
             <Row className={style.flag}>
               <img src={logo1} alt="" />
+              {{ ...company_info }[0]?.languages === 'japan' ? (
+                <img src={logo4} alt="" />
+              ) : (
+                ''
+              )}
+              {/* <img src={logo1} alt="" />
               <img src={logo2} alt="" />
               <img src={logo3} alt="" />
-              <img src={logo4} alt="" />
+              <img src={logo4} alt="" /> */}
             </Row>
           </Col>
           <Col span={10}>
