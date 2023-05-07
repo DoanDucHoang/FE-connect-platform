@@ -27,7 +27,7 @@ const Company = ({ companys, title }) => {
           {t('Representative Company In')} <span>{t(`${title}`)}</span>
         </h1>
       </Row>
-      <Swiper
+      {/* <Swiper
         style={{ zIndex: '0' }}
         slidesPerView={1}
         spaceBetween={8}
@@ -43,9 +43,10 @@ const Company = ({ companys, title }) => {
         }}
         modules={[Navigation]}
         className="mySwiper"
-      >
+      > */}
+      <Row gutter={[16, 16]} justify={'center'}>
         {companys.map(item => (
-          <SwiperSlide key={item.id}>
+          <Col md={10} xs={12}>
             <Link to={`/profile/${item.company_ID}`}>
               <div className={style.container}>
                 <Row justify={'space-between'} align={'middle'}>
@@ -106,9 +107,10 @@ const Company = ({ companys, title }) => {
                 </Row>
               </div>
             </Link>
-          </SwiperSlide>
+          </Col>
         ))}
-      </Swiper>
+      </Row>
+      {/* </Swiper> */}
     </Container>
   );
 };
