@@ -27,29 +27,24 @@ function App() {
       <div className="wrapper">
         <Routes>
           <Route exact path={ROUTES.HOME} element={<Landing />} />
-          <Route exact path={ROUTES.EVENT} element={<Home />} />
+          <Route path={ROUTES.EVENT} element={<Home />} />
           <Route
-            exact
             path={ROUTES.PROFILE}
             element={user ? <Profile /> : <Navigate to={ROUTES.LOGIN} />}
           />
           <Route
-            exact
             path={ROUTES.UPDATE_PROFILE}
             element={user ? <MemberProfile /> : <Navigate to={ROUTES.LOGIN} />}
           />
           <Route
-            exact
             path={ROUTES.BOOK}
             element={user ? <HistoryBooking /> : <Navigate to={ROUTES.LOGIN} />}
           />
           <Route
-            exact
             path={ROUTES.DETAIL}
             element={user ? <Profile /> : <Navigate to={ROUTES.LOGIN} />}
           />
           <Route
-            exact
             path={ROUTES.LOGIN}
             element={user ? <Navigate to={ROUTES.HOME} /> : <Auth />}
           />
