@@ -32,6 +32,7 @@ function App() {
             path={ROUTES.PROFILE}
             element={user ? <Profile /> : <Navigate to={ROUTES.LOGIN} />}
           />
+
           <Route
             path={ROUTES.UPDATE_PROFILE}
             element={user ? <MemberProfile /> : <Navigate to={ROUTES.LOGIN} />}
