@@ -117,8 +117,13 @@ const Navbar = () => {
         open={open}
         className={style.menu__mobile_item}
       >
-        <Link to="/">Trang chủ</Link>
-        <Link to="/update_profile">Đăng ký sự kiện</Link>
+        <Link to="/">{t('Home')}</Link>
+        <Link to="/update_profile">{t('Event')}</Link>
+        <Link to="/">{t('About Us')}</Link>
+        <Link to="/">{t('Member List')}</Link>
+        <Link to="/">{t('Hot Deals')}</Link>
+        <Link to="/">{t('News')}</Link>
+        <Link to="/">{t('Contact')}</Link>
 
         {!user ? (
           <Link to="/login">

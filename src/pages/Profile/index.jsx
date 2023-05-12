@@ -23,6 +23,7 @@ import Translate from '../../components/Translate';
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
   const { t } = useTranslation();
+  const [lang, setLang] = useState();
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const [slotBooking, setSlotBooking] = useState([]);
@@ -36,10 +37,6 @@ const Profile = () => {
     company_specialties,
     slot_booking,
   } = info;
-  console.log(
-    '🚀 ~ file: index.jsx:36 ~ Profile ~ company_specialties:',
-    company_specialties
-  );
 
   useEffect(() => {
     username
@@ -78,7 +75,7 @@ const Profile = () => {
 
   return (
     <>
-      <Translate/>
+      <Translate />
       <Navbar />
       <div className={style.container}>
         <Row justify={'space-between'}>
@@ -90,11 +87,7 @@ const Profile = () => {
             />
           </Col>
           <Col span={6}>
-            <img
-              className={style.logo}
-              src="https://investment-day-assets.sgp1.digitaloceanspaces.com/ybahcm/2021/03/23214250/Logo-YBA-2.png"
-              alt=""
-            />
+            <img className={style.logo} src="" alt="" />
           </Col>
         </Row>
         <Row className={style.content}>

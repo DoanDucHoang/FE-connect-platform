@@ -2,13 +2,13 @@ import React from 'react';
 import Container from '../../../../components/Container';
 import { Col, Row } from 'antd';
 import style from './index.module.scss';
-//import useTimer from './hooks/useTimer';
+import useTimer from './hooks/useTimer';
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
 import { useTranslation } from 'react-i18next';
 
 const TimeAddress = () => {
-  //const timeArray = useTimer('2023-06-08T23:59:59');
+  const timeArray = useTimer('2023-06-08T23:59:59');
   const { t } = useTranslation();
   //const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -103,20 +103,28 @@ const TimeAddress = () => {
           </Col>
         </Row>
 
-        {/* {timeArray.map(item => (
+        <Row gutter={24}>
+          {timeArray.map(item => (
             <Col className="gutter-row" md={6} xs={12} key={item.title}>
               <div className={style.timeAddress__countdown}>
                 <h1>{item.time}</h1>
                 <span>{t(`${item.title}`)}</span>
               </div>
             </Col>
-          ))} */}
+          ))}
+          {/* <FlipClock
+            type="countdown"
+            count_to="2023-06-08 00:00:00"
+            className={style.timeAddress__countdown}
+          /> */}
+        </Row>
+
         {/* <FlipClock
             type="countdown"
             count_to="2023-06-08 00:00:00"
             className={style.timeAddress__countdown}
           /> */}
-        <div
+        {/* <div
           className="flipclock_container"
           style={{ justifyContent: 'center' }}
         >
@@ -147,7 +155,7 @@ const TimeAddress = () => {
             duration={0.7}
             style={{ justifyContent: 'center' }}
           ></FlipClockCountdown>
-        </div>
+        </div> */}
 
         <a className={style.linklogin} href="/">
           {t('REGISTRATION')}
