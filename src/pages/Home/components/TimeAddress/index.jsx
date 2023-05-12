@@ -120,35 +120,33 @@ const TimeAddress = () => {
           className="flipclock_container"
           style={{ justifyContent: 'center' }}
         >
-          <StyleRoot>
-            <FlipClockCountdown
-              className="flipclock"
-              to="2023-06-08T23:59:59"
-              labels={[
-                `${t('DAYS')}`,
-                `${t('HOURS')}`,
-                `${t('MINUTES')}`,
-                `${t('SECONDS')}`,
-              ]}
-              labelStyle={{
-                fontSize: 25,
-                fontWeight: 500,
-                textTransform: 'uppercase',
-              }}
-              digitBlockStyle={
-                // width: 140,
-                // height: 160,
-                // fontSize: 120,
-                // color: '#f7f300',
-                // marginTop: '30px',
-                styleFlipclock
-              }
-              dividerStyle={{ height: 1 }}
-              separatorStyle={{ color: 'white', size: '15px' }}
-              duration={0.7}
-              style={{ justifyContent: 'center' }}
-            ></FlipClockCountdown>
-          </StyleRoot>
+          <FlipClockCountdown
+            className="flipclock"
+            to="2023-06-08T23:59:59"
+            labels={[
+              `${t('DAYS')}`,
+              `${t('HOURS')}`,
+              `${t('MINUTES')}`,
+              `${t('SECONDS')}`,
+            ]}
+            labelStyle={{
+              fontSize: 25,
+              fontWeight: 500,
+              textTransform: 'uppercase',
+            }}
+            digitBlockStyle={
+              // width: 140,
+              // height: 160,
+              // fontSize: 120,
+              // color: '#f7f300',
+              // marginTop: '30px',
+              styleFlipclock
+            }
+            dividerStyle={{ height: 1 }}
+            separatorStyle={{ color: 'white', size: '15px' }}
+            duration={0.7}
+            style={{ justifyContent: 'center' }}
+          ></FlipClockCountdown>
         </div>
 
         <a className={style.linklogin} href="/">
