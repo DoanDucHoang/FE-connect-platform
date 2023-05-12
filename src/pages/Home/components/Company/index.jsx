@@ -58,11 +58,7 @@ const Company = ({ companys, title }) => {
                     />
                   </Col>
                   <Col span={6}>
-                    <img
-                      className={style.logo}
-                      src="https://investment-day-assets.sgp1.digitaloceanspaces.com/ybahcm/2021/03/23214250/Logo-YBA-2.png"
-                      alt=""
-                    />
+                    <img className={style.logo} src="" alt="" />
                   </Col>
                 </Row>
                 <Row className={style.content}>
