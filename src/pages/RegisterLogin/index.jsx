@@ -122,9 +122,7 @@ const Auth = () => {
       >
         <div className={`${style.form_container} ${style.sign_up_container}`}>
           {/* REGISTER */}
-          <div>
-            <Translate />
-          </div>
+          <Translate />
           <form onSubmit={formik.handleSubmit}>
             <h1>{t('Create Account')}</h1>
             {/* <div className={style.social_container}></div> */}
@@ -219,9 +217,7 @@ const Auth = () => {
         </div>
         <div className={`${style.form_container} ${style.sign_in_container}`}>
           {/* LOGIN */}
-          <div>
-            <Translate />
-          </div>
+          <Translate />
           <form>
             <h1>{t('Sign In')}</h1>
             <div className={style.social_container}></div>
