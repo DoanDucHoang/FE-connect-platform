@@ -6,7 +6,6 @@ import style from './index.module.scss';
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
 import { useTranslation } from 'react-i18next';
-import Radium, { StyleRoot } from 'radium';
 
 const TimeAddress = () => {
   //const timeArray = useTimer('2023-06-08T23:59:59');
@@ -160,4 +159,4 @@ const TimeAddress = () => {
   );
 };
 
-export default Radium(TimeAddress);
+export default TimeAddress;
