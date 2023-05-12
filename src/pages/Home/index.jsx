@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { COUNTRY } from '../../constant/constant';
 import Navbar from '../../components/Navbar';
 import { getAllCompany } from '../../store/apiCall';
+import Translate from '../../components/Translate';
 
 const Home = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,12 +22,12 @@ const Home = () => {
   };
   const [companys, setCompanys] = useState([]);
 
-  const companyVN = companys.filter(item => {
+  const companyVN = companys ? companys.filter(item => {
     return item.country === 'Viet Nam';
-  });
-  const companyJP = companys.filter(item => {
+  }) : [];
+  const companyJP = companys ? companys.filter(item => {
     return item.country === 'Japan';
-  });
+  }) : [];
 
   useEffect(() => {
     getAllCompany()
@@ -40,6 +41,7 @@ const Home = () => {
 
   return (
     <>
+      <Translate/>
       <Navbar />
       <Header />
       <Benefit />

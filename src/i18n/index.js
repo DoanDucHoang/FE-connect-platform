@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import us from './locales/us.json';
 import jp from './locales/jp.json';
 import vn from './locales/vn.json';
+import { useEffect } from 'react';
 
 export const resources = {
   us: {

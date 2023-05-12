@@ -44,8 +44,11 @@ import {
   translateSubmitButton,
 } from '../../constant/language.js';
 import { useTranslation } from 'react-i18next';
-
 import axios from 'axios';
+import Translate from '../../components/Translate';
+import { storage } from '../../firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 } from 'uuid';
 
 const MemberProfile = () => {
   const { t } = useTranslation();
@@ -183,20 +186,25 @@ const MemberProfile = () => {
     if (e.target.name === 'language') {
       if (e.target.checked) {
         //checkboxValue.unshift(e.target.value);
-
         setInfo({ ...info, languages: [...checkboxValue, e.target.value] });
-        console.log(
-          '🚀 ~ file: index.jsx:190 ~ handleChangeInfo ~ info:',
-          info
-        );
       } else {
         let index = checkboxValue.indexOf(e.target.id);
         checkboxValue.splice(index, 1);
         //setInfo({ ...info, [name]: value });
       }
+    } else if (e.target.name === 'company_logo') {
+      const imgUrl = e.target.files[0];
+      if (imgUrl === null) {
+        return;
+      }
+      const imageRef = ref(storage, `images/${imgUrl.name + v4()}`);
+      uploadBytes(imageRef, imgUrl).then(snapshot => {
+        getDownloadURL(snapshot.ref).then(url => {
+          setInfo({ ...info, [name]: url });
+        });
+      });
     } else {
       setInfo({ ...info, [name]: value });
-      console.log(name + ': ' + value);
     }
   };
 
@@ -205,10 +213,16 @@ const MemberProfile = () => {
     const newServices = services;
     let index = newServices.findIndex(item => item.id === data.id);
     if (e.target.name === 'product_picture') {
-      //imgUrl = await upload(services[index].product_picture);
-      imgUrl = await upload(e.target.files[0]);
-      const imgUrlServices = 'http://localhost:3000/upload/' + imgUrl.filename;
-      newServices[index][e.target.name] = imgUrlServices;
+      const imgUrl = e.target.files[0];
+      if (imgUrl === null) {
+        return;
+      }
+      const imageRef = ref(storage, `images/${imgUrl.name + v4()}`);
+      uploadBytes(imageRef, imgUrl).then(snapshot => {
+        getDownloadURL(snapshot.ref).then(url => {
+          setServices({ ...services, product_picture: url });
+        });
+      });
     } else {
       newServices[index][e.target.name] = e.target.value;
     }
@@ -297,13 +311,14 @@ const MemberProfile = () => {
       core,
       clients,
     ];
-    pushInfoCompany(data, navigate);
+    //pushInfoCompany(data, navigate);
     localStorage.setItem('linkWebsite', JSON.stringify(data[0].info_url));
     console.log(data);
   };
 
   return (
     <div className="member__wrapper">
+      <Translate />
       <Navbar />
       <div className="member__container">
         <Row className="member__title" justify={'center'} align={'middle'}>

@@ -16,10 +16,13 @@ import logo2 from '../../assets/logo2.png';
 import logo3 from '../../assets/logo3.png';
 import logo4 from '../../assets/logo4.png';
 import { getCompany } from '../../store/apiCall';
+import { useTranslation } from 'react-i18next';
 import Navbar from '../../components/Navbar';
+import Translate from '../../components/Translate';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
+  const { t } = useTranslation();
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const [slotBooking, setSlotBooking] = useState([]);
@@ -75,6 +78,7 @@ const Profile = () => {
 
   return (
     <>
+      <Translate/>
       <Navbar />
       <div className={style.container}>
         <Row justify={'space-between'}>

@@ -32,26 +32,8 @@
       line-height: calc(24 / 18);
     }
   }
-  &__countdown {
-    background-color: white;
-    border-radius: 8px;
-    height: 125px;
-    h1 {
-      font-size: 50px;
-      font-weight: 500;
-      color: black;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 14px;
-    }
-    span {
-      color: crimson;
-      font-size: 18px;
-      font-weight: 700;
-      display: flex;
-      justify-content: center;
-    }
-  }
+
+  
 }
 
 .linklogin {

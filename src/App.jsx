@@ -29,22 +29,27 @@ function App() {
           <Route exact path={ROUTES.HOME} element={<Landing />} />
           <Route path={ROUTES.EVENT} element={<Home />} />
           <Route
+            
             path={ROUTES.PROFILE}
             element={user ? <Profile /> : <Navigate to={ROUTES.LOGIN} />}
           />
           <Route
+            
             path={ROUTES.UPDATE_PROFILE}
             element={user ? <MemberProfile /> : <Navigate to={ROUTES.LOGIN} />}
           />
           <Route
+            
             path={ROUTES.BOOK}
             element={user ? <HistoryBooking /> : <Navigate to={ROUTES.LOGIN} />}
           />
           <Route
+            
             path={ROUTES.DETAIL}
             element={user ? <Profile /> : <Navigate to={ROUTES.LOGIN} />}
           />
           <Route
+            
             path={ROUTES.LOGIN}
             element={user ? <Navigate to={ROUTES.HOME} /> : <Auth />}
           />

@@ -46,7 +46,7 @@ const Company = ({ companys, title }) => {
       > */}
       <Row gutter={[16, 16]} justify={'center'}>
         {companys.map(item => (
-          <Col md={10} xs={12}>
+          <Col md={10} xs={12} key={item.company_ID}>
             <Link to={`/profile/${item.company_ID}`}>
               <div className={style.container}>
                 <Row justify={'space-between'} align={'middle'}>

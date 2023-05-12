@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import DataTable, { createTheme } from 'react-data-table-component';
 import { useTranslation } from 'react-i18next';
+import { DOMAIN } from '../../constant/constant';
 import './index.scss';
+import Translate from '../../components/Translate';
 
 createTheme(
   'solarized',
@@ -66,16 +68,12 @@ const HistoryBooking = () => {
   const getCalendarBooking = async () => {
     if (user.country === 'Japan') {
       const res = await axios.get(
-        `http://localhost:8000/server/booking/${user.id}`
+        `${DOMAIN}booking/${user.id}`
       );
       setListBooking(res.data);
     } else {
       const res = await axios.get(
-        `http://localhost:8000/server/booking/vietnam/${user.company_name}`
-      );
-      console.log(
-        '🚀 ~ file: index.jsx:75 ~ getCalendarBooking ~ res:',
-        res.data
+        `${DOMAIN}booking/vietnam/${user.company_name}`
       );
       setListBooking(res.data);
     }
@@ -148,6 +146,7 @@ const HistoryBooking = () => {
 
   return (
     <div>
+      <Translate />
       <Navbar />
       {user.country === 'Japan' ? (
         <DataTable

@@ -1,40 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Navbar from '../../components/Navbar';
 import Header from '../../components/Header';
 import { BackTop, Col, Row } from 'antd';
-import Wrapper from '../../components/Wrapper';
+//import Wrapper from '../../components/Wrapper';
 import Translate from '../../components/Translate';
-import banner from '../../assets/banner_platform.png';
+//import banner from '../../assets/banner_platform.png';
 import './index.scss';
-import image from '../../assets/voducthang.png';
+//import image from '../../assets/voducthang.png';
 import { Link } from 'react-router-dom';
 import SlideImage from './components/slideImage';
 import Contact from './components/contact';
 import FindPartner from './components/FindPartner';
-import Clients from './components/Clients';
+//import Clients from './components/Clients';
 import Service from '../Home/components/Service';
 import Footer from '../../components/Footer';
+import { useTranslation } from 'react-i18next';
 import style from './index.scss';
 
 const Landing = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const isScrolled = false;
+  const { t } = useTranslation();
   return (
     <div className="Home_container">
-      <div className="header_top">
+      {/* <div className="header_top">
         <div className="header_top_container">
           <div className="row">
             <div className="left_row"></div>
             <div className="right_row">
-              <Translate />
-              <div>hello</div>
+              
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+      <Translate />
       <Navbar />
       <Header />
       <div className="events_matching_container">
-        <h3 className="matching_title">Các sự kiện kết nối sắp diễn ra</h3>
+        <h3 className="matching_title">{t('Upcoming Business Matching Events')}</h3>
         <Row gutter={[32, 32]} justify={'center'}>
           <Col md={10} xs={12}>
             <Link to="/bm1">
@@ -65,28 +67,28 @@ const Landing = () => {
         </Row>
       </div>
       <div className="events_matching_container">
-        <h3 className="matching_title">Các đối tác nổi bật</h3>
+        <h3 className="matching_title">{t('Prominent Partners')}</h3>
         <Row gutter={[32, 32]} justify={'center'}></Row>
       </div>
       <div className="events_matching_container">
-        <h3 className="matching_title">Các chuyên gia hỗ trợ chúng tôi</h3>
+        <h3 className="matching_title">{ t('EXPERTS SUPPORTING US')}</h3>
         <SlideImage props={'professional'} />
       </div>
       <div className="events_matching_container">
-        <h3 className="matching_title">Hãy liên hệ với chúng tôi!</h3>
+        <h3 className="matching_title">{t('Please contact us')}</h3>
         <Contact />
       </div>
       <div className="events_matching_container">
-        <h3 className="matching_title">tìm kiếm đối tác theo từ khóa</h3>
+        <h3 className="matching_title">{t('Search for partners by keyword')}</h3>
         <FindPartner />
       </div>
       <div className="events_matching_container">
-        <h3 className="matching_title">Tìm kiếm đối tác theo ngành nghề</h3>
+        <h3 className="matching_title">{t('Search for partners by industry')}</h3>
         <Service />
       </div>
       <div className="events_matching_container">
         <h3 className="matching_title">
-          các đối tác và khách hàng của chúng tôi
+          {t('Our partners and customers')}
         </h3>
         <SlideImage props={'partner'} />
       </div>
