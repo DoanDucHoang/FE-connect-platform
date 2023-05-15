@@ -55,14 +55,16 @@ const MemberProfile = () => {
   //const [file, setFile] = useState(null);
 
   const upload = async file => {
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const res = await axios.post(UPLOAD_IMAGE, formData);
-      return res.data;
-    } catch (err) {
-      console.log(err);
-    }
+    const imgUrl = file;
+    const res = await axios.get(`${UPLOAD_IMAGE}s3Url`);
+    await fetch(res.data.url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'image/png',
+      },
+      body: imgUrl,
+    });
+    return res.data.url.split('?')[0];
   };
 
   const user = useSelector(state => state.auth.currentUser);
@@ -181,7 +183,7 @@ const MemberProfile = () => {
     }
   };
 
-  const handleChangeInfo = e => {
+  const handleChangeInfo = async e => {
     const { name, value } = e.target;
     if (e.target.name === 'language') {
       if (e.target.checked) {
@@ -193,16 +195,8 @@ const MemberProfile = () => {
         //setInfo({ ...info, [name]: value });
       }
     } else if (e.target.name === 'company_logo') {
-      const imgUrl = e.target.files[0];
-      if (imgUrl === null) {
-        return;
-      }
-      const imageRef = ref(storage, `images/${imgUrl.name + v4()}`);
-      uploadBytes(imageRef, imgUrl).then(snapshot => {
-        getDownloadURL(snapshot.ref).then(url => {
-          setInfo({ ...info, [name]: url });
-        });
-      });
+      const imgUrl = await upload(e.target.files[0]);
+      setInfo({ ...info, [name]: imgUrl });
     } else {
       setInfo({ ...info, [name]: value });
     }
@@ -213,16 +207,8 @@ const MemberProfile = () => {
     const newServices = services;
     let index = newServices.findIndex(item => item.id === data.id);
     if (e.target.name === 'product_picture') {
-      const imgUrl = e.target.files[0];
-      if (imgUrl === null) {
-        return;
-      }
-      const imageRef = ref(storage, `images/${imgUrl.name + v4()}`);
-      uploadBytes(imageRef, imgUrl).then(snapshot => {
-        getDownloadURL(snapshot.ref).then(url => {
-          setServices({ ...services, product_picture: url });
-        });
-      });
+      const imgUrl = await upload(e.target.files[0]);
+      newServices[index][e.target.name] = imgUrl;
     } else {
       newServices[index][e.target.name] = e.target.value;
     }
@@ -240,10 +226,8 @@ const MemberProfile = () => {
     const newfeatures = features;
     let index = features.findIndex(item => item.id === data.id);
     if (e.target.name === 'speciality_picture') {
-      //newfeatures[index][e.target.name] = e.target.files[0];
-      imgUrl = await upload(e.target.files[0]);
-      const imgUrlFeatures = 'http://localhost:3000/upload/' + imgUrl.filename;
-      newfeatures[index][e.target.name] = imgUrlFeatures;
+      const imgUrl = await upload(e.target.files[0]);
+      newfeatures[index][e.target.name] = imgUrl;
     } else {
       newfeatures[index][e.target.name] = e.target.value;
     }
@@ -255,10 +239,8 @@ const MemberProfile = () => {
     const newCore = core;
     let index = core.findIndex(item => item.id === data.id);
     if (e.target.name === 'member_picture') {
-      //newCore[index][e.target.name] = e.target.files[0];
-      imgUrl = await upload(e.target.files[0]);
-      const imgUrlCores = 'http://localhost:3000/upload/' + imgUrl.filename;
-      newCore[index][e.target.name] = imgUrlCores;
+      const imgUrl = await upload(e.target.files[0]);
+      newCore[index][e.target.name] = imgUrl;
     } else {
       newCore[index][e.target.name] = e.target.value;
     }
@@ -276,10 +258,8 @@ const MemberProfile = () => {
     const newClients = clients;
     let index = clients.findIndex(item => item.id === data.id);
     if (e.target.name === 'client_logo') {
-      //newClients[index][e.target.name] = e.target.files[0];
-      imgUrl = await upload(e.target.files[0]);
-      const imgUrlClients = 'http://localhost:3000/upload/' + imgUrl.filename;
-      newClients[index][e.target.name] = imgUrlClients;
+      const imgUrl = await upload(e.target.files[0]);
+      newClients[index][e.target.name] = imgUrl;
     } else {
       newClients[index][e.target.name] = e.target.value;
     }
@@ -467,8 +447,8 @@ const MemberProfile = () => {
                   <option value="Du lịch & giải trí & thiết kế">
                     Du lịch & giải trí & thiết kế
                   </option>
-                  <option value="Ngành thực phẩm & dịch vụ　">
-                    Ngành thực phẩm & dịch vụ　
+                  <option value="Ngành thực phẩm & dịch vụ">
+                    Ngành thực phẩm & dịch vụ
                   </option>
                   <option value="Kinh doanh theo xu hướng">
                     Kinh doanh theo xu hướng

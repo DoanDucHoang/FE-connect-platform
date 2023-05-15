@@ -269,7 +269,7 @@
   "Password": "Mật Khẩu",
   "Comfirm Password": "Xác Nhận Mật Khẩu",
   "Please fill out this field.": "Vui lòng điền vào trường này.",
-  "Japan" : "Nhật Bản",
+  "Japan": "Nhật Bản",
   "Viet Nam": "Việt Nam",
   "Sign Up": "Đăng Ký",
   "Invalid account information": "Thông tin tài khoản không hợp lệ",
@@ -283,5 +283,7 @@
   "Invalid email": "Email không hợp lệ",
   "Please enter your email": "Hãy Nhập Email của bạn",
   "Please enter a password": "Vui lòng nhập mật khẩu",
-  "Password 6 characters or more": "Mật khẩu từ 6 kí tự trở lên"
+  "Password 6 characters or more": "Mật khẩu từ 6 kí tự trở lên",
+  "INTRODUCTION": "LỜI GIỚI THIỆU",
+  "MAIN SERVICES": "CÁC DỊCH VỤ CHÍNH"
 }

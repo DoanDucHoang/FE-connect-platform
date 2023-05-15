@@ -271,8 +271,8 @@
   "Phone": "でんわばんごう",
   "Password": "パスワード",
   "Comfirm Password": "パスワードを確認してください",
-   "Please fill out this field.": "このフィールドは必須です.",
-   "Japan": "日本",
+  "Please fill out this field.": "このフィールドは必須です.",
+  "Japan": "日本",
   "Viet Nam": "ベトナム",
   "Sign Up": "サインアップ",
   "Invalid account information": "アカウント情報が無効です",
@@ -286,5 +286,7 @@
   "Invalid email": "無効な電子メール",
   "Please enter your email": "あなたのメールアドレスを入力してください",
   "Please enter a password": "パスワードを入力してください",
-  "Password 6 characters or more": "パスワード 6文字以上"
+  "Password 6 characters or more": "パスワード 6文字以上",
+  "INTRODUCTION": "序章",
+  "MAIN SERVICES": "主なサービス"
 }

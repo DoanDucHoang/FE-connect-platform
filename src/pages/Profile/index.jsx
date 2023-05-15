@@ -22,8 +22,8 @@ import Translate from '../../components/Translate';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
-  const { t } = useTranslation();
   const [lang, setLang] = useState();
+  const { t } = useTranslation();
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const [slotBooking, setSlotBooking] = useState([]);
@@ -37,6 +37,7 @@ const Profile = () => {
     company_specialties,
     slot_booking,
   } = info;
+  console.log('🚀 ~ file: index.jsx:39 ~ Profile ~ info:', info);
 
   useEffect(() => {
     username
@@ -98,7 +99,7 @@ const Profile = () => {
             <Row>
               <Col xl={12} xs={24}>
                 <Row align={'middle'} className={style.content__item}>
-                  <span>Establishment: </span>
+                  <span>{t('Establishment')}: </span>
                   <p>{{ ...company_info }[0]?.estalishment}</p>
                 </Row>
               </Col>
@@ -114,7 +115,7 @@ const Profile = () => {
               <p>$ {{ ...company_info }[0]?.capital}</p>
             </Row>
             <p className={style.addresss}>
-              {{ ...company_info }[0]?.address_vn}
+              {{ ...company_info }[0]?.address_jp}
             </p>
             <Row className={style.flag}>
               <img src={logo1} alt="" />
@@ -137,7 +138,7 @@ const Profile = () => {
             <div style={{ marginTop: '20px', fontWeight: '600' }}>Needs :</div>
             <div className={style.customer}>
               <div className={style.customer__item}>
-                {{ ...company_info }[0]?.needs_vn}
+                {{ ...company_info }[0]?.needs_jp}
               </div>
             </div>
           </Col>

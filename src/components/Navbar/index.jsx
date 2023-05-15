@@ -18,7 +18,7 @@ const Navbar = () => {
   const user = useSelector(state => state.auth.currentUser);
   //const user = localStorage.getItem('userID');
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
 

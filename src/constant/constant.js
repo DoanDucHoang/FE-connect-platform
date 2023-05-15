@@ -2,7 +2,7 @@ export const COUNTRY = { VN: 'VIỆT NAM', JP: 'NHẬT BẢN' };
 
 export const DOMAIN = 'https://server-vjc.onrender.com/server/';
 
-export const UPLOAD_IMAGE = 'https://server-vjc.onrender.com/api/upload';
+export const UPLOAD_IMAGE = 'https://server-vjc.onrender.com/';
 
 export const LANGUAGES = ['jp', 'us'];
 

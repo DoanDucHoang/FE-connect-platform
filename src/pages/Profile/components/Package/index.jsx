@@ -2,13 +2,15 @@ import { Card, Col, Row } from 'antd';
 import style from './index.module.scss';
 import Wrapper from '../../../../components/Wrapper';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { createMarkup } from '../../hooks';
 
 const Package = ({ company_products }) => {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <Row justify={'center'}>
-        <h1 className={style.h1_title}>CÁC DỊCH VỤ CHÍNH</h1>
+        <h1 className={style.h1_title}>{t('MAIN SERVICES')}</h1>
       </Row>
       <Row gutter={[32, 32]} justify={'center'}>
         {company_products?.map(item => (
