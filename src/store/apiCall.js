@@ -73,9 +73,7 @@ export const getCompany = async data => {
 
 export const getFourJapanCompany = async () => {
   try {
-    const res = await axios.post(
-      `http://localhost:8080/server/getcompany/japancompany`
-    );
+    const res = await axios.post(`${DOMAIN}getcompany/japancompany`);
     return res.data;
   } catch (error) {
     console.log(error);
