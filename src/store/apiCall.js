@@ -70,3 +70,14 @@ export const getCompany = async data => {
     console.log(error);
   }
 };
+
+export const getFourJapanCompany = async () => {
+  try {
+    const res = await axios.post(
+      `http://localhost:8080/server/getcompany/japancompany`
+    );
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

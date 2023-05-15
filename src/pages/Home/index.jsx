@@ -22,12 +22,16 @@ const Home = () => {
   };
   const [companys, setCompanys] = useState([]);
 
-  const companyVN = companys ? companys.filter(item => {
-    return item.country === 'Viet Nam';
-  }) : [];
-  const companyJP = companys ? companys.filter(item => {
-    return item.country === 'Japan';
-  }) : [];
+  const companyVN = companys
+    ? companys.filter(item => {
+        return item.country === 'Viet Nam';
+      })
+    : [];
+  const companyJP = companys
+    ? companys.filter(item => {
+        return item.country === 'Japan';
+      })
+    : [];
 
   useEffect(() => {
     getAllCompany()
@@ -41,9 +45,9 @@ const Home = () => {
 
   return (
     <>
-      <Translate/>
+      <Translate />
       <Navbar />
-      <Header />
+      <Header props="home" />
       <Benefit />
       <TimeAddress />
       <Donors />

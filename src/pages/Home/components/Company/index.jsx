@@ -11,6 +11,7 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation } from 'swiper';
+import GridLoader from 'react-spinners/GridLoader';
 
 import logo1 from '../../../../assets/logo1.png';
 import logo2 from '../../../../assets/logo2.png';
@@ -18,8 +19,7 @@ import logo3 from '../../../../assets/logo3.png';
 import logo4 from '../../../../assets/logo4.png';
 
 const Company = ({ companys, title }) => {
-  console.log('🚀 ~ file: index.jsx:21 ~ Company ~ companys:', companys);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Container>
       <Row justify={'center'}>
@@ -45,6 +45,18 @@ const Company = ({ companys, title }) => {
         className="mySwiper"
       > */}
       <Row gutter={[16, 16]} justify={'center'}>
+        {companys.length ? (
+          ''
+        ) : (
+          <GridLoader
+            color="#cf2030"
+            loading={true}
+            //cssOverride={override}
+            size={15}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        )}
         {companys.map(item => (
           <Col md={10} xs={12} key={item.company_ID}>
             <Link to={`/profile/${item.company_ID}`}>
@@ -57,21 +69,21 @@ const Company = ({ companys, title }) => {
                       alt=""
                     />
                   </Col>
-                  <Col span={6}>
+                  {/* <Col span={6}>
                     <img className={style.logo} src="" alt="" />
-                  </Col>
+                  </Col> */}
                 </Row>
                 <Row className={style.content}>
-                  <Col span={14} className={style.content__container}>
+                  <Col span={24} className={style.content__container}>
                     <h3 className={style.title}>{item.company_name}</h3>
                     <Row className={style.content__top}>
-                      <Col xl={12} lg={24}>
+                      <Col xl={24} lg={24}>
                         <Row align={'middle'} className={style.content__item}>
                           <span>{t('Years Of Establishment:')} </span>
                           <p>{item.estalishment}</p>
                         </Row>
                       </Col>
-                      <Col xl={12} lg={24}>
+                      <Col xl={24} lg={24}>
                         <Row align={'middle'} className={style.content__item}>
                           <span>{t('Employers')} </span>
                           <p>{item.employers}</p>
@@ -83,6 +95,16 @@ const Company = ({ companys, title }) => {
                       <p>$ {item.capital}</p>
                     </Row>
                     <p className={style.addresss}>{item.address}</p>
+                    {/* <Col span={10} className={style.customer__container}> */}
+                    <div className={style.category}>
+                      <span>{t('Category')}:</span>
+                      {item.category}
+                    </div>
+                    <p>Needs</p>
+                    <div className={style.customer}>
+                      <div className={style.customer__item}>{item.needs}</div>
+                    </div>
+                    {/* </Col> */}
                     <Row className={style.flag}>
                       <img src={logo1} alt="" />
                       {item.languages === 'japan' ? (
@@ -94,16 +116,6 @@ const Company = ({ companys, title }) => {
                       <img src={logo3} alt="" />
                       <img src={logo4} alt="" /> */}
                     </Row>
-                  </Col>
-                  <Col span={10} className={style.customer__container}>
-                    <div className={style.category}>
-                      <span>{t('Category')}:</span>
-                      {item.category}
-                    </div>
-                    <p>Needs</p>
-                    <div className={style.customer}>
-                      <div className={style.customer__item}>{item.needs}</div>
-                    </div>
                   </Col>
                 </Row>
               </div>

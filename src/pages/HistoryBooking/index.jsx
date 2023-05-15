@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { DOMAIN } from '../../constant/constant';
 import './index.scss';
 import Translate from '../../components/Translate';
+import GridLoader from 'react-spinners/GridLoader';
 
 createTheme(
   'solarized',
@@ -19,7 +20,7 @@ createTheme(
       default: '#E7E7E7',
     },
     context: {
-      background: '#0088D1',
+      background: '#cf2030',
       text: '#FFFFFF',
     },
     divider: {
@@ -36,7 +37,7 @@ const customStyles = {
     },
   },
   headCells: {
-    style: { fontSize: '19px', color: '#0088D1' },
+    style: { fontSize: '19px', color: '#cf2030' },
   },
   cells: {
     style: {
@@ -63,13 +64,10 @@ const HistoryBooking = () => {
   const [toggleCleared, setToggleCleared] = useState(false);
   const [pending, setPending] = useState(true);
   const user = useSelector(state => state.auth.currentUser);
-  console.log('🚀 ~ file: index.jsx:64 ~ HistoryBooking ~ user:', user.id);
 
   const getCalendarBooking = async () => {
     if (user.country === 'Japan') {
-      const res = await axios.get(
-        `${DOMAIN}booking/${user.id}`
-      );
+      const res = await axios.get(`${DOMAIN}booking/${user.id}`);
       setListBooking(res.data);
     } else {
       const res = await axios.get(
@@ -88,10 +86,8 @@ const HistoryBooking = () => {
     const handleDelete = () => {
       setToggleCleared(!toggleCleared);
       selectRows.map(
-        async item =>
-          await axios.delete(`http://localhost:8000/server/booking/${item.id}`)
+        async item => await axios.delete(`${DOMAIN}booking/${item.id}`)
       );
-      window.location.reload();
     };
 
     return (
@@ -128,7 +124,7 @@ const HistoryBooking = () => {
         ),
       sortable: true,
       style: {
-        color: '#0088D1',
+        color: '#cf2030',
       },
     },
   ];
@@ -157,6 +153,16 @@ const HistoryBooking = () => {
           customStyles={customStyles}
           data={Object.values(listBooking)}
           progressPending={pending}
+          progressComponent={
+            <GridLoader
+              color="#cf2030"
+              loading={true}
+              //cssOverride={override}
+              size={15}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          }
         />
       ) : (
         <DataTable
@@ -170,6 +176,16 @@ const HistoryBooking = () => {
           onSelectedRowsChange={handleRowSelected}
           clearSelectedRows={toggleCleared}
           progressPending={pending}
+          progressComponent={
+            <GridLoader
+              color="#cf2030"
+              loading={true}
+              //cssOverride={override}
+              size={15}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          }
         />
       )}
     </div>

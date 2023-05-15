@@ -1,11 +1,16 @@
 import React from 'react';
-import banner from '../../assets/banner_platform.png';
+import bannerHome from '../../assets/banner_platform.png';
+import bannerBM from '../../assets/posterVJBC.png';
 import style from './index.module.scss';
 
-const Header = () => {
+const Header = props => {
   return (
     <div className={style.wrapper}>
-      <img src={banner} alt='banner' />
+      {props.props === 'landing' ? (
+        <img src={bannerHome} alt="banner" />
+      ) : (
+        <img src={bannerBM} alt="banner" />
+      )}
     </div>
   );
 };

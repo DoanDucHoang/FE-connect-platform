@@ -64,7 +64,7 @@ const Navbar = () => {
       <div className={style.logo}>
         <Link to="/">
           <img
-            src="https://lh5.googleusercontent.com/-aE5Q7UG1qQ8/AAAAAAAAAAI/AAAAAAAAAAA/FT52yrqAETQ/s55-p-k-no-ns-nd/photo.jpg"
+            src="https://vj-partner.com/uploads/img/general/1638966072-logo-VJP-[306x75].png"
             alt=""
           />
         </Link>
