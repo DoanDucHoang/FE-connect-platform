@@ -79,3 +79,21 @@ export const getFourJapanCompany = async () => {
     console.log(error);
   }
 };
+
+export const getFourVietNamCompany = async () => {
+  try {
+    const res = await axios.post(`${DOMAIN}getcompany/vietnamcompany`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCompanyByName = async data => {
+  try {
+    const res = await axios.post(`${DOMAIN}getcompany/searchcompanyname`, data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

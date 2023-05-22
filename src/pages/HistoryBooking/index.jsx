@@ -58,7 +58,7 @@ const conditionalRowStyles = [
 ];
 
 const HistoryBooking = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [listBooking, setListBooking] = useState([]);
   const [selectRows, setSelectRows] = useState([]);
   const [toggleCleared, setToggleCleared] = useState(false);

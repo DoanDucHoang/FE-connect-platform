@@ -3,6 +3,20 @@
   background-image: url(../../assets/background2.jpg);
   background-size: cover;
 }
+
+.btn_edit {
+  padding: 10px;
+  background: #ffca45;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  font-weight: 700;
+  &:hover {
+    box-shadow: 4px 5px 10px 0px rgb(242, 64, 64);
+    cursor: pointer;
+  }
+}
+
 .banner {
   background-color: white;
   padding: 20px;

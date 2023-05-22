@@ -53,16 +53,19 @@
     width: 100%;
   }
 }
+
 .button__login {
   text-align: center;
   align-self: center;
+
   button {
-    background: linear-gradient(45deg, #b74d4e, #b73232) !important;
+    background: linear-gradient(45deg, #b74d4e, #b73232);
     border: none;
     color: white;
     padding: 10px 26px;
     border-radius: 4px;
     font-weight: 700;
+    margin: 0px 10px;
     &:hover {
       box-shadow: 4px 5px 10px 0px rgba(183, 50, 50, 0.6);
       cursor: pointer;
@@ -74,7 +77,7 @@
   display: none;
 }
 
-@media (max-width: 426px) {
+@media (max-width: 650px) {
   .navbar__menu {
     display: none;
   }

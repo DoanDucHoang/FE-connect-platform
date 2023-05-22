@@ -10,9 +10,12 @@ import {
   UserOutlined,
   CalendarOutlined,
 } from '@ant-design/icons';
+import { Link as LinkScroll } from 'react-scroll';
 import { logout } from '../../store/apiCall';
 import Translate from '../Translate/index';
 import { useTranslation } from 'react-i18next';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Navbar = () => {
   const user = useSelector(state => state.auth.currentUser);
@@ -72,15 +75,18 @@ const Navbar = () => {
       <div className={style.navbar__menu}>
         <div className={style.navbar__left_menu}>
           <Link to="/">{t('Home')}</Link>
-          <Link to="/update_profile">{t('Event')}</Link>
-          <Link to="/">{t('About Us')}</Link>
-          <Link to="/">{t('Member List')}</Link>
-          <Link to="/">{t('Hot Deals')}</Link>
+          <a href="/#events">{t('Event')}</a>
+          <a href="/#members">{t('About Us')}</a>
+          <a href="/#professional">{t('Member List')}</a>
+          <a href="/#contact">{t('Contact')}</a>
+          <a href="/#client">{t('Client')}</a>
           <Link to="/">{t('News')}</Link>
-          <Link to="/">{t('Contact')}</Link>
-          <button className="button_member_register">
-            {t('Member Register')}
-          </button>
+          <Link to="/update_profile">
+            <button className="button_member_register">
+              {t('Member Register')}
+            </button>
+          </Link>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
         </div>
         <div className="right_menu">{/* <Translate /> */}</div>
       </div>

@@ -4,6 +4,7 @@ import Wrapper from '../../../../components/Wrapper';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { createMarkup } from '../../hooks';
+import ReadMore from '../../../../components/ReadMore/ReadMore';
 
 const Package = ({ company_products }) => {
   const { t } = useTranslation();
@@ -23,11 +24,12 @@ const Package = ({ company_products }) => {
             >
               <div className={style.content}>
                 <h3>{item.product_name}</h3>
-                <div
+                {/* <div
                   dangerouslySetInnerHTML={createMarkup(
                     item.product_description
                   )}
-                />
+                /> */}
+                <ReadMore>{item.product_description}</ReadMore>
               </div>
             </Card>
           </Col>

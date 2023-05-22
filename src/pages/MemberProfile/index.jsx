@@ -5,8 +5,11 @@ import { Col, Row } from 'antd';
 import { Editor } from '@tinymce/tinymce-react';
 import { useSelector } from 'react-redux';
 import { pushInfoCompany } from '../../store/apiCall';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { UPLOAD_IMAGE } from '../../constant/constant';
+import logoVN from '../../assets/logo2.png';
+import logoEN from '../../assets/logo3.png';
+import logoJP from '../../assets/logo4.png';
 //import { Radio } from 'antd';
 import {
   //translateSelectLanguage,
@@ -69,6 +72,8 @@ const MemberProfile = () => {
 
   const user = useSelector(state => state.auth.currentUser);
   const navigate = useNavigate();
+  let { state } = useLocation();
+  console.log('🚀 ~ file: index.jsx:73 ~ MemberProfile ~ state:', state);
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const checkboxValue = [];
@@ -322,6 +327,7 @@ const MemberProfile = () => {
                   onChange={handleChangeInfo}
                   name="estalishment"
                   type="text"
+                  //defaultValue={state.company_info[0].estalishment}
                   placeholder="2022"
                 />
               </div>
@@ -331,6 +337,7 @@ const MemberProfile = () => {
                   onChange={handleChangeInfo}
                   name="employers"
                   type="number"
+                  //defaultValue={state.company_info[0].employers}
                   placeholder="30"
                 />
               </div>
@@ -340,6 +347,7 @@ const MemberProfile = () => {
                   onChange={handleChangeInfo}
                   name="needs_vn"
                   type="text"
+                  //defaultValue={state.company_info[0].needs_vn}
                   placeholder="Tìm khách hàng"
                 />
                 <h5>{t('Request (English): ')}</h5>
@@ -347,6 +355,7 @@ const MemberProfile = () => {
                   onChange={handleChangeInfo}
                   name="needs_en"
                   type="text"
+                  //defaultValue={state.company_info[0].needs_en}
                   placeholder="Find customers"
                 />
                 <h5>{t('Request (Japanese): ')}</h5>
@@ -354,6 +363,7 @@ const MemberProfile = () => {
                   onChange={handleChangeInfo}
                   name="needs_jp"
                   type="text"
+                  //defaultValue={state.company_info[0].needs_jp}
                   placeholder="Tìm khách hàng"
                 />
               </div>
@@ -382,10 +392,7 @@ const MemberProfile = () => {
                     />
                     <label htmlFor="vietnam">
                       <div className="flag_icon">
-                        <img
-                          src="http://localhost:3000/static/media/logo2.054728c8e7081cf4b673.png"
-                          alt=""
-                        />
+                        <img src={logoVN} alt="" />
                       </div>
                       <div className="title">Viet Nam</div>
                     </label>
@@ -396,14 +403,12 @@ const MemberProfile = () => {
                       value="english"
                       id="english"
                       name="language"
+                      //defaultChecked={state.company_info[0].languages}
                       onChange={handleChangeInfo}
                     />
                     <label htmlFor="english">
                       <div className="flag_icon">
-                        <img
-                          src="http://localhost:3000/static/media/logo3.f5dcebd68bc84a60a22d.png"
-                          alt=""
-                        />
+                        <img src={logoEN} alt="" />
                       </div>
                       <div className="title">English</div>
                     </label>
@@ -418,10 +423,7 @@ const MemberProfile = () => {
                     />
                     <label htmlFor="japan">
                       <div className="flag_icon">
-                        <img
-                          src="http://localhost:3000/static/media/logo4.e589f7cf672eca3ebf6e.png"
-                          alt=""
-                        />
+                        <img src={logoJP} alt="" />
                       </div>
                       <div className="title">Japan</div>
                     </label>

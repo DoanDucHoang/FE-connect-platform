@@ -11,9 +11,9 @@
   }
 
   .events_matching_container {
-    margin-top: 100px;
+    margin-top: 50px;
     .matching_title {
-      margin: 0 auto 30px;
+      margin: 0 auto 50px;
       text-align: center;
       color: #000;
       font-size: 1.875rem;
@@ -21,6 +21,10 @@
       text-transform: uppercase;
       font-weight: 700;
       margin-top: 10px;
+    }
+
+    #contact {
+      margin-bottom: 90px;
     }
     .event_matching_content {
       width: 100%;

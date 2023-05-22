@@ -1,10 +1,16 @@
 import { Col, Row } from 'antd';
 import Container from '../../../../components/Container';
 import style from './index.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
+import { faGears } from '@fortawesome/free-solid-svg-icons';
+import { faSchool } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 
 const Service = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <Container>
       {/* <Row justify={'center'}>
@@ -18,11 +24,14 @@ const Service = () => {
             <div className={style.service__box}>
               <div className={style.icon}>
                 <span className="test">
-                  <i className="fas fa-building"></i>
+                  <i className="fas fa-plane-departure"></i>
+                  {/* <i className="fas fa-building"></i> */}
                 </span>
               </div>
               <div className={style.service__content}>
-                <h3 className={style.title}>{t('Advancement Support')}</h3>
+                <h3 className={style.title}>
+                  {t('Travel, Entertainment and Design')}
+                </h3>
                 <p className={style.para}>
                   {t(
                     'Legal, accounting, sales support, etc. for Japanese investors'
@@ -35,11 +44,14 @@ const Service = () => {
             <div className={style.service__box}>
               <div className={style.icon}>
                 <span className="test">
-                  <i className="fab fa-dev"></i>
+                  <FontAwesomeIcon icon={faUtensils} />
+                  {/* <i className="fab fa-dev"></i> */}
                 </span>
               </div>
               <div className={style.service__content}>
-                <h3 className={style.title}>{t('System Development')}</h3>
+                <h3 className={style.title}>
+                  {t('Food and service industry')}
+                </h3>
                 <p className={style.para}>
                   {t(
                     'System introduction, WEB, application development, DX service'
@@ -52,11 +64,12 @@ const Service = () => {
             <div className={style.service__box}>
               <div className={style.icon}>
                 <span className="test">
-                  <i className="fas fa-user"></i>
+                  <FontAwesomeIcon icon={faArrowTrendUp} />
+                  {/* <i className="fas fa-user"></i> */}
                 </span>
               </div>
               <div className={style.service__content}>
-                <h3 className={style.title}>{t('Recruitment')}</h3>
+                <h3 className={style.title}>{t('Trend-Following Business')}</h3>
                 <p className={style.para}>
                   {t(
                     'Introduce Japanese-speaking Vietnamese locals and human resources in Japan'
@@ -69,12 +82,13 @@ const Service = () => {
             <div className={style.service__box}>
               <div className={style.icon}>
                 <span className="test">
-                  <i className="fas fa-book-open"></i>
+                  <i className="fab fa-dev"></i>
+                  {/* <i className="fas fa-book-open"></i> */}
                 </span>
               </div>
               <div className={style.service__content}>
                 <h3 className={style.title}>
-                  {t('Japanese Language Education')}
+                  {t('Related to Information Technology')}
                 </h3>
                 <p className={style.para}>
                   {t(
@@ -88,11 +102,14 @@ const Service = () => {
             <div className={style.service__box}>
               <div className={style.icon}>
                 <span className="test">
-                  <i className="fas fa-plane-departure"></i>
+                  <FontAwesomeIcon icon={faGears} />
+                  {/* <i className="fas fa-plane-departure"></i> */}
                 </span>
               </div>
               <div className={style.service__content}>
-                <h3 className={style.title}>{t('Sightseeing')}</h3>
+                <h3 className={style.title}>
+                  {t('Regarding Technical Interns')}
+                </h3>
                 <p className={style.para}>
                   {t(
                     'Japanese-speaking Japan-Vietnam sightseeing and rental car services'
@@ -105,11 +122,12 @@ const Service = () => {
             <div className={style.service__box}>
               <div className={style.icon}>
                 <span className="test">
-                  <i className="fas fa-cut"></i>
+                  <FontAwesomeIcon icon={faSchool} />
+                  {/* <i className="fas fa-cut"></i> */}
                 </span>
               </div>
               <div className={style.service__content}>
-                <h3 className={style.title}>{t('Manufacturing Process')}</h3>
+                <h3 className={style.title}>{t('Education and Care')}</h3>
                 <p className={style.para}>
                   {t('Machining plastics, CNC accessories, jewelry, etc.')}
                 </p>
@@ -120,11 +138,12 @@ const Service = () => {
             <div className={style.service__box}>
               <div className={style.icon}>
                 <span className="test">
-                  <i className="fas fa-tshirt"></i>
+                  <FontAwesomeIcon icon={faGlobe} />
+                  {/* <i className="fas fa-tshirt"></i> */}
                 </span>
               </div>
               <div className={style.service__content}>
-                <h3 className={style.title}>{t('Sewing')}</h3>
+                <h3 className={style.title}>{t('Expansion to Vietnam')}</h3>
                 <p className={style.para}>
                   {t(
                     'Clothing design and production services for domestic and overseas markets'

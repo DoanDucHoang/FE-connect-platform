@@ -68,6 +68,28 @@ h1 {
   }
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+
+  button {
+    background-color: #808080a8;
+    border-radius: 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin: 0px 10px;
+    width: 90px;
+    height: 35px;
+    transition: all 300ms ease-out 0s;
+
+    &:hover {
+      background-color: #cf2030;
+    }
+  }
+}
+
 .customer {
   font-size: 16px;
   &__item {

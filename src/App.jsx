@@ -18,6 +18,7 @@ import Profile from './pages/Profile';
 import Auth from './pages/RegisterLogin';
 import MemberProfile from './pages/MemberProfile';
 import HistoryBooking from './pages/HistoryBooking';
+import Search from './pages/Search';
 //import HistoryBooking from './pages/HistoryBooking/index';
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
             path={ROUTES.PROFILE}
             element={user ? <Profile /> : <Navigate to={ROUTES.LOGIN} />}
           />
-
+          <Route path={ROUTES.SEARCH} element={<Search />} />
           <Route
             path={ROUTES.UPDATE_PROFILE}
             element={user ? <MemberProfile /> : <Navigate to={ROUTES.LOGIN} />}

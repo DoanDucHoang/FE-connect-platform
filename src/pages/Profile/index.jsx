@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Package from './components/Package';
 import style from './index.module.scss';
@@ -19,6 +19,7 @@ import { getCompany } from '../../store/apiCall';
 import { useTranslation } from 'react-i18next';
 import Navbar from '../../components/Navbar';
 import Translate from '../../components/Translate';
+import Footer from '../../components/Footer';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
@@ -28,6 +29,7 @@ const Profile = () => {
   const [info, setInfo] = useState({});
   const [slotBooking, setSlotBooking] = useState([]);
   const { username } = useParams();
+  const [queryParameters] = useSearchParams();
   const {
     company_core_members,
     company_description,
@@ -37,7 +39,6 @@ const Profile = () => {
     company_specialties,
     slot_booking,
   } = info;
-  console.log('🚀 ~ file: index.jsx:39 ~ Profile ~ info:', info);
 
   useEffect(() => {
     username
@@ -87,8 +88,23 @@ const Profile = () => {
               alt=""
             />
           </Col>
-          <Col span={6}>
-            <img className={style.logo} src="" alt="" />
+          <Col
+            span={6}
+            style={{
+              textAlign: 'center',
+              display: 'block',
+              alignContent: 'center',
+              alignSelf: 'center',
+            }}
+          >
+            {user.company_name === { ...company_info }[0]?.company_name ? (
+              <Link to={'/update_profile'} state={info}>
+                {' '}
+                <button className={style.btn_edit}>Edit Your Profile</button>
+              </Link>
+            ) : (
+              ''
+            )}
           </Col>
         </Row>
         <Row className={style.content}>
@@ -151,7 +167,7 @@ const Profile = () => {
       <Team company_core_members={company_core_members} />
       <Customer company_main_clients={company_main_clients} />
       {{ ...company_info }[0]?.country != 'Viet Nam' ? (
-        <Container>
+        <Container id="booking">
           <Row justify={'center'} className={style.checkbox}>
             <h1 className={style.h1_title}>LỊCH CÓ THỂ HẸN BOOK</h1>
           </Row>
@@ -183,6 +199,7 @@ const Profile = () => {
       ) : (
         ''
       )}
+      <Footer />
     </>
   );
 };

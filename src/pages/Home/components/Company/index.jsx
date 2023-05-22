@@ -106,12 +106,24 @@ const Company = ({ companys, title }) => {
                     </div>
                     {/* </Col> */}
                     <Row className={style.flag}>
-                      <img src={logo1} alt="" />
-                      {item.languages === 'japan' ? (
+                      <Col xl={12} lg={12}>
+                        <img src={logo1} alt="" />
+                        {/* {item.languages === 'japan' ? (
+                          <img src={logo4} alt="" />
+                        ) : (
+                          ''
+                        )} */}
                         <img src={logo4} alt="" />
-                      ) : (
-                        ''
-                      )}
+                        <img src={logo2} alt="" />
+                      </Col>
+                      <Col xl={12} lg={12} className={style.button}>
+                        <a href={`/profile/${item.company_ID}/#booking`}>
+                          <button>Đặt Lịch</button>
+                        </a>
+                        <Link to={`/profile/${item.company_ID}`}>
+                          <button>Xem Profile</button>
+                        </Link>
+                      </Col>
                       {/* <img src={logo2} alt="" />
                       <img src={logo3} alt="" />
                       <img src={logo4} alt="" /> */}

@@ -9,7 +9,7 @@ import './index.scss';
 
 const SlideImage = props => {
   return (
-    <div className="slide_container">
+    <div className="slide_container" id="professional">
       {props.props === 'professional' ? (
         <div className="slide_track">
           {/* image */}{' '}

@@ -7,7 +7,10 @@
       "default",
       {
         "ignore": [
-          "position: sticky"
+          "position: sticky",
+          "scroll-behavior",
+          "width: fit-content",
+          "height: fit-content"
         ]
       }
     ]
