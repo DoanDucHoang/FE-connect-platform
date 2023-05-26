@@ -208,6 +208,7 @@
   "Request (Japanese): ": "Yêu cầu (Tiếng Nhật): ",
   "Address (Vietnamese)": "Địa Chỉ (Tiếng Việt): ",
   "Address (English)": "Địa Chỉ (Tiếng Anh): ",
+  "Address": "Địa Chỉ",
   "Address (Japanese)": "Địa Chỉ (Tiếng Nhật): ",
   "Company Description (Vietnamese)": "Mô tả công ty (Tiếng Việt):",
   "Company Description (English)": "Mô tả công ty (Tiếng Anh):",
@@ -287,10 +288,18 @@
   "INTRODUCTION": "LỜI GIỚI THIỆU",
   "MAIN SERVICES": "CÁC DỊCH VỤ CHÍNH",
   "Travel, Entertainment and Design": "Du lịch, giải trí và thiết kế",
-  "Food and service industry": "Ngành thực phẩm và dịch vụ",
+  "Food and service industry": "Ngành thực phẩm & dịch vụ",
   "Trend-Following Business": "Kinh doanh theo xu hướng",
   "Related to Information Technology": "Liên quan đến CNTT",
   "Regarding Technical Interns": "Liên quan đến thực tập sinh kỹ năng ",
   "Education and Care": "Giáo dục và chăm sóc",
-  "Expansion to Vietnam": "Mở rộng sang Việt Nam"
+  "Expansion to Vietnam": "Mở rộng sang Việt Nam",
+  "Estalishment": "Năm Thành Lập",
+  "Needs": "Yêu Cầu",
+  "Search For Company Name": "Tìm Kiếm Theo Tên Công Ty",
+  "Categoty": "Loại Hình",
+  "search...": "Tìm Kiếm...",
+  "Result For": "Kết Quả Cho",
+  "Booking": "Đặt Lịch",
+  "Detail": "Chi Tiết"
 }

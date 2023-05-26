@@ -79,7 +79,6 @@ const HistoryBooking = () => {
 
   const handleRowSelected = useCallback(state => {
     setSelectRows(state.selectedRows);
-    //console.log(state.selectedRows);
   }, []);
 
   const contextActions = useMemo(() => {

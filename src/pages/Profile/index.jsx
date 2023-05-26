@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import {
+  Link,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Package from './components/Package';
 import style from './index.module.scss';
@@ -20,6 +25,7 @@ import { useTranslation } from 'react-i18next';
 import Navbar from '../../components/Navbar';
 import Translate from '../../components/Translate';
 import Footer from '../../components/Footer';
+import Modal from '../Search/components/Modal';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
@@ -28,6 +34,8 @@ const Profile = () => {
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const [slotBooking, setSlotBooking] = useState([]);
+  // const [infoBook, setInfoBook] = useState();
+  let { state } = useLocation();
   const { username } = useParams();
   const [queryParameters] = useSearchParams();
   const {
@@ -39,6 +47,12 @@ const Profile = () => {
     company_specialties,
     slot_booking,
   } = info;
+
+  // useEffect(() => {
+  //   if (company_info != undefined) {
+  //     setInfoBook(company_info[0]);
+  //   }
+  // }, []);
 
   useEffect(() => {
     username
@@ -66,13 +80,6 @@ const Profile = () => {
     } else {
       slotBooking.splice(index, 1);
     }
-  };
-
-  const handleClick = () => {
-    try {
-      pushSlotBooking(slotBooking);
-      window.location.reload();
-    } catch (error) {}
   };
 
   return (
@@ -171,29 +178,8 @@ const Profile = () => {
           <Row justify={'center'} className={style.checkbox}>
             <h1 className={style.h1_title}>LỊCH CÓ THỂ HẸN BOOK</h1>
           </Row>
-          {slot_booking?.map(item => (
-            <Row
-              justify={'center'}
-              className={style.checkbox}
-              key={item.slot_booking}
-            >
-              <span>Slot {item.slot_booking}</span>
-              <span style={{ margin: '0 10px' }}>
-                {item.company_name_booking ? (
-                  <Checkbox disabled checked />
-                ) : (
-                  <Checkbox onChange={e => handleChange(e, item)} />
-                )}
-              </span>
-              <span>
-                {item.start_time_booking} - {item.end_time_booking}
-              </span>
-            </Row>
-          ))}
           <Row justify={'center'} className={style.checkbox}>
-            <button className={style.button} onClick={handleClick}>
-              Book
-            </button>
+            <Modal props={state} />
           </Row>
         </Container>
       ) : (

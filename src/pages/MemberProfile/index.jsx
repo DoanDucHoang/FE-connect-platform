@@ -10,27 +10,17 @@ import { UPLOAD_IMAGE } from '../../constant/constant';
 import logoVN from '../../assets/logo2.png';
 import logoEN from '../../assets/logo3.png';
 import logoJP from '../../assets/logo4.png';
-//import { Radio } from 'antd';
 import {
-  //translateSelectLanguage,
-  //translateProfile,
-  //translateObligatory,
-  //translateInfoCompany,
   translateEstablishment,
   translateEmployee,
-  //translateRequest,
   translateCompanyLogo,
   translatePreferred,
   translateLanguageWork,
   translateTypeOfBusiness,
   translateCapital,
-  //translateAddress,
   translateAssociationlogo,
   translateDescription,
   translateServices,
-  //translateName,
-  //translateServiceName,
-  //translateServiceDescription,
   translateServicePicture,
   translateDeleteButton,
   translateAddButton,
@@ -38,9 +28,7 @@ import {
   translateCompanyFeaturesDesc,
   translateCompanyCoreMembers,
   translateFullName,
-  //translatePosition,
   translateMemberPicture,
-  //translateMemberDescription,
   translateCompanyClients,
   translateCompanyClientsName,
   translateCompanyClientsLogo,
@@ -50,12 +38,9 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import Translate from '../../components/Translate';
 import { storage } from '../../firebase';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { v4 } from 'uuid';
 
 const MemberProfile = () => {
   const { t } = useTranslation();
-  //const [file, setFile] = useState(null);
 
   const upload = async file => {
     const imgUrl = file;
@@ -73,7 +58,6 @@ const MemberProfile = () => {
   const user = useSelector(state => state.auth.currentUser);
   const navigate = useNavigate();
   let { state } = useLocation();
-  console.log('🚀 ~ file: index.jsx:73 ~ MemberProfile ~ state:', state);
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const checkboxValue = [];
@@ -192,12 +176,10 @@ const MemberProfile = () => {
     const { name, value } = e.target;
     if (e.target.name === 'language') {
       if (e.target.checked) {
-        //checkboxValue.unshift(e.target.value);
         setInfo({ ...info, languages: [...checkboxValue, e.target.value] });
       } else {
         let index = checkboxValue.indexOf(e.target.id);
         checkboxValue.splice(index, 1);
-        //setInfo({ ...info, [name]: value });
       }
     } else if (e.target.name === 'company_logo') {
       const imgUrl = await upload(e.target.files[0]);
@@ -327,7 +309,6 @@ const MemberProfile = () => {
                   onChange={handleChangeInfo}
                   name="estalishment"
                   type="text"
-                  //defaultValue={state.company_info[0].estalishment}
                   placeholder="2022"
                 />
               </div>
@@ -337,7 +318,6 @@ const MemberProfile = () => {
                   onChange={handleChangeInfo}
                   name="employers"
                   type="number"
-                  //defaultValue={state.company_info[0].employers}
                   placeholder="30"
                 />
               </div>
@@ -347,7 +327,6 @@ const MemberProfile = () => {
                   onChange={handleChangeInfo}
                   name="needs_vn"
                   type="text"
-                  //defaultValue={state.company_info[0].needs_vn}
                   placeholder="Tìm khách hàng"
                 />
                 <h5>{t('Request (English): ')}</h5>
@@ -355,7 +334,6 @@ const MemberProfile = () => {
                   onChange={handleChangeInfo}
                   name="needs_en"
                   type="text"
-                  //defaultValue={state.company_info[0].needs_en}
                   placeholder="Find customers"
                 />
                 <h5>{t('Request (Japanese): ')}</h5>
@@ -363,7 +341,6 @@ const MemberProfile = () => {
                   onChange={handleChangeInfo}
                   name="needs_jp"
                   type="text"
-                  //defaultValue={state.company_info[0].needs_jp}
                   placeholder="Tìm khách hàng"
                 />
               </div>
@@ -403,7 +380,6 @@ const MemberProfile = () => {
                       value="english"
                       id="english"
                       name="language"
-                      //defaultChecked={state.company_info[0].languages}
                       onChange={handleChangeInfo}
                     />
                     <label htmlFor="english">
@@ -446,8 +422,8 @@ const MemberProfile = () => {
                   className="ceategory_member"
                   onChange={handleChangeInfo}
                 >
-                  <option value="Du lịch & giải trí & thiết kế">
-                    Du lịch & giải trí & thiết kế
+                  <option value="Du lịch, giải trí và thiết kế">
+                    Du lịch, giải trí và thiết kế
                   </option>
                   <option value="Ngành thực phẩm & dịch vụ">
                     Ngành thực phẩm & dịch vụ

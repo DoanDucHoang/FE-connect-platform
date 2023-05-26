@@ -210,6 +210,7 @@
   "Request (English): ": "リクエスト（英語）: ",
   "Request (Japanese): ": "リクエスト（日本語）: ",
   "Address (Vietnamese)": "住所（ベトナム語）: ",
+  "Address": "住所",
   "Address (English)": "住所（英語）: ",
   "Address (Japanese)": "住所（日本語）: ",
   "Company Description (Vietnamese)": "会社の説明 (ベトナム語):",
@@ -295,5 +296,9 @@
   "Related to Information Technology": "関連する情報技術",
   "Regarding Technical Interns": "技能実習生に関する",
   "Education and Care": "教育とケア",
-  "Expansion to Vietnam": "拡大（かくだい）ベトナム市場へ"
+  "Expansion to Vietnam": "拡大（かくだい）ベトナム市場へ",
+  "Client": "クライアント",
+  "Detail": "詳細",
+  "Estalishment": "確率",
+  "Needs": "ニーズ"
 }

@@ -8,7 +8,7 @@ const authSlice = createSlice({
     error: false,
   },
   reducers: {
-    loginStart: (state) => {
+    loginStart: state => {
       state.isFetching = true;
     },
 
@@ -17,18 +17,18 @@ const authSlice = createSlice({
       state.currentUser = action.payload;
       localStorage.setItem('user', JSON.stringify(state.currentUser));
     },
-    loginFailure: (state) => {
+    loginFailure: state => {
       state.isFetching = false;
       state.error = true;
     },
-    registerSuccess: (state) => {
+    registerSuccess: state => {
       state.isFetching = false;
     },
-    logoutUser: (state) => {
+    logoutUser: state => {
       state.currentUser = null;
       localStorage.clear();
     },
-    resetError: (state) => {
+    resetError: state => {
       state.error = false;
     },
   },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   MDBContainer,
   MDBRow,
@@ -21,9 +21,34 @@ import logo4 from '../../../../assets/logo4.png';
 import { SyncLoader } from 'react-spinners';
 import { Link } from 'react-router-dom';
 import Modal from '../Modal';
+import { useSelector } from 'react-redux';
+import { Pagination } from 'antd';
+import { useEffect } from 'react';
+let numPages = 2;
 
 function CompanyList({ companys, page }) {
   const { t } = useTranslation();
+  const user = useSelector(state => state.auth.currentUser);
+  const [pages, setPages] = useState({ minValue: 0, maxValue: numPages });
+  const [current, setCurrent] = useState(1);
+  //const [userCountry, setUserCountry] = useState('');
+
+  const handlePagination = value => {
+    setPages({ minValue: (value - 1) * numPages, maxValue: value * numPages });
+    setCurrent(value);
+  };
+
+  useEffect(() => {
+    setCurrent(1);
+    setPages({ minValue: 0, maxValue: numPages });
+  }, [companys]);
+
+  // useEffect(() => {
+  //   if (!user.country) {
+  //     setUserCountry(user.country);
+  //   }
+  // }, [user]);
+
   return (
     <MDBContainer fluid>
       <MDBRow className="justify-content-center mb-0">
@@ -33,13 +58,12 @@ function CompanyList({ companys, page }) {
           <SyncLoader
             color="#cf2030"
             loading={true}
-            //cssOverride={override}
             size={15}
             aria-label="Loading Spinner"
             data-testid="loader"
           />
         )}
-        {companys.map(item => (
+        {companys.slice(pages.minValue, pages.maxValue).map(item => (
           <MDBCol
             size="6"
             md="6"
@@ -63,14 +87,14 @@ function CompanyList({ companys, page }) {
                       className="bg-image rounded hover-zoom hover-overlay"
                     >
                       <MDBCardImage src={item.company_logo} className="w-100" />
-                      <a href={`/profile/${item.company_ID}`}>
+                      <Link to={`/profile/${item.company_ID}`} state={item}>
                         <div
                           className="mask"
                           style={{
                             backgroundColor: 'rgba(251, 251, 251, 0.15)',
                           }}
                         ></div>
-                      </a>
+                      </Link>
                     </MDBRipple>
                     <MDBRipple
                       rippleColor="light"
@@ -78,11 +102,6 @@ function CompanyList({ companys, page }) {
                       className="rounded"
                     >
                       <img src={logo1} alt="" style={{ width: '50px' }} />
-                      {/* {item.languages === 'japan' ? (
-                          <img src={logo4} alt="" />
-                        ) : (
-                          ''
-                        )} */}
                       <img src={logo4} alt="" style={{ width: '50px' }} />
                       <img src={logo2} alt="" style={{ width: '50px' }} />
                     </MDBRipple>
@@ -94,36 +113,24 @@ function CompanyList({ companys, page }) {
                     </h5>
 
                     <div className="mt-1 mb-0 small">
-                      {/* <span className="text-primary"> • </span>
-                      <span>
-                        {t('Estalishment')}: {item.estalishment}
-                      </span> */}
                       <div style={{ display: 'flex' }}>
                         <span className="text-primary"> • </span> &nbsp;
                         <p className="text-truncate mb-4 mb-md-0">
-                          {t('Address')}: {item.estalishment}
+                          {t('Estalishment')}: {item.estalishment}
                         </p>
                       </div>
-                      {/* <span className="text-primary"> • </span>
-                      <span className="mb-4 mb-md-0">
-                        {t('Employers')}: {item.employers}
-                      </span> */}
 
                       <div style={{ display: 'flex' }}>
                         <span className="text-primary"> • </span> &nbsp;
                         <p className="text-truncate mb-4 mb-md-0">
-                          {t('Address')}: {item.employers}
+                          {t('Employers')}: {item.employers}
                         </p>
                       </div>
-                      {/* <span className="text-primary"> • </span>
-                      <span>
-                        {t('Capital')}: {item.capital}
-                      </span> */}
 
                       <div style={{ display: 'flex' }}>
                         <span className="text-primary"> • </span> &nbsp;
                         <p className="text-truncate mb-4 mb-md-0">
-                          {t('Address')}: {item.capital}
+                          {t('Capital')}: {item.capital}
                         </p>
                       </div>
                     </div>
@@ -159,8 +166,30 @@ function CompanyList({ companys, page }) {
                         <div className="d-flex flex-row align-items-center mb-1">
                           <h6 className="mb-1 me-1">Slot Còn Trống</h6>
                         </div>
-                        <h6 className="text-success">1 2 3 4</h6>
-                        <h6 className="text-success">5 6 7 8</h6>
+                        <div
+                          className="text-success"
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-around',
+                          }}
+                        >
+                          <p>1</p>
+                          <p>2</p>
+                          <p>3</p>
+                          <p>4</p>
+                        </div>
+                        <div
+                          className="text-success"
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-around',
+                          }}
+                        >
+                          <p>5</p>
+                          <p>6</p>
+                          <p>7</p>
+                          <p>8</p>
+                        </div>
                       </>
                     ) : (
                       <>
@@ -172,18 +201,15 @@ function CompanyList({ companys, page }) {
                       </>
                     )}
                     <div className="d-flex flex-column mt-4">
-                      {/* <Link to={`/profile/${item.company_ID}`}> */}
-                      {/* <MDBBtn
-                          color="primary"
-                          size="sm"
-                          style={{ width: '100px' }}
-                        >
-                          Đặt Lịch
-                        </MDBBtn> */}
-                      {item.country === 'Japan' ? <Modal props={item} /> : ''}
+                      {item.country === 'Japan' &&
+                      user?.country != 'Japan' &&
+                      user != null ? (
+                        <Modal props={item} />
+                      ) : (
+                        ''
+                      )}
 
-                      {/* </Link> */}
-                      <Link to={`/profile/${item.company_ID}`}>
+                      <Link to={`/profile/${item.company_ID}`} state={item}>
                         <MDBBtn
                           outline
                           color="primary"
@@ -191,7 +217,7 @@ function CompanyList({ companys, page }) {
                           className="mt-2"
                           style={{ width: '100px' }}
                         >
-                          Chi Tiết
+                          {t('Detail')}
                         </MDBBtn>
                       </Link>
                     </div>
@@ -201,6 +227,18 @@ function CompanyList({ companys, page }) {
             </MDBCard>
           </MDBCol>
         ))}
+        {page === 'search' || page === 'home' ? (
+          <Pagination
+            current={current}
+            total={companys.length}
+            defaultPageSize={numPages}
+            responsive={true}
+            onChange={handlePagination}
+            style={{ textAlign: 'center', marginBottom: '10px' }}
+          />
+        ) : (
+          ''
+        )}
       </MDBRow>
     </MDBContainer>
   );

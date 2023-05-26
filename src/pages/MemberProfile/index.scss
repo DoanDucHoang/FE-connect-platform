@@ -5,6 +5,10 @@
   }
   &__container {
     padding: 20px 180px;
+
+    @media only screen and (max-width: 1070px) {
+      padding: 20px 10px;
+    }
   }
   &__title {
     background-color: white;
