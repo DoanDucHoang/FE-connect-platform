@@ -8,7 +8,6 @@ import {
   getAllCompany,
   getCompanyByName,
   getCompanyByCategory,
-  getCompanyJapan,
 } from '../../store/apiCall';
 import { useState } from 'react';
 import { COUNTRY } from '../../constant/constant';
