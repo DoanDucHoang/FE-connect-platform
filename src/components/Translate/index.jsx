@@ -9,16 +9,6 @@ import './index.scss';
 const Translate = () => {
   const { i18n } = useTranslation();
   const [lang, setLang] = useState('');
-  // const onSelect = code => {
-  //   setLang(code);
-  //   if (code === 'GB') {
-  //     localStorage.setItem('lang', 'en');
-  //   } else {
-  //     localStorage.setItem('lang', code.toLowerCase());
-  //   }
-  //   window.location.reload();
-  // };
-
   const handleChangeInfo = e => {
     localStorage.setItem('lang', e.target.value);
     setLang(localStorage.getItem('lang') || 'en');

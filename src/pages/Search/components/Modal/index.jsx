@@ -234,7 +234,7 @@ export default function Modal({ props }) {
     <>
       <MDBBtn
         onClick={toggleShow}
-        style={{ width: '100px', padding: '4px 14px 3px' }}
+        style={{ width: '100px', padding: '4px 14px 3px', height: '100%' }}
       >
         {t('Booking')}
       </MDBBtn>

@@ -34,7 +34,7 @@ function CompanyList({ companys, page }) {
   //const [userCountry, setUserCountry] = useState('');
 
   const handlePagination = value => {
-    setPages({ minValue: (value - 1) * numPages, maxValue: value * numPages });
+    setPages({ minValue: 0, maxValue: value * numPages });
     setCurrent(value);
   };
 
@@ -110,7 +110,7 @@ function CompanyList({ companys, page }) {
                       <div style={{ display: 'flex' }}>
                         <span className="text-primary"> • </span> &nbsp;
                         <p className="text-truncate mb-4 mb-md-0">
-                          {t('Estalishment')}: {item.estalishment}
+                          {t('Establishment')}: {item.estalishment}
                         </p>
                       </div>
 

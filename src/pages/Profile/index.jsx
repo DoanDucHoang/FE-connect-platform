@@ -29,15 +29,15 @@ import Modal from '../Search/components/Modal';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
-  const [lang, setLang] = useState();
+  //const [lang, setLang] = useState();
   const { t } = useTranslation();
   const { email, company_name } = user;
   const [info, setInfo] = useState({});
   const [slotBooking, setSlotBooking] = useState([]);
-  // const [infoBook, setInfoBook] = useState();
   let { state } = useLocation();
   const { username } = useParams();
   const [queryParameters] = useSearchParams();
+
   const {
     company_core_members,
     company_description,
@@ -47,12 +47,6 @@ const Profile = () => {
     company_specialties,
     slot_booking,
   } = info;
-
-  // useEffect(() => {
-  //   if (company_info != undefined) {
-  //     setInfoBook(company_info[0]);
-  //   }
-  // }, []);
 
   useEffect(() => {
     username
@@ -128,13 +122,13 @@ const Profile = () => {
               </Col>
               <Col xl={12} xs={24}>
                 <Row align={'middle'} className={style.content__item}>
-                  <span>Employers: </span>
+                  <span>{t('Employers')}: </span>
                   <p>{{ ...company_info }[0]?.employers}</p>
                 </Row>
               </Col>
             </Row>
             <Row align={'middle'} className={style.content__item}>
-              <span>Capital: </span>
+              <span>{t('Capital')}: </span>
               <p>$ {{ ...company_info }[0]?.capital}</p>
             </Row>
             <p className={style.addresss}>
@@ -155,10 +149,12 @@ const Profile = () => {
           </Col>
           <Col span={10}>
             <div className={style.category}>
-              <span>Category:</span>
+              <span>{t('Category')}:</span>
               {{ ...company_info }[0]?.category}
             </div>
-            <div style={{ marginTop: '20px', fontWeight: '600' }}>Needs :</div>
+            <div style={{ marginTop: '20px', fontWeight: '600' }}>
+              {t('Needs')} :
+            </div>
             <div className={style.customer}>
               <div className={style.customer__item}>
                 {{ ...company_info }[0]?.needs_jp}
@@ -167,7 +163,6 @@ const Profile = () => {
           </Col>
         </Row>
       </div>
-
       <Introduce company_description={company_description} />
       <Package company_products={company_products} />
       <Service company_specialties={company_specialties} />
@@ -176,10 +171,12 @@ const Profile = () => {
       {{ ...company_info }[0]?.country != 'Viet Nam' ? (
         <Container id="booking">
           <Row justify={'center'} className={style.checkbox}>
-            <h1 className={style.h1_title}>LỊCH CÓ THỂ HẸN BOOK</h1>
+            <h1 className={style.h1_title}>{t('BOOKING RIGHT HERE')}</h1>
           </Row>
           <Row justify={'center'} className={style.checkbox}>
-            <Modal props={state} />
+            <div style={{ height: '50px' }}>
+              <Modal props={state} />
+            </div>
           </Row>
         </Container>
       ) : (
