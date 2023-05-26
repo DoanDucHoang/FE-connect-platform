@@ -43,12 +43,6 @@ function CompanyList({ companys, page }) {
     setPages({ minValue: 0, maxValue: numPages });
   }, [companys]);
 
-  // useEffect(() => {
-  //   if (!user.country) {
-  //     setUserCountry(user.country);
-  //   }
-  // }, [user]);
-
   return (
     <MDBContainer fluid>
       <MDBRow className="justify-content-center mb-0">
@@ -147,7 +141,7 @@ function CompanyList({ companys, page }) {
                           {t('Category')}: {item.category}
                         </p>
                       </div>
-                      {/* <span className="text-primary"> • </span> */}
+
                       <div style={{ display: 'flex' }}>
                         <span className="text-primary"> • </span> &nbsp;
                         <p className="text-truncate mb-4 mb-md-0">

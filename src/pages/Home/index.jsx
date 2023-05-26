@@ -67,7 +67,9 @@ const Home = () => {
 
       <div className={style.btncontainer} style={{ textAlign: 'center' }}>
         <Link to={'/bm1/search'}>
-          <button className={style.btn}>Đăng Ký Lịch Kết Nối</button>
+          <button className={style.btn}>
+            {t('Register Business Matching')}
+          </button>
         </Link>
       </div>
       <Footer />
