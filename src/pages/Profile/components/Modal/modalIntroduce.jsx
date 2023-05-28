@@ -13,10 +13,6 @@ import { useTranslation } from 'react-i18next';
 import { Editor } from '@tinymce/tinymce-react';
 
 export default function ModalIntroduce({ props }) {
-  console.log(
-    '🚀 ~ file: modalIntroduce.jsx:16 ~ ModalIntroduce ~ props:',
-    props
-  );
   const { t } = useTranslation();
   const data = props || [];
   const [centredModal, setCentredModal] = useState(false);

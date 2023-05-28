@@ -5,9 +5,12 @@ import ModalIntroduce from '../Modal/modalIntroduce.jsx';
 import style from './index.module.scss';
 import { createMarkup } from '../../hooks';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const Introduce = ({ company_description }) => {
   const { t } = useTranslation();
+  const data = company_description || [];
+  const user = useSelector(state => state.auth.currentUser);
   const [lang, setLang] = useState('');
   useEffect(() => {
     setLang(localStorage.getItem('lang') || 'en');
@@ -17,11 +20,11 @@ const Introduce = ({ company_description }) => {
     <Wrapper>
       <Row justify={'center'}>
         <h1 className={style.h1_title}>{t('INTRODUCTION')}</h1>
-
-        {/* <Button type="primary" size={'default'} style={{ margin: 'auto 10px' }}>
-          Edit
-        </Button> */}
-        <ModalIntroduce props={company_description} />
+        {user.company_name === data[0]?.company_name ? (
+          <ModalIntroduce props={company_description} />
+        ) : (
+          ''
+        )}
       </Row>
       {lang === 'vn' ? (
         <>

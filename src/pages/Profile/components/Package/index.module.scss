@@ -11,6 +11,20 @@
 
 .content {
   height: 118px;
+
+  .more_content {
+    height: 85%;
+    margin: 10px 20px 10px 20px;
+    p {
+      display: -webkit-box;
+      max-width: 100%;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
   h3 {
     color: #333;
     margin-top: 0;
