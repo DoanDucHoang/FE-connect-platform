@@ -55,6 +55,7 @@ function CompanyList({ companys, page }) {
             size={15}
             aria-label="Loading Spinner"
             data-testid="loader"
+            style={{ textAlign: 'center' }}
           />
         )}
         {companys.slice(pages.minValue, pages.maxValue).map(item => (

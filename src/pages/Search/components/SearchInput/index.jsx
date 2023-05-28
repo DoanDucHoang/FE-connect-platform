@@ -3,6 +3,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './index.scss';
 import { useState } from 'react';
+import { Col, Row } from 'antd';
 
 function SearchInput({ handleSearch, handleCategory }) {
   const { t } = useTranslation();
@@ -90,7 +91,9 @@ function SearchInput({ handleSearch, handleCategory }) {
         </div>
         <div className="search_category_content">
           <ul className="category_content">
+            {/* <Row> */}
             {values.map(item => (
+              // <Col span={1}>
               <li
                 key={item.id}
                 style={
@@ -105,7 +108,9 @@ function SearchInput({ handleSearch, handleCategory }) {
               >
                 {t(`${item.text}`)}
               </li>
+              // </Col>
             ))}
+            {/* </Row> */}
           </ul>
           {/* <button onClick={handleOffCategory}>Off</button> */}
         </div>

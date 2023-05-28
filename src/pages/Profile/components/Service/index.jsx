@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd';
+import { Button, Col, Row } from 'antd';
 import style from './index.module.scss';
 import { useTranslation } from 'react-i18next';
 import Wrapper from '../../../../components/Wrapper';
@@ -15,6 +15,10 @@ const Service = ({ company_specialties }) => {
     <Wrapper>
       <Row justify={'center'}>
         <h1 className={style.h1_title}>{t('COMPANY FEATURES')}</h1>
+
+        <Button type="primary" size={'default'} style={{ margin: 'auto 10px' }}>
+          Edit
+        </Button>
       </Row>
       <Row gutter={[16, 16]} justify={'center'}>
         {company_specialties?.map(item => (

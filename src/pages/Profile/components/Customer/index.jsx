@@ -2,6 +2,7 @@ import React from 'react';
 import { Col, Row } from 'antd';
 import style from './index.module.scss';
 import Wrapper from '../../../../components/Wrapper';
+import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 const Customer = ({ company_main_clients }) => {
@@ -10,6 +11,10 @@ const Customer = ({ company_main_clients }) => {
     <Wrapper>
       <Row justify={'center'}>
         <h1 className={style.h1_title}>{t('COSTUMERS')}</h1>
+
+        <Button type="primary" size={'default'} style={{ margin: 'auto 10px' }}>
+          Edit
+        </Button>
       </Row>
       <Row justify={'center'} gutter={[16, 16]} style={{ marginTop: '20px' }}>
         {company_main_clients?.map(item => (

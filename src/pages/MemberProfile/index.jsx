@@ -410,12 +410,6 @@ const MemberProfile = () => {
             <Col xl={12} lg={12} md={24}>
               <div className="member__main_info_item">
                 <h5>{translateTypeOfBusiness(language)}</h5>
-                {/* <input
-                  onChange={handleChangeInfo}
-                  name="ceategory"
-                  type="text"
-                  placeholder="IT"
-                /> */}
                 <select
                   name="ceategory"
                   id=""

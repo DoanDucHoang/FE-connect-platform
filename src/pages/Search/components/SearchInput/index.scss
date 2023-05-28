@@ -2,6 +2,7 @@
   //margin: 0px 10px 0px 40px;
   background-color: #e8e8e8;
   padding: 10px;
+  width: 100%;
   .search-box {
     width: fit-content;
     height: fit-content;
@@ -68,8 +69,13 @@
 
   .search_category {
     .search_category_content {
+      ul {
+        text-align: -webkit-center;
+      }
       ul,
       li {
+        margin: 0;
+        padding: 0;
         list-style: none;
       }
 
@@ -77,8 +83,9 @@
         margin: 12px 0px;
         padding: 5px;
         border-radius: 15px;
-        width: fit-content;
+        width: 250px;
         background-color: #fff;
+        text-align: center;
         cursor: pointer;
 
         &:hover {
@@ -86,10 +93,11 @@
         }
       }
       @media only screen and (max-width: 991px) {
-        ul,
+        ul {
+          display: block;
+        }
         li {
           list-style: none;
-          display: flex;
         }
       }
     }

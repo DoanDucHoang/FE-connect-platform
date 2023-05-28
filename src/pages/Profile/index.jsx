@@ -99,10 +99,7 @@ const Profile = () => {
             }}
           >
             {user.company_name === { ...company_info }[0]?.company_name ? (
-              <Link to={'/update_profile'} state={info}>
-                {' '}
-                <button className={style.btn_edit}>Edit Your Profile</button>
-              </Link>
+              <button className={style.btn_edit}>Edit Your Profile</button>
             ) : (
               ''
             )}

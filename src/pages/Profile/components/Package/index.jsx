@@ -1,9 +1,10 @@
-import { Card, Col, Row } from 'antd';
+import { Button, Card, Col, Row } from 'antd';
 import style from './index.module.scss';
 import Wrapper from '../../../../components/Wrapper';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createMarkup } from '../../hooks';
+import Modal from '../Modal/modalProduct.jsx';
 import ReadMore from '../../../../components/ReadMore/ReadMore';
 
 const Package = ({ company_products }) => {
@@ -17,6 +18,7 @@ const Package = ({ company_products }) => {
     <Wrapper>
       <Row justify={'center'}>
         <h1 className={style.h1_title}>{t('MAIN SERVICES')}</h1>
+        <Modal props={company_products} />
       </Row>
       <Row gutter={[32, 32]} justify={'center'}>
         {company_products?.map(item => (

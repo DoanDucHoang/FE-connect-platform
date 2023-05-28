@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row } from 'antd';
+import { Button, Col, Row } from 'antd';
 import style from './index.module.scss';
 import Wrapper from '../../../../components/Wrapper';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +15,9 @@ const Team = ({ company_core_members }) => {
     <Wrapper className={style.wrapper}>
       <Row justify={'center'}>
         <h1 className={style.h1_title}>{t('CORE MEMBERS')}</h1>
+        <Button type="primary" size={'default'} style={{ margin: 'auto 10px' }}>
+          Edit
+        </Button>
       </Row>
       <Row gutter={[16, 16]} justify={'center'}>
         {company_core_members?.map(item => (
