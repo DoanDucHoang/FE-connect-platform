@@ -4,17 +4,22 @@ import style from './index.module.scss';
 import Wrapper from '../../../../components/Wrapper';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
+import ModalClient from '../Modal/modalClient';
+import { useSelector } from 'react-redux';
 
 const Customer = ({ company_main_clients }) => {
   const { t } = useTranslation();
+  const user = useSelector(state => state.auth.currentUser);
+  const data = company_main_clients || [];
   return (
     <Wrapper>
       <Row justify={'center'}>
         <h1 className={style.h1_title}>{t('COSTUMERS')}</h1>
-
-        <Button type="primary" size={'default'} style={{ margin: 'auto 10px' }}>
-          Edit
-        </Button>
+        {user.company_name === data[0]?.company_name ? (
+          <ModalClient props={company_main_clients} />
+        ) : (
+          ''
+        )}
       </Row>
       <Row justify={'center'} gutter={[16, 16]} style={{ marginTop: '20px' }}>
         {company_main_clients?.map(item => (

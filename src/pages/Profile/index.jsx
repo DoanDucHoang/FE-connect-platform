@@ -26,6 +26,7 @@ import Navbar from '../../components/Navbar';
 import Translate from '../../components/Translate';
 import Footer from '../../components/Footer';
 import Modal from '../Search/components/Modal';
+import ModalIntroduce from './components/Modal/modalIntroduce';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
@@ -99,7 +100,7 @@ const Profile = () => {
             }}
           >
             {user.company_name === { ...company_info }[0]?.company_name ? (
-              <button className={style.btn_edit}>Edit Your Profile</button>
+              <ModalIntroduce props={''} />
             ) : (
               ''
             )}

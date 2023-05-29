@@ -71,14 +71,6 @@ const Package = ({ company_products }) => {
                     </div>
                   </>
                 )}
-
-                {/* <ReadMore>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: item.product_description_JP,
-                    }}
-                  />
-                </ReadMore> */}
               </div>
             </Card>
           </Col>

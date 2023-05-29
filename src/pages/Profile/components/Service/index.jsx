@@ -3,9 +3,13 @@ import style from './index.module.scss';
 import { useTranslation } from 'react-i18next';
 import Wrapper from '../../../../components/Wrapper';
 import { useEffect, useState } from 'react';
+import ModalSpecialties from '../Modal/modalSpecialties';
+import { useSelector } from 'react-redux';
 
 const Service = ({ company_specialties }) => {
   const { t } = useTranslation();
+  const user = useSelector(state => state.auth.currentUser);
+  const data = company_specialties || [];
   const [lang, setLang] = useState('');
   useEffect(() => {
     setLang(localStorage.getItem('lang') || 'en');
@@ -15,10 +19,11 @@ const Service = ({ company_specialties }) => {
     <Wrapper>
       <Row justify={'center'}>
         <h1 className={style.h1_title}>{t('COMPANY FEATURES')}</h1>
-
-        <Button type="primary" size={'default'} style={{ margin: 'auto 10px' }}>
-          Edit
-        </Button>
+        {user.company_name === data[0]?.company_name ? (
+          <ModalSpecialties props={company_specialties} />
+        ) : (
+          ''
+        )}
       </Row>
       <Row gutter={[16, 16]} justify={'center'}>
         {company_specialties?.map(item => (
