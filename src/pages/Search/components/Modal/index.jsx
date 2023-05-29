@@ -25,6 +25,7 @@ import { ROUTES } from '../../../../constant/ROUTES';
 export default function Modal({ props }) {
   const { t } = useTranslation();
   const [listBooking, setListBooking] = useState([]);
+  // console.log('🚀 ~ file: index.jsx:28 ~ Modal ~ listBooking:', listBooking);
   const [listBookingVN, setListBookingVN] = useState([]);
   const [centredModal, setCentredModal] = useState(false);
   const [typeAlert, setTypeAlert] = useState({
@@ -130,7 +131,6 @@ export default function Modal({ props }) {
     {
       name: `${t('Slot Number')}`,
       selector: row => row.slot_booking,
-      //user.country === 'Japan' ? row.slot_number : row.slot_booking,
       sortable: true,
     },
     {

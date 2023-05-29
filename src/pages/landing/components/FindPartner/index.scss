@@ -10,10 +10,10 @@
       padding: 0px 10px;
     }
 
-    @media only screen and (max-width: 400px) {
+    @media only screen and (max-width: 500px) {
       input {
         width: 80%;
-      }    
+      }
     }
   }
 
@@ -28,10 +28,9 @@
       font-family: 'Source Sans Pro', sans-serif;
       border-radius: 15px;
       justify-content: center;
-       span {
+      span {
         display: inline-block;
-       }
-
+      }
     }
 
     .button_left {
@@ -56,7 +55,7 @@
         box-shadow: inset 350px 0 0 0 #b73232;
       }
 
-      @media only screen and (max-width: 400px) {
+      @media only screen and (max-width: 500px) {
         width: 100px;
         font-size: 1rem;
         display: inline-block;
@@ -85,12 +84,11 @@
         box-shadow: inset 350px 0 0 0 #f7f300;
       }
 
-      @media only screen and (max-width: 400px) {
+      @media only screen and (max-width: 500px) {
         width: 100px;
         font-size: 1rem;
         display: inline-block;
       }
-
     }
   }
 }

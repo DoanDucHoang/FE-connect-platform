@@ -31,7 +31,7 @@ function CompanyList({ companys, page }) {
   const user = useSelector(state => state.auth.currentUser);
   const [pages, setPages] = useState({ minValue: 0, maxValue: numPages });
   const [current, setCurrent] = useState(1);
-  //const [userCountry, setUserCountry] = useState('');
+  // const [slot, setSlot] = useState();
 
   const handlePagination = value => {
     setPages({ minValue: (value - 1) * numPages, maxValue: value * numPages });

@@ -94,12 +94,6 @@ const Landing = () => {
         <Col xl={24} lg={21}>
           <CompanyList companys={vietNamCompanys} page="landing" />
         </Col>
-        {/* <Row gutter={[32, 32]} justify={'center'}>
-          <Company companys={japanCompanys} title={COUNTRY.JP} />
-        </Row> */}
-        {/* <Row gutter={[32, 32]} justify={'center'}>
-          <Company companys={vietNamCompanys} title={COUNTRY.VN} />
-        </Row> */}
       </div>
       <div className="events_matching_container">
         <h3 className="matching_title" id="professional">
