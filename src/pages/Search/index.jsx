@@ -98,14 +98,14 @@ const Search = () => {
       <Navbar />
       <Header props="landing" />
       <Row>
-        <Col xl={7} lg={24}>
+        <Col xl={7} lg={24} style={{ width: '100%' }}>
           <SearchInput
             handleSearch={handleSearch}
             handleCategory={handleCategory}
           />
         </Col>
         <Col xl={17} lg={12}>
-          <h2>
+          <h2 style={{ marginLeft: '20px', marginTop: '20px' }}>
             {t('Result For')}: {t(`${title}`)}
           </h2>
           <CompanyList companys={companyJP} page="search" />

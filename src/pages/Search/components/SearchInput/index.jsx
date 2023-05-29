@@ -2,13 +2,14 @@ import { useTranslation } from 'react-i18next';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './index.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Col, Row } from 'antd';
 
 function SearchInput({ handleSearch, handleCategory }) {
   const { t } = useTranslation();
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
+  const [stickyClass, setStickyClass] = useState('');
   const [activeId, setActiveId] = useState();
   const values = [
     {
@@ -64,9 +65,21 @@ function SearchInput({ handleSearch, handleCategory }) {
     setActiveId(0);
   };
 
+  const stickNavbar = () => {
+    if (window !== undefined) {
+      let windowHeight = window.scrollY;
+      windowHeight > 640 ? setStickyClass('sticky-nav') : setStickyClass('');
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', stickNavbar);
+    return () => window.removeEventListener('scroll', stickNavbar);
+  }, []);
+
   return (
-    <div className="container_search">
-      <h5>{t('Search For Company Name')}</h5>
+    <div className={`container_search ${stickyClass}`}>
+      <h3>{t('Search For Company Name')}</h3>
       <form onSubmit={handleSubmit}>
         <div className="search-box">
           <button

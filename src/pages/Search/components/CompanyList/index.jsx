@@ -24,7 +24,7 @@ import Modal from '../Modal';
 import { useSelector } from 'react-redux';
 import { Pagination } from 'antd';
 import { useEffect } from 'react';
-let numPages = 2;
+let numPages = 4;
 
 function CompanyList({ companys, page }) {
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ function CompanyList({ companys, page }) {
   //const [userCountry, setUserCountry] = useState('');
 
   const handlePagination = value => {
-    setPages({ minValue: 0, maxValue: value * numPages });
+    setPages({ minValue: (value - 1) * numPages, maxValue: value * numPages });
     setCurrent(value);
   };
 
