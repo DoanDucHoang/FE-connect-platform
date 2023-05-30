@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MDBBtn,
   MDBModal,
@@ -12,14 +12,58 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Editor } from '@tinymce/tinymce-react';
 import { Col, Row } from 'antd';
+import axios from 'axios';
+import { UPLOAD_IMAGE } from '../../../../constant/constant';
+import { useSelector } from 'react-redux';
+import { updateProduct } from '../../../../store/apiCall';
 
 export default function ModalProduct({ props }) {
   console.log('🚀 ~ file: modalProduct.jsx:17 ~ ModalProduct ~ props:', props);
   const data = props || [];
+  const user = useSelector(state => state.auth.currentUser);
+  const { email, company_name } = user;
   const { t } = useTranslation();
   const [centredModal, setCentredModal] = useState(false);
-
   const toggleShow = () => setCentredModal(!centredModal);
+  const [services, setServices] = useState(props);
+
+  // useEffect(() => {
+  //   props.map(
+  //     (item, index) =>
+  //       (services[index][services[index].product_name] = item.product_name)
+  //   );
+  // });
+
+  const upload = async file => {
+    const imgUrl = file;
+    const res = await axios.get(`${UPLOAD_IMAGE}s3Url`);
+    await fetch(res.data.url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'image/png',
+      },
+      body: imgUrl,
+    });
+    return res.data.url.split('?')[0];
+  };
+
+  const handelChangeService = async (e, data) => {
+    let imgUrl = '';
+    const newServices = services;
+    let index = newServices.findIndex(item => item.id === data.id);
+    if (e.target.name === 'product_picture') {
+      const imgUrl = await upload(e.target.files[0]);
+      newServices[index][e.target.name] = imgUrl;
+    } else {
+      newServices[index][e.target.name] = e.target.value;
+    }
+    setServices([...newServices]);
+  };
+
+  const handleSubmit = () => {
+    const data = services;
+    updateProduct(data);
+  };
 
   return (
     <>
@@ -50,7 +94,7 @@ export default function ModalProduct({ props }) {
                       {/* {translatePreferred(language)} */}
                     </label>
                     <input
-                      // onChange={e => handelChangeService(e, item)}
+                      onChange={e => handelChangeService(e, item)}
                       id="image"
                       type="file"
                       name="product_picture"
@@ -64,7 +108,7 @@ export default function ModalProduct({ props }) {
                     <div className="member__services_content_name">
                       <h5>{t('Service Name (Vietnamese)')}</h5>
                       <input
-                        // onChange={e => handelChangeService(e, item)}
+                        onChange={e => handelChangeService(e, item)}
                         type="text"
                         defaultValue={`${item.product_name}`}
                         name="product_name"
@@ -72,7 +116,7 @@ export default function ModalProduct({ props }) {
                       />
                       <h5>{t('Service Name (English)')}</h5>
                       <input
-                        // onChange={e => handelChangeService(e, item)}
+                        onChange={e => handelChangeService(e, item)}
                         type="text"
                         defaultValue={`${item.product_name_EN}`}
                         name="product_name_EN"
@@ -80,7 +124,7 @@ export default function ModalProduct({ props }) {
                       />
                       <h5>{t('Service Name (Japanese)')}</h5>
                       <input
-                        // onChange={e => handelChangeService(e, item)}
+                        onChange={e => handelChangeService(e, item)}
                         type="text"
                         defaultValue={`${item.product_name_JP}`}
                         name="product_name_JP"
@@ -90,7 +134,7 @@ export default function ModalProduct({ props }) {
                     <div className="member__services_content_url">
                       <h5>URL :</h5>
                       <input
-                        // onChange={e => handelChangeService(e, item)}
+                        onChange={e => handelChangeService(e, item)}
                         defaultValue={`${item.product_url}`}
                         type="text"
                         name="product_url"
@@ -100,14 +144,14 @@ export default function ModalProduct({ props }) {
                       <h5>{t('Service Description (Vietnamese)')}:</h5>
                       <Editor
                         apiKey="llhgp2l4okfe8p5ocd3ies84wrt9rs82y4xdc69nlmm0rc58"
-                        // onEditorChange={(content, editor) => {
-                        //   const newServices = services;
-                        //   let index = services.findIndex(
-                        //     data => data.id === item.id
-                        //   );
-                        //   newServices[index].product_description = content;
-                        //   setServices([...newServices]);
-                        // }}
+                        onEditorChange={(content, editor) => {
+                          const newServices = services;
+                          let index = services.findIndex(
+                            data => data.id === item.id
+                          );
+                          newServices[index].product_description = content;
+                          setServices([...newServices]);
+                        }}
                         initialValue={`${item.product_description}`}
                         init={{
                           height: 224,
@@ -146,14 +190,14 @@ export default function ModalProduct({ props }) {
                       <h5>{t('Service Description (English)')}:</h5>
                       <Editor
                         apiKey="llhgp2l4okfe8p5ocd3ies84wrt9rs82y4xdc69nlmm0rc58"
-                        // onEditorChange={(content, editor) => {
-                        //   const newServices = services;
-                        //   let index = services.findIndex(
-                        //     data => data.id === item.id
-                        //   );
-                        //   newServices[index].product_description_EN = content;
-                        //   setServices([...newServices]);
-                        // }}
+                        onEditorChange={(content, editor) => {
+                          const newServices = services;
+                          let index = services.findIndex(
+                            data => data.id === item.id
+                          );
+                          newServices[index].product_description_EN = content;
+                          setServices([...newServices]);
+                        }}
                         initialValue={`${item.product_description_EN}`}
                         init={{
                           height: 224,
@@ -192,14 +236,14 @@ export default function ModalProduct({ props }) {
                       <h5>{t('Service Description (Japanese)')}:</h5>
                       <Editor
                         apiKey="llhgp2l4okfe8p5ocd3ies84wrt9rs82y4xdc69nlmm0rc58"
-                        // onEditorChange={(content, editor) => {
-                        //   const newServices = services;
-                        //   let index = services.findIndex(
-                        //     data => data.id === item.id
-                        //   );
-                        //   newServices[index].product_description_JP = content;
-                        //   setServices([...newServices]);
-                        // }}
+                        onEditorChange={(content, editor) => {
+                          const newServices = services;
+                          let index = services.findIndex(
+                            data => data.id === item.id
+                          );
+                          newServices[index].product_description_JP = content;
+                          setServices([...newServices]);
+                        }}
                         initialValue={`${item.product_description_JP}`}
                         init={{
                           height: 224,
@@ -247,7 +291,7 @@ export default function ModalProduct({ props }) {
               <MDBBtn color="secondary" onClick={toggleShow}>
                 Close
               </MDBBtn>
-              <MDBBtn>Save changes</MDBBtn>
+              <MDBBtn onClick={() => handleSubmit()}>Save changes</MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

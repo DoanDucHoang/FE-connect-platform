@@ -13,18 +13,58 @@ import { useTranslation } from 'react-i18next';
 import { Editor } from '@tinymce/tinymce-react';
 import { Col, Row } from 'antd';
 import { useSelector } from 'react-redux';
+import { UPLOAD_IMAGE } from '../../../../constant/constant';
+import axios from 'axios';
+import { updateCoreMember } from '../../../../store/apiCall';
 
 export default function ModalCoreMember({ props }) {
-  console.log(
-    '🚀 ~ file: modalCoreMember.jsx:18 ~ ModalCoreMember ~ props:',
-    props
-  );
+  // console.log(
+  //   '🚀 ~ file: modalCoreMember.jsx:18 ~ ModalCoreMember ~ props:',
+  //   props
+  // );
 
   const data = props || [];
   const user = useSelector(state => state.auth.currentUser);
   const { email, company_name } = user;
   const { t } = useTranslation();
   const [centredModal, setCentredModal] = useState(false);
+  const [core, setCore] = useState(props);
+
+  const upload = async file => {
+    const imgUrl = file;
+    const res = await axios.get(`${UPLOAD_IMAGE}s3Url`);
+    await fetch(res.data.url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'image/png',
+      },
+      body: imgUrl,
+    });
+    return res.data.url.split('?')[0];
+  };
+
+  const handleChangeCore = async (e, data) => {
+    let imgUrl = '';
+    const newCore = core;
+    let index = core.findIndex(item => item.id === data.id);
+    if (e.target.name === 'member_picture') {
+      const imgUrl = await upload(e.target.files[0]);
+      newCore[index][e.target.name] = imgUrl;
+    } else {
+      newCore[index][e.target.name] = e.target.value;
+    }
+    setCore([...newCore]);
+  };
+
+  const handleSubmit = () => {
+    const data = core;
+    // console.log(
+    //   '🚀 ~ file: modalCoreMember.jsx:59 ~ handleSubmit ~ data:',
+    //   data
+    // );
+
+    updateCoreMember(data);
+  };
 
   const toggleShow = () => setCentredModal(!centredModal);
 
@@ -62,7 +102,7 @@ export default function ModalCoreMember({ props }) {
                         Full Name
                       </div>
                       <input
-                        // onChange={e => handleChangeCore(e, item)}
+                        onChange={e => handleChangeCore(e, item)}
                         defaultValue={`${item.member_name}`}
                         className="member__core_input"
                         type="text"
@@ -72,7 +112,7 @@ export default function ModalCoreMember({ props }) {
                         Chức Vụ (Tiếng Việt):{' '}
                       </div>
                       <input
-                        // onChange={e => handleChangeCore(e, item)}
+                        onChange={e => handleChangeCore(e, item)}
                         className="member__core_input"
                         defaultValue={`${item.member_position}`}
                         type="text"
@@ -82,7 +122,7 @@ export default function ModalCoreMember({ props }) {
                         Chức Vụ (Tiếng Anh):{' '}
                       </div>
                       <input
-                        // onChange={e => handleChangeCore(e, item)}
+                        onChange={e => handleChangeCore(e, item)}
                         className="member__core_input"
                         defaultValue={`${item.member_position_EN}`}
                         type="text"
@@ -92,7 +132,7 @@ export default function ModalCoreMember({ props }) {
                         Chức Vụ (Tiếng Nhật):{' '}
                       </div>
                       <input
-                        // onChange={e => handleChangeCore(e, item)}
+                        onChange={e => handleChangeCore(e, item)}
                         className="member__core_input"
                         defaultValue={`${item.member_position_JP}`}
                         type="text"
@@ -107,7 +147,7 @@ export default function ModalCoreMember({ props }) {
                         {/* {translatePreferred(language)} */}
                       </label>
                       <input
-                        // onChange={e => handleChangeCore(e, item)}
+                        onChange={e => handleChangeCore(e, item)}
                         id="coreImage"
                         type="file"
                         name="member_picture"
@@ -126,7 +166,7 @@ export default function ModalCoreMember({ props }) {
                         Mô Tả Thành Viên (Tiếng Việt):
                       </div>
                       <textarea
-                        // onChange={e => handleChangeCore(e, item)}
+                        onChange={e => handleChangeCore(e, item)}
                         name="member_desc"
                         defaultValue={`${item.member_desc}`}
                         id=""
@@ -137,7 +177,7 @@ export default function ModalCoreMember({ props }) {
                         Mô Tả Thành Viên (Tiếng Anh):
                       </div>
                       <textarea
-                        // onChange={e => handleChangeCore(e, item)}
+                        onChange={e => handleChangeCore(e, item)}
                         name="member_desc_EN"
                         defaultValue={`${item.member_desc_EN}`}
                         id=""
@@ -148,7 +188,7 @@ export default function ModalCoreMember({ props }) {
                         Mô Tả Thành Viên (Tiếng Nhật):
                       </div>
                       <textarea
-                        // onChange={e => handleChangeCore(e, item)}
+                        onChange={e => handleChangeCore(e, item)}
                         name="member_desc_JP"
                         defaultValue={`${item.member_desc_JP}`}
                         id=""
@@ -171,7 +211,7 @@ export default function ModalCoreMember({ props }) {
               <MDBBtn color="secondary" onClick={toggleShow}>
                 Close
               </MDBBtn>
-              <MDBBtn>Save changes</MDBBtn>
+              <MDBBtn onClick={() => handleSubmit()}>Save changes</MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

@@ -26,7 +26,7 @@ import { Pagination } from 'antd';
 import { useEffect } from 'react';
 let numPages = 4;
 
-function CompanyList({ companys, page }) {
+function CompanyList({ companys, page, isLoading }) {
   const { t } = useTranslation();
   const user = useSelector(state => state.auth.currentUser);
   const [pages, setPages] = useState({ minValue: 0, maxValue: numPages });
@@ -46,9 +46,7 @@ function CompanyList({ companys, page }) {
   return (
     <MDBContainer fluid>
       <MDBRow className="justify-content-center mb-0">
-        {companys.length ? (
-          ''
-        ) : (
+        {isLoading && (
           <SyncLoader
             color="#cf2030"
             loading={true}

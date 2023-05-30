@@ -24,13 +24,14 @@ import { COUNTRY } from '../../constant/constant';
 import bannerBM from '../../assets/posterVJBC.png';
 import style from './index.scss';
 import CompanyList from '../Search/components/CompanyList';
-
+import { useLocation } from 'react-router-dom';
+import { scrollToElement } from '../../helper';
 const Landing = () => {
   const isScrolled = false;
   const { t } = useTranslation();
   const [japanCompanys, setJapanCompanys] = useState([]);
   const [vietNamCompanys, setVietNamCompanys] = useState([]);
-
+  const location = useLocation();
   useEffect(() => {
     getFourJapanCompany()
       .then(data => {
@@ -47,6 +48,10 @@ const Landing = () => {
       .catch(err => {
         console.log(err);
       });
+    const { hash } = location;
+    if (hash) {
+      scrollToElement(hash);
+    }
   }, []);
 
   return (
@@ -101,10 +106,8 @@ const Landing = () => {
         </h3>
         <SlideImage props={'professional'} />
       </div>
-      <div className="events_matching_container">
-        <h3 className="matching_title" id="contact">
-          {t('Please contact us')}
-        </h3>
+      <div className="events_matching_container" id="contact">
+        <h3 className="matching_title">{t('Please contact us')}</h3>
         <Contact />
       </div>
       <div className="events_matching_container">

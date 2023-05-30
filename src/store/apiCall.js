@@ -45,6 +45,46 @@ export const pushInfoCompany = async (data, navigate) => {
   }
 };
 
+export const updateIntroduce = async data => {
+  try {
+    const res = await axios.put(`${DOMAIN}getcompany/update_introduce`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateProduct = async data => {
+  try {
+    const res = await axios.put(`${DOMAIN}getcompany/update_product`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateFeatures = async data => {
+  try {
+    const res = await axios.put(`${DOMAIN}getcompany/update_specialties`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateCoreMember = async data => {
+  try {
+    const res = await axios.put(`${DOMAIN}getcompany/update_core_member`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateClient = async data => {
+  try {
+    const res = await axios.put(`${DOMAIN}getcompany/update_client`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const pushSlotBooking = async data => {
   try {
     const res = await axios.post(`${DOMAIN}booking`, data);

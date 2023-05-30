@@ -13,17 +13,56 @@ import { useTranslation } from 'react-i18next';
 import { Editor } from '@tinymce/tinymce-react';
 import { Col, Row } from 'antd';
 import { useSelector } from 'react-redux';
+import { UPLOAD_IMAGE } from '../../../../constant/constant';
+import axios from 'axios';
+import { updateFeatures } from '../../../../store/apiCall';
 
 export default function ModalSpecialties({ props }) {
-  console.log(
-    '🚀 ~ file: modalSpecialties.jsx:18 ~ ModalSpecialties ~ props:',
-    props
-  );
+  // console.log(
+  //   '🚀 ~ file: modalSpecialties.jsx:18 ~ ModalSpecialties ~ props:',
+  //   props
+  // );
   const data = props || [];
   const user = useSelector(state => state.auth.currentUser);
   const { email, company_name } = user;
   const { t } = useTranslation();
   const [centredModal, setCentredModal] = useState(false);
+  const [features, setFeatures] = useState(props);
+
+  const upload = async file => {
+    const imgUrl = file;
+    const res = await axios.get(`${UPLOAD_IMAGE}s3Url`);
+    await fetch(res.data.url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'image/png',
+      },
+      body: imgUrl,
+    });
+    return res.data.url.split('?')[0];
+  };
+
+  const handleChangeFeature = async (e, data) => {
+    let imgUrl = '';
+    const newfeatures = features;
+    let index = features.findIndex(item => item.id === data.id);
+    if (e.target.name === 'speciality_picture') {
+      const imgUrl = await upload(e.target.files[0]);
+      newfeatures[index][e.target.name] = imgUrl;
+    } else {
+      newfeatures[index][e.target.name] = e.target.value;
+    }
+    setFeatures([...newfeatures]);
+  };
+
+  const handleSubmit = () => {
+    const data = features;
+    // console.log(
+    //   '🚀 ~ file: modalSpecialties.jsx:59 ~ handleSubmit ~ data:',
+    //   data
+    // );
+    updateFeatures(data);
+  };
 
   const toggleShow = () => setCentredModal(!centredModal);
 
@@ -66,7 +105,7 @@ export default function ModalSpecialties({ props }) {
                       </div>
                     </Row>
                     <input
-                      //   onChange={e => handleChangeFeature(e, item)}
+                      onChange={e => handleChangeFeature(e, item)}
                       className="member__features_input1"
                       type="file"
                       name="speciality_picture"
@@ -74,7 +113,7 @@ export default function ModalSpecialties({ props }) {
                     />
                     <h5>Mô Tả Đặc Trưng (Tiếng Việt)</h5>
                     <input
-                      //   onChange={e => handleChangeFeature(e, item)}
+                      onChange={e => handleChangeFeature(e, item)}
                       className="member__features_input2"
                       defaultValue={`${item.speciality_desc}`}
                       type="text"
@@ -82,7 +121,7 @@ export default function ModalSpecialties({ props }) {
                     />
                     <h5>Mô Tả Đặc Trưng (Tiếng Anh)</h5>
                     <input
-                      //   onChange={e => handleChangeFeature(e, item)}
+                      onChange={e => handleChangeFeature(e, item)}
                       className="member__features_input2"
                       defaultValue={`${item.speciality_desc_en}`}
                       type="text"
@@ -90,7 +129,7 @@ export default function ModalSpecialties({ props }) {
                     />
                     <h5>Mô Tả Đặc Trưng (Tiếng Nhật)</h5>
                     <input
-                      //   onChange={e => handleChangeFeature(e, item)}
+                      onChange={e => handleChangeFeature(e, item)}
                       className="member__features_input2"
                       defaultValue={`${item.speciality_desc_jp}`}
                       type="text"
@@ -104,7 +143,7 @@ export default function ModalSpecialties({ props }) {
               <MDBBtn color="secondary" onClick={toggleShow}>
                 Close
               </MDBBtn>
-              <MDBBtn>Save changes</MDBBtn>
+              <MDBBtn onClick={() => handleSubmit()}>Save changes</MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

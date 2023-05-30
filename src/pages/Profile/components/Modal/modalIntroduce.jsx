@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MDBBtn,
   MDBModal,
@@ -11,14 +11,24 @@ import {
 } from 'mdb-react-ui-kit';
 import { useTranslation } from 'react-i18next';
 import { Editor } from '@tinymce/tinymce-react';
+import { updateIntroduce } from '../../../../store/apiCall';
 
-export default function ModalIntroduce({ props }) {
+export default function ModalIntroduce({ props, email }) {
   const { t } = useTranslation();
   const data = props || [];
   const [centredModal, setCentredModal] = useState(false);
-  const [description, setDescription] = useState();
-  const [descriptionEN, setDescriptionEN] = useState();
-  const [descriptionJP, setDescriptionJP] = useState();
+  const [description, setDescription] = useState(`${data[0]?.description}`);
+  const [descriptionEN, setDescriptionEN] = useState(
+    `${data[0]?.descriptionEN}`
+  );
+  const [descriptionJP, setDescriptionJP] = useState(
+    `${data[0]?.descriptionJP}`
+  );
+
+  const handleSubmit = () => {
+    const data = { description, descriptionEN, descriptionJP, email };
+    updateIntroduce(data);
+  };
 
   const toggleShow = () => setCentredModal(!centredModal);
 
@@ -49,7 +59,6 @@ export default function ModalIntroduce({ props }) {
                 </div>
                 <Editor
                   apiKey="llhgp2l4okfe8p5ocd3ies84wrt9rs82y4xdc69nlmm0rc58"
-                  defaultValue="hello"
                   onEditorChange={(content, editor) => {
                     setDescription(content);
                   }}
@@ -174,7 +183,7 @@ export default function ModalIntroduce({ props }) {
               <MDBBtn color="secondary" onClick={toggleShow}>
                 Close
               </MDBBtn>
-              <MDBBtn>Save changes</MDBBtn>
+              <MDBBtn onClick={() => handleSubmit()}>Save changes</MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

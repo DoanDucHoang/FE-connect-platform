@@ -11,7 +11,7 @@ import {
 } from '../../store/apiCall';
 import { useState } from 'react';
 import { COUNTRY } from '../../constant/constant';
-import { Col, Row } from 'antd';
+import { Col, Row, Spin } from 'antd';
 import CompanyList from './components/CompanyList';
 import './index.scss';
 import { GridLoader } from 'react-spinners';
@@ -22,6 +22,7 @@ let PageSize = 2;
 
 const Search = () => {
   const [companys, setCompanys] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [title, setTitle] = useState('ALL');
   const [company_name, setCompanyName] = useState('');
   const [category, setCategory] = useState('All');
@@ -36,6 +37,9 @@ const Search = () => {
   }, [currentPage]);
 
   const handleSearch = name => {
+    if (!name) {
+      getAll();
+    }
     setCompanyName(name);
     setTitle(name);
     if (!name) {
@@ -62,6 +66,7 @@ const Search = () => {
     getAllCompany()
       .then(data => {
         setCompanys(data);
+        setIsLoading(false);
       })
       .catch(err => {
         console.log(err);
@@ -73,27 +78,36 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    getCompanyByName({ company_name }).then(data => {
-      setCompanys(data);
-    });
-
-    if (!company_name) {
-      getAll();
+    if (company_name.trim()) {
+      getCompanyByName({ company_name }).then(data => {
+        setCompanys(data);
+      });
     }
+    // if (!company_name) {
+    //   getAll();
+    // }
   }, [company_name]);
 
   useEffect(() => {
-    getCompanyByCategory({ category }).then(data => {
-      setCompanys(data);
-    });
-
-    if (!category) {
-      getAll();
+    if (category !== 'All') {
+      getCompanyByCategory({ category }).then(data => {
+        setCompanys(data);
+        setIsLoading(false);
+      });
     }
+
+    // if (!category) {
+    //   getAll();
+    // }
   }, [category]);
 
   return (
     <div className="container">
+      {/* {!isLoading && (
+        <div className="loading">
+          <Spin size="large" />
+        </div>
+      )} */}
       <Translate />
       <Navbar />
       <Header props="landing" />

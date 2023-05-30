@@ -21,7 +21,7 @@ const Introduce = ({ company_description }) => {
       <Row justify={'center'}>
         <h1 className={style.h1_title}>{t('INTRODUCTION')}</h1>
         {user.company_name === data[0]?.company_name ? (
-          <ModalIntroduce props={company_description} />
+          <ModalIntroduce props={company_description} email={user.email} />
         ) : (
           ''
         )}

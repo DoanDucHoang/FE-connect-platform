@@ -33,8 +33,10 @@ const Customer = ({ company_main_clients }) => {
             key={item.id}
             style={{ textAlign: 'center', alignItems: 'center' }}
           >
-            <img className={style.logo} src={item.client_logo} alt="" />
-            <span className={style.tooltiptext}>{item.client_name}</span>
+            <a href={item.client_url} target="_blank">
+              <img className={style.logo} src={item.client_logo} alt="" />
+              <span className={style.tooltiptext}>{item.client_name}</span>
+            </a>
           </Col>
         ))}
       </Row>

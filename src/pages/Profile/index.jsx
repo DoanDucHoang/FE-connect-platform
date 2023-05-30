@@ -27,6 +27,7 @@ import Translate from '../../components/Translate';
 import Footer from '../../components/Footer';
 import Modal from '../Search/components/Modal';
 import ModalIntroduce from './components/Modal/modalIntroduce';
+import ModalInfo from './components/Modal/modalInfo';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
@@ -99,11 +100,10 @@ const Profile = () => {
               alignSelf: 'center',
             }}
           >
-            {user.company_name === { ...company_info }[0]?.company_name ? (
-              <ModalIntroduce props={''} />
-            ) : (
-              ''
-            )}
+            {user.company_name === { ...company_info }[0]?.company_name
+              ? // <ModalInfo props={company_info} />
+                ''
+              : ''}
           </Col>
         </Row>
         <Row className={style.content}>

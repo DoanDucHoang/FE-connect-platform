@@ -37,6 +37,7 @@ export default function Modal({ props }) {
   const [showAlert, setShowAlert] = useState(false);
   const [pending, setPending] = useState(true);
   const [slotBooking, setSlotBooking] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const user = useSelector(state => state.auth.currentUser);
   //const { email, company_name } = user;
   const toggleShow = () => setCentredModal(!centredModal);
@@ -96,13 +97,18 @@ export default function Modal({ props }) {
     }
   };
 
-  const handleBooking = slotNum => {
+  const handleBooking = async slotNum => {
+    setPending(true);
     try {
       if (slotNum == 1) {
-        pushSlotBooking(slotBooking);
+        await pushSlotBooking(slotBooking);
+        await getCalendarBooking();
+        setPending(false);
       }
       //window.location.reload();
     } catch (error) {
+      setPending(false);
+
       //console.log(error);
     }
   };
@@ -329,6 +335,7 @@ export default function Modal({ props }) {
                 onClick={event => {
                   handleAlert(slotBooking.length);
                   handleBooking(slotBooking.length);
+                  // setIsLoading(true);
                 }}
               >
                 Đặt Lịch
