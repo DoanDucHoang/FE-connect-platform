@@ -39,6 +39,12 @@ const Profile = () => {
   let { state } = useLocation();
   const { username } = useParams();
   const [queryParameters] = useSearchParams();
+  const [lang, setLang] = useState('');
+  console.log('🚀 ~ file: index.jsx:43 ~ Profile ~ lang:', lang);
+
+  useEffect(() => {
+    setLang(localStorage.getItem('lang') || 'en');
+  }, [localStorage.getItem('lang')]);
 
   const {
     company_core_members,
@@ -130,7 +136,11 @@ const Profile = () => {
               <p>$ {{ ...company_info }[0]?.capital}</p>
             </Row>
             <p className={style.addresss}>
-              {{ ...company_info }[0]?.address_jp}
+              {lang === 'jp'
+                ? { ...company_info }[0]?.address_jp
+                : lang === 'en'
+                ? { ...company_info }[0]?.address_en
+                : { ...company_info }[0]?.address_vn}
             </p>
             <Row className={style.flag}>
               <img src={logo1} alt="" />

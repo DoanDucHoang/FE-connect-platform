@@ -218,7 +218,7 @@ export default function Modal({ props }) {
           index => index.slot_booking != row.slot_booking
         ),
       style: {
-        backgroundColor: 'orange',
+        backgroundColor: 'gray',
         fontWeight: '700',
         color: '#000000',
       },
@@ -229,7 +229,7 @@ export default function Modal({ props }) {
           index => index.slot_booking == row.slot_booking
         ) && row.company_name !== listBookingVN[0].company_name_booking,
       style: {
-        backgroundColor: 'red',
+        backgroundColor: 'green',
         fontWeight: '700',
         color: '#000000',
       },
@@ -311,7 +311,7 @@ export default function Modal({ props }) {
                   style={{
                     width: '10px',
                     height: '10px',
-                    backgroundColor: 'red',
+                    backgroundColor: 'green',
                   }}
                 ></div>
                 <p>{`: Slot Bạn Đã Chọn`} </p>
@@ -321,7 +321,7 @@ export default function Modal({ props }) {
                   style={{
                     width: '10px',
                     height: '10px',
-                    backgroundColor: 'orange',
+                    backgroundColor: 'gray',
                   }}
                 ></div>
                 <p>: Slot Đã có người chọn</p>

@@ -157,7 +157,7 @@ function CompanyList({ companys, page, isLoading }) {
                     {page === 'search' && item.country === 'Japan' ? (
                       <>
                         <div className="d-flex flex-row align-items-center mb-1">
-                          <h6 className="mb-1 me-1">Slot Còn Trống</h6>
+                          <h6 className="mb-1 me-1">{t('Slots Are Empty')}</h6>
                         </div>
                         <div
                           className="text-success"
@@ -196,6 +196,7 @@ function CompanyList({ companys, page, isLoading }) {
                     <div className="d-flex flex-column mt-4">
                       {item.country === 'Japan' &&
                       user?.country != 'Japan' &&
+                      page !== 'landing' &&
                       user != null ? (
                         <Modal props={item} />
                       ) : (
