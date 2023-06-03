@@ -17,7 +17,7 @@ const Team = ({ company_core_members }) => {
 
   return (
     <Wrapper className={style.wrapper}>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{ marginBottom: '20px' }}>
         <h1 className={style.h1_title}>{t('CORE MEMBERS')}</h1>
         {user.company_name === data[0]?.company_name ? (
           <ModalCoreMember props={company_core_members} />

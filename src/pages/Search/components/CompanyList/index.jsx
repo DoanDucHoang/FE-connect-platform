@@ -24,14 +24,14 @@ import Modal from '../Modal';
 import { useSelector } from 'react-redux';
 import { Pagination } from 'antd';
 import { useEffect } from 'react';
-let numPages = 4;
+let numPages = 6;
 
 function CompanyList({ companys, page, isLoading }) {
+  console.log('🚀 ~ file: index.jsx:30 ~ CompanyList ~ companys:', companys);
   const { t } = useTranslation();
   const user = useSelector(state => state.auth.currentUser);
   const [pages, setPages] = useState({ minValue: 0, maxValue: numPages });
   const [current, setCurrent] = useState(1);
-  // const [slot, setSlot] = useState();
 
   const handlePagination = value => {
     setPages({ minValue: (value - 1) * numPages, maxValue: value * numPages });
@@ -79,7 +79,11 @@ function CompanyList({ companys, page, isLoading }) {
                       rippleTag="div"
                       className="bg-image rounded hover-zoom hover-overlay"
                     >
-                      <MDBCardImage src={item.company_logo} className="w-100" />
+                      <MDBCardImage
+                        src={item.company_logo}
+                        // className="w-100"
+                        style={{ width: '100px' }}
+                      />
                       <Link to={`/profile/${item.company_ID}`} state={item}>
                         <div
                           className="mask"
@@ -95,8 +99,12 @@ function CompanyList({ companys, page, isLoading }) {
                       className="rounded"
                     >
                       <img src={logo1} alt="" style={{ width: '50px' }} />
-                      <img src={logo4} alt="" style={{ width: '50px' }} />
-                      <img src={logo2} alt="" style={{ width: '50px' }} />
+
+                      {item.country === 'Japan' ? (
+                        <img src={logo4} alt="" style={{ width: '50px' }} />
+                      ) : (
+                        <img src={logo2} alt="" style={{ width: '50px' }} />
+                      )}
                     </MDBRipple>
                   </MDBCol>
 

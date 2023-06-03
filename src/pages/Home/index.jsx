@@ -15,10 +15,13 @@ import Translate from '../../components/Translate';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import CompanyList from '../Search/components/CompanyList';
+import { scrollToTop } from '../../helper';
+import { HashLoader } from 'react-spinners';
 
 const Home = () => {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset !== 0 ? true : false);
@@ -38,17 +41,46 @@ const Home = () => {
     : [];
 
   useEffect(() => {
+    setIsLoading(false);
     getAllCompany()
       .then(data => {
         setCompanys(data);
+        setIsLoading(true);
       })
       .catch(err => {
         console.log(err);
       });
+    scrollToTop();
   }, []);
 
   return (
-    <>
+    <div className="container_bm">
+      {!isLoading && (
+        <div
+          className="loading"
+          style={{
+            position: 'fixed',
+            top: '0',
+            width: '100vw',
+            zIndex: '1000',
+            backgroundColor: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            opacity: '0.5',
+            bottom: '0',
+          }}
+        >
+          <HashLoader
+            color="#d63636"
+            loading={true}
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+            style={{ textAlign: 'center' }}
+          />
+        </div>
+      )}
       <Translate />
       <Navbar />
       <Header props="home" />
@@ -77,7 +109,7 @@ const Home = () => {
         <BackTop />
         <span className={style.animation}></span>
       </div>
-    </>
+    </div>
   );
 };
 

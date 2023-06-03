@@ -28,6 +28,8 @@ import Footer from '../../components/Footer';
 import Modal from '../Search/components/Modal';
 import ModalIntroduce from './components/Modal/modalIntroduce';
 import ModalInfo from './components/Modal/modalInfo';
+import { scrollToTop } from '../../helper';
+import { HashLoader } from 'react-spinners';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
@@ -40,7 +42,7 @@ const Profile = () => {
   const { username } = useParams();
   const [queryParameters] = useSearchParams();
   const [lang, setLang] = useState('');
-  console.log('🚀 ~ file: index.jsx:43 ~ Profile ~ lang:', lang);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setLang(localStorage.getItem('lang') || 'en');
@@ -57,10 +59,12 @@ const Profile = () => {
   } = info;
 
   useEffect(() => {
+    setIsLoading(false);
     username
       ? getCompany(username)
           .then(data => {
             setInfo(data);
+            setIsLoading(true);
           })
           .catch(err => {
             console.log(err);
@@ -68,10 +72,12 @@ const Profile = () => {
       : getCompany(user.id)
           .then(data => {
             setInfo(data);
+            setIsLoading(true);
           })
           .catch(err => {
             console.log(err);
           });
+    scrollToTop();
   }, [user.company_name, username]);
 
   const handleChange = (e, data) => {
@@ -86,6 +92,32 @@ const Profile = () => {
 
   return (
     <>
+      {!isLoading && (
+        <div
+          className="loading"
+          style={{
+            position: 'fixed',
+            top: '0',
+            width: '100vw',
+            zIndex: '1000',
+            backgroundColor: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            opacity: '0.5',
+            bottom: '0',
+          }}
+        >
+          <HashLoader
+            color="#d63636"
+            loading={true}
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+            style={{ textAlign: 'center' }}
+          />
+        </div>
+      )}
       <Translate />
       <Navbar />
       <div className={style.container}>

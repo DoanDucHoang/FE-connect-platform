@@ -13,7 +13,7 @@ import DataTable from 'react-data-table-component';
 import Alert from 'react-bootstrap/Alert';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { GridLoader } from 'react-spinners';
+import { GridLoader, HashLoader } from 'react-spinners';
 import axios from 'axios';
 import { DOMAIN } from '../../../../constant/constant';
 import { useEffect } from 'react';
@@ -39,7 +39,6 @@ export default function Modal({ props }) {
   const [slotBooking, setSlotBooking] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const user = useSelector(state => state.auth.currentUser);
-  //const { email, company_name } = user;
   const toggleShow = () => setCentredModal(!centredModal);
 
   const handleAlert = slotBooking => {
@@ -105,24 +104,21 @@ export default function Modal({ props }) {
         await getCalendarBooking();
         setPending(false);
       }
-      //window.location.reload();
     } catch (error) {
       setPending(false);
-
-      //console.log(error);
     }
   };
 
   useEffect(() => {
     getCalendarBooking();
-  }, []);
+  }, [centredModal]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setPending(false);
     }, 1000);
     return () => clearTimeout(timeout);
-  });
+  }, [centredModal]);
 
   const getCalendarBooking = async () => {
     const res = await axios.get(`${DOMAIN}booking/${props.company_ID}`);
@@ -268,6 +264,32 @@ export default function Modal({ props }) {
       )}
 
       <MDBModal tabIndex="-1" show={centredModal} setShow={setCentredModal}>
+        {/* {pending && (
+          <div
+            className="loading"
+            style={{
+              position: 'fixed',
+              top: '0',
+              width: '100vw',
+              zIndex: '1000',
+              backgroundColor: 'white',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              opacity: '0.5',
+              bottom: '0',
+            }}
+          >
+            <HashLoader
+              color="#d63636"
+              loading={true}
+              size={50}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+              style={{ textAlign: 'center' }}
+            />
+          </div>
+        )} */}
         <MDBModalDialog centered size="lg">
           <MDBModalContent>
             <MDBModalHeader>

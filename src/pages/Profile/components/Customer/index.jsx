@@ -13,7 +13,7 @@ const Customer = ({ company_main_clients }) => {
   const data = company_main_clients || [];
   return (
     <Wrapper>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{ marginBottom: '20px' }}>
         <h1 className={style.h1_title}>{t('COSTUMERS')}</h1>
         {user.company_name === data[0]?.company_name ? (
           <ModalClient props={company_main_clients} />

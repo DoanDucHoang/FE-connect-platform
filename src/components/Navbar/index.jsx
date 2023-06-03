@@ -16,8 +16,11 @@ import Translate from '../Translate/index';
 import { useTranslation } from 'react-i18next';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react';
 
 const Navbar = () => {
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const user = useSelector(state => state.auth.currentUser);
   //const user = localStorage.getItem('userID');
   const dispatch = useDispatch();
@@ -32,6 +35,28 @@ const Navbar = () => {
   const onClose = () => {
     setOpen(false);
   };
+
+  const controlNavbar = () => {
+    if (typeof window !== 'undefined') {
+      if (window.scrollY > lastScrollY) {
+        setShow(false);
+      } else {
+        setShow(true);
+      }
+      setLastScrollY(window.scrollY);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+
+      // cleanup function
+      return () => {
+        window.removeEventListener('scroll', controlNavbar);
+      };
+    }
+  }, [lastScrollY]);
 
   const items = [
     {
@@ -63,6 +88,7 @@ const Navbar = () => {
   ];
 
   return (
+    // <div className={show ? style.navbar__container : style.navbar__hidden}>
     <div className={style.navbar__container}>
       <div className={style.logo}>
         <Link to="/">

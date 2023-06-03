@@ -13,22 +13,30 @@ import { useState } from 'react';
 import { COUNTRY } from '../../constant/constant';
 import { Col, Row, Spin } from 'antd';
 import CompanyList from './components/CompanyList';
+import Spinner from '../../components/Spinner';
 import './index.scss';
-import { GridLoader } from 'react-spinners';
+import { HashLoader } from 'react-spinners';
 import Footer from './../../components/Footer/index';
 import { useTranslation } from 'react-i18next';
+import { scrollToTop } from '../../helper';
+import { setLoading } from '../../store/loadingSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 let PageSize = 2;
 
 const Search = () => {
   const [companys, setCompanys] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const loading = useSelector(state => state.loading.value);
+  const [isLoading, setIsLoading] = useState(false);
+  // console.log('🚀 ~ file: index.jsx:30 ~ Search ~ isLoading:', isLoading);
   const [title, setTitle] = useState('ALL');
   const [company_name, setCompanyName] = useState('');
   const [category, setCategory] = useState('All');
   const current = 1;
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
+
+  const dispatch = useDispatch();
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
@@ -66,7 +74,8 @@ const Search = () => {
     getAllCompany()
       .then(data => {
         setCompanys(data);
-        setIsLoading(false);
+        // setIsLoading(false);
+        setIsLoading(dispatch(setLoading()));
       })
       .catch(err => {
         console.log(err);
@@ -75,12 +84,15 @@ const Search = () => {
 
   useEffect(() => {
     getAll();
+    scrollToTop();
   }, []);
 
   useEffect(() => {
+    setIsLoading(false);
     if (company_name.trim()) {
       getCompanyByName({ company_name }).then(data => {
         setCompanys(data);
+        setIsLoading(true);
       });
     }
     // if (!company_name) {
@@ -90,24 +102,29 @@ const Search = () => {
 
   useEffect(() => {
     if (category !== 'All') {
+      setIsLoading(false);
       getCompanyByCategory({ category }).then(data => {
         setCompanys(data);
-        setIsLoading(false);
+        setIsLoading(true);
       });
     }
-
-    // if (!category) {
-    //   getAll();
-    // }
   }, [category]);
 
   return (
     <div className="container">
-      {/* {!isLoading && (
+      {!isLoading && (
         <div className="loading">
-          <Spin size="large" />
+          <HashLoader
+            color="#d63636"
+            loading={true}
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+            style={{ textAlign: 'center' }}
+          />
         </div>
-      )} */}
+      )}
+      {/* <Spinner isLoading={isLoading} /> */}
       <Translate />
       <Navbar />
       <Header props="landing" />

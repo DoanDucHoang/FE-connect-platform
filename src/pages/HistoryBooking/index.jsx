@@ -82,10 +82,13 @@ const HistoryBooking = () => {
   }, []);
 
   const contextActions = useMemo(() => {
-    const handleDelete = () => {
+    const handleDelete = async () => {
       setToggleCleared(!toggleCleared);
       selectRows.map(
-        async item => await axios.delete(`${DOMAIN}booking/${item.id}`)
+        async item =>
+          await axios
+            .delete(`${DOMAIN}booking/${item.id}`)
+            .then(getCalendarBooking())
       );
     };
 

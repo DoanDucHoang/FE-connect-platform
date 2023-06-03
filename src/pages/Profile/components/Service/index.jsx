@@ -17,7 +17,7 @@ const Service = ({ company_specialties }) => {
 
   return (
     <Wrapper>
-      <Row justify={'center'}>
+      <Row justify={'center'} style={{ marginBottom: '20px' }}>
         <h1 className={style.h1_title}>{t('COMPANY FEATURES')}</h1>
         {user.company_name === data[0]?.company_name ? (
           <ModalSpecialties props={company_specialties} />
