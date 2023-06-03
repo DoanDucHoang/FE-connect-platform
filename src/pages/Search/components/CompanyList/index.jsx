@@ -24,7 +24,7 @@ import Modal from '../Modal';
 import { useSelector } from 'react-redux';
 import { Pagination } from 'antd';
 import { useEffect } from 'react';
-let numPages = 6;
+let numPages = 4;
 
 function CompanyList({ companys, page, isLoading }) {
   console.log('🚀 ~ file: index.jsx:30 ~ CompanyList ~ companys:', companys);
