@@ -1,7 +1,7 @@
 import { Spin } from 'antd';
 
 const Spinner = isLoading => {
-  console.log('🚀 ~ file: index.jsx:4 ~ Spinner ~ isLoading:', isLoading);
+  // console.log('🚀 ~ file: index.jsx:4 ~ Spinner ~ isLoading:', isLoading);
 
   return (
     <div>

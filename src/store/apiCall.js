@@ -102,6 +102,18 @@ export const getAllCompany = async () => {
   }
 };
 
+export const getAllCompannyJapanProfile = async data => {
+  try {
+    const res = await axios.post(
+      `${DOMAIN}getcompany/allcompanyjapan/pages=`,
+      data
+    );
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getCompany = async data => {
   try {
     const res = await axios.get(`${DOMAIN}getcompany/${data}`);

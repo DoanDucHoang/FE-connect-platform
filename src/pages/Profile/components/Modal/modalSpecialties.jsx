@@ -12,22 +12,21 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Editor } from '@tinymce/tinymce-react';
 import { Col, Row } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UPLOAD_IMAGE } from '../../../../constant/constant';
 import axios from 'axios';
 import { updateFeatures } from '../../../../store/apiCall';
+import { editProfile } from '../../../../store/editSlice';
 
 export default function ModalSpecialties({ props }) {
-  // console.log(
-  //   '🚀 ~ file: modalSpecialties.jsx:18 ~ ModalSpecialties ~ props:',
-  //   props
-  // );
+  const dispatch = useDispatch();
   const data = props || [];
   const user = useSelector(state => state.auth.currentUser);
   const { email, company_name } = user;
   const { t } = useTranslation();
   const [centredModal, setCentredModal] = useState(false);
   const [features, setFeatures] = useState(props);
+  const edit = useSelector(state => state.edit.isFetching);
 
   const upload = async file => {
     const imgUrl = file;
@@ -143,7 +142,15 @@ export default function ModalSpecialties({ props }) {
               <MDBBtn color="secondary" onClick={toggleShow}>
                 Close
               </MDBBtn>
-              <MDBBtn onClick={() => handleSubmit()}>Save changes</MDBBtn>
+              <MDBBtn
+                onClick={() => {
+                  handleSubmit();
+                  dispatch(editProfile(!edit));
+                  toggleShow();
+                }}
+              >
+                Save changes
+              </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

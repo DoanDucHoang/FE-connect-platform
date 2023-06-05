@@ -12,7 +12,7 @@ export const scrollToElement = elementId => {
   const convertId = elementId.substring(1);
   if (elementId) {
     const element = document.getElementById(`${convertId}`);
-    console.log('element', element);
+    // console.log('element', element);
     element.scrollIntoView({ behavior: 'smooth' });
     //   window.scrollTo({ top: element, behavior: 'smooth' });
   }

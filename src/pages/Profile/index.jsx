@@ -14,7 +14,6 @@ import Team from './components/Team';
 import Customer from './components/Customer';
 import Container from '../../components/Container';
 import Introduce from './components/Introduce';
-import { pushSlotBooking } from '../../store/apiCall.js';
 
 import logo1 from '../../assets/logo1.png';
 import logo2 from '../../assets/logo2.png';
@@ -33,6 +32,7 @@ import { HashLoader } from 'react-spinners';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.currentUser);
+  const edit = useSelector(state => state.edit.isFetching);
   //const [lang, setLang] = useState();
   const { t } = useTranslation();
   const { email, company_name } = user;
@@ -78,17 +78,29 @@ const Profile = () => {
             console.log(err);
           });
     scrollToTop();
-  }, [user.company_name, username]);
+  }, [user.company_name, username, edit]);
 
-  const handleChange = (e, data) => {
-    let index = slotBooking.findIndex(item => item.id === data.id);
-    if (e.target.checked) {
-      data.company_name_booking = company_name;
-      slotBooking.push(data);
-    } else {
-      slotBooking.splice(index, 1);
-    }
-  };
+  useEffect(() => {
+    setIsLoading(false);
+    username
+      ? getCompany(username)
+          .then(data => {
+            setInfo(data);
+            setIsLoading(true);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      : getCompany(user.id)
+          .then(data => {
+            setInfo(data);
+            setIsLoading(true);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    scrollToTop();
+  }, [edit]);
 
   return (
     <>
@@ -181,10 +193,6 @@ const Profile = () => {
               ) : (
                 ''
               )}
-              {/* <img src={logo1} alt="" />
-              <img src={logo2} alt="" />
-              <img src={logo3} alt="" />
-              <img src={logo4} alt="" /> */}
             </Row>
           </Col>
           <Col span={10}>

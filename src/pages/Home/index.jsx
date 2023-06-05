@@ -98,7 +98,7 @@ const Home = () => {
       </Col>
 
       <div className={style.btncontainer} style={{ textAlign: 'center' }}>
-        <Link to={'/bm1/search'}>
+        <Link to={`/bm1/search/?pages=${1}`}>
           <button className={style.btn}>
             {t('Register Business Matching')}
           </button>

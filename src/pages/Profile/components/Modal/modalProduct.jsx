@@ -14,15 +14,18 @@ import { Editor } from '@tinymce/tinymce-react';
 import { Col, Row } from 'antd';
 import axios from 'axios';
 import { UPLOAD_IMAGE } from '../../../../constant/constant';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateProduct } from '../../../../store/apiCall';
+import { editProfile } from '../../../../store/editSlice';
 
 export default function ModalProduct({ props }) {
-  console.log('🚀 ~ file: modalProduct.jsx:17 ~ ModalProduct ~ props:', props);
+  // console.log('🚀 ~ file: modalProduct.jsx:17 ~ ModalProduct ~ props:', props);
   const data = props || [];
   const user = useSelector(state => state.auth.currentUser);
+  const edit = useSelector(state => state.edit.isFetching);
   const { email, company_name } = user;
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const [centredModal, setCentredModal] = useState(false);
   const toggleShow = () => setCentredModal(!centredModal);
   const [services, setServices] = useState(props);
@@ -291,7 +294,15 @@ export default function ModalProduct({ props }) {
               <MDBBtn color="secondary" onClick={toggleShow}>
                 Close
               </MDBBtn>
-              <MDBBtn onClick={() => handleSubmit()}>Save changes</MDBBtn>
+              <MDBBtn
+                onClick={() => {
+                  handleSubmit();
+                  dispatch(editProfile(!edit));
+                  toggleShow();
+                }}
+              >
+                Save changes
+              </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

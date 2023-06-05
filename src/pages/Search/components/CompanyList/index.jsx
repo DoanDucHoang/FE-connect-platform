@@ -19,28 +19,55 @@ import logo3 from '../../../../assets/logo3.png';
 import logo4 from '../../../../assets/logo4.png';
 //import './ecommerce-category-product.css';
 import { SyncLoader } from 'react-spinners';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Modal from '../Modal';
 import { useSelector } from 'react-redux';
 import { Pagination } from 'antd';
 import { useEffect } from 'react';
-let numPages = 4;
+import { getAllCompannyJapanProfile } from '../../../../store/apiCall';
+import { scrollToTop } from '../../../../helper';
+let numPages = 6;
 
 function CompanyList({ companys, page, isLoading }) {
-  console.log('🚀 ~ file: index.jsx:30 ~ CompanyList ~ companys:', companys);
   const { t } = useTranslation();
+  const location = useLocation();
+  const currentPage = location.search.charAt(location.search.length - 1);
   const user = useSelector(state => state.auth.currentUser);
   const [pages, setPages] = useState({ minValue: 0, maxValue: numPages });
   const [current, setCurrent] = useState(1);
+  console.log('🚀 ~ file: index.jsx:38 ~ CompanyList ~ current:', current);
+  const [data, setData] = useState();
+  const navigate = useNavigate();
+
+  const getData = value => {
+    getAllCompannyJapanProfile({
+      pages: (value - 1) * numPages,
+      limit: numPages,
+    }).then(data => {
+      setData(data);
+    });
+  };
 
   const handlePagination = value => {
+    getData(value);
     setPages({ minValue: (value - 1) * numPages, maxValue: value * numPages });
     setCurrent(value);
+    scrollToTop();
+    navigate(`?pages=${value}`);
   };
 
   useEffect(() => {
     setCurrent(1);
     setPages({ minValue: 0, maxValue: numPages });
+
+    if (page === 'search') {
+      getData(currentPage);
+      setCurrent(currentPage);
+    } else if (page === 'home') {
+      getData(1);
+    } else {
+      setData(companys);
+    }
   }, [companys]);
 
   return (
@@ -56,7 +83,7 @@ function CompanyList({ companys, page, isLoading }) {
             style={{ textAlign: 'center' }}
           />
         )}
-        {companys.slice(pages.minValue, pages.maxValue).map(item => (
+        {data?.map(item => (
           <MDBCol
             size="6"
             md="6"
@@ -229,7 +256,7 @@ function CompanyList({ companys, page, isLoading }) {
             </MDBCard>
           </MDBCol>
         ))}
-        {page === 'search' || page === 'home' ? (
+        {page === 'search' ? (
           <Pagination
             current={current}
             total={companys.length}

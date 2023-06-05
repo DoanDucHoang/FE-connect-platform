@@ -10,11 +10,15 @@ import {
   MDBModalFooter,
 } from 'mdb-react-ui-kit';
 import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
+import { editProfile } from '../../../../store/editSlice';
 import { Editor } from '@tinymce/tinymce-react';
-import { updateIntroduce } from '../../../../store/apiCall';
+import { getCompany, updateIntroduce } from '../../../../store/apiCall';
 
 export default function ModalIntroduce({ props, email }) {
   const { t } = useTranslation();
+  const edit = useSelector(state => state.edit.isFetching);
+  const dispatch = useDispatch();
   const data = props || [];
   const [centredModal, setCentredModal] = useState(false);
   const [description, setDescription] = useState(`${data[0]?.description}`);
@@ -30,7 +34,9 @@ export default function ModalIntroduce({ props, email }) {
     updateIntroduce(data);
   };
 
-  const toggleShow = () => setCentredModal(!centredModal);
+  const toggleShow = () => {
+    setCentredModal(!centredModal);
+  };
 
   return (
     <>
@@ -183,7 +189,15 @@ export default function ModalIntroduce({ props, email }) {
               <MDBBtn color="secondary" onClick={toggleShow}>
                 Close
               </MDBBtn>
-              <MDBBtn onClick={() => handleSubmit()}>Save changes</MDBBtn>
+              <MDBBtn
+                onClick={() => {
+                  handleSubmit();
+                  dispatch(editProfile(!edit));
+                  toggleShow();
+                }}
+              >
+                Save changes
+              </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

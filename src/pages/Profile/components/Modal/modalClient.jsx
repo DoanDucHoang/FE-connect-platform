@@ -12,13 +12,16 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Editor } from '@tinymce/tinymce-react';
 import { Col, Row } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UPLOAD_IMAGE } from '../../../../constant/constant';
 import axios from 'axios';
 import { updateClient } from '../../../../store/apiCall';
+import { editProfile } from '../../../../store/editSlice';
 
 export default function ModalClient({ props }) {
   const data = props || [];
+  const dispatch = useDispatch();
+  const edit = useSelector(state => state.edit.isFetching);
   const user = useSelector(state => state.auth.currentUser);
   const { email, company_name } = user;
   const { t } = useTranslation();
@@ -158,7 +161,15 @@ export default function ModalClient({ props }) {
               <MDBBtn color="secondary" onClick={toggleShow}>
                 Close
               </MDBBtn>
-              <MDBBtn onClick={() => handleSubmit()}>Save changes</MDBBtn>
+              <MDBBtn
+                onClick={() => {
+                  handleSubmit();
+                  dispatch(editProfile(!edit));
+                  toggleShow();
+                }}
+              >
+                Save changes
+              </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

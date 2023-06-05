@@ -121,7 +121,7 @@ export default function Modal({ props }) {
   }, [centredModal]);
 
   const getCalendarBooking = async () => {
-    const res = await axios.get(`${DOMAIN}booking/${props.company_ID}`);
+    const res = await axios.get(`${DOMAIN}booking/${props?.company_ID}`);
     const bookingVN = await axios.get(
       `${DOMAIN}booking/vietnam/${user.company_name}`
     );
