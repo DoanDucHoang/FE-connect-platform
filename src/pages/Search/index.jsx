@@ -26,9 +26,7 @@ let PageSize = 2;
 
 const Search = () => {
   const [companys, setCompanys] = useState([]);
-  const loading = useSelector(state => state.loading.value);
   const [isLoading, setIsLoading] = useState(false);
-  // console.log('🚀 ~ file: index.jsx:30 ~ Search ~ isLoading:', isLoading);
   const [title, setTitle] = useState('ALL');
   const [company_name, setCompanyName] = useState('');
   const [category, setCategory] = useState('All');
@@ -136,10 +134,17 @@ const Search = () => {
           />
         </Col>
         <Col xl={17} lg={12}>
-          <h2 style={{ marginLeft: '20px', marginTop: '20px' }}>
+          <h2
+            id="#top_search"
+            style={{ marginLeft: '20px', marginTop: '20px' }}
+          >
             {t('Result For')}: {t(`${title}`)}
           </h2>
-          <CompanyList companys={companyJP} page="search" />
+          <CompanyList
+            companys={companyJP}
+            page="search"
+            isLoading={isLoading}
+          />
         </Col>
       </Row>
       <Footer />
