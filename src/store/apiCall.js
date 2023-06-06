@@ -72,7 +72,7 @@ export const updateFeatures = async data => {
 export const updateCompanyName = async data => {
   try {
     const res = await axios.put(
-      `http://localhost:8080/server/getcompany/update_company_name`,
+      `${DOMAIN}getcompany/update_company_name`,
       data
     );
   } catch (error) {
