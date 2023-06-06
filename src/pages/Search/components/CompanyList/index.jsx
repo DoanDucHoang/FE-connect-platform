@@ -99,7 +99,7 @@ function CompanyList({ companys, page, category }) {
           </div>
         ) : (
           <>
-            {companys?.map(item => (
+            {data?.map(item => (
               <MDBCol
                 size="6"
                 md="6"
