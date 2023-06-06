@@ -1,5 +1,5 @@
 import React from 'react';
-import bannerHome from '../../assets/banner_platform.png';
+import bannerHome from '../../assets/logobanner.png';
 import bannerBM from '../../assets/posterVJBC.png';
 import style from './index.module.scss';
 
