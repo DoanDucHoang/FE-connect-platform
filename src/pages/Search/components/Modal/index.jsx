@@ -39,6 +39,7 @@ export default function Modal({ props }) {
   const [slotBooking, setSlotBooking] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const user = useSelector(state => state.auth.currentUser);
+  // console.log('🚀 ~ file: index.jsx:42 ~ Modal ~ user:', user);
   const toggleShow = () => setCentredModal(!centredModal);
 
   const handleAlert = slotBooking => {

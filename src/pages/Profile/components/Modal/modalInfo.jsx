@@ -28,6 +28,7 @@ export default function ModalInfo({ props }) {
   const { t } = useTranslation();
   const [centredModal, setCentredModal] = useState(false);
   const [info, setInfo] = useState(props);
+  // console.log('🚀 ~ file: modalInfo.jsx:31 ~ ModalInfo ~ info:', info);
   const checkboxValue = [];
 
   const upload = async file => {
@@ -43,26 +44,21 @@ export default function ModalInfo({ props }) {
     return res.data.url.split('?')[0];
   };
 
-  const handleChangeInfo = async e => {
-    const { name, value } = e.target;
-    if (e.target.name === 'language') {
-      if (e.target.checked) {
-        setInfo({ languages: [...checkboxValue, e.target.value] });
-      } else {
-        let index = checkboxValue.indexOf(e.target.id);
-        checkboxValue.splice(index, 1);
-      }
-    } else if (e.target.name === 'company_logo') {
+  const handleChangeInfo = async (e, data) => {
+    let imgUrl = '';
+    const newInfo = info;
+    if (e.target.name === 'company_logo') {
       const imgUrl = await upload(e.target.files[0]);
-      setInfo({ [name]: imgUrl });
+      newInfo[0][e.target.name] = imgUrl;
     } else {
-      setInfo({ [name]: value });
+      newInfo[0][e.target.name] = e.target.value;
     }
+    setInfo([...newInfo]);
   };
 
   const handleSubmit = () => {
     const data = info;
-    console.log('🚀 ~ file: modalInfo.jsx:65 ~ handleSubmit ~ data:', data);
+    // console.log('🚀 ~ file: modalInfo.jsx:65 ~ handleSubmit ~ data:', data);
     //updateClient(data);
   };
 
@@ -168,7 +164,6 @@ export default function ModalInfo({ props }) {
                             value="vietnam"
                             id="vietnam"
                             name="language"
-                            checked
                             onChange={handleChangeInfo}
                           />
                           <label htmlFor="vietnam">
@@ -199,7 +194,6 @@ export default function ModalInfo({ props }) {
                             value="japan"
                             id="japan"
                             name="language"
-                            checked
                             onChange={handleChangeInfo}
                           />
                           <label htmlFor="japan">
@@ -282,24 +276,15 @@ export default function ModalInfo({ props }) {
                         placeholder="Q12, TPHCM"
                       />
                     </div>
-                    {/* <div className="member__main_info_item">
-                      <h5>{t('Association Logo')}</h5>
-                      <label htmlFor="image">
-                        {translatePreferred(language)}
-                      </label>
+                    <div className="member__main_info_item">
+                      <h5>Company Name:</h5>
                       <input
-                        id="image"
-                        type="file"
-                        name="logo_associations"
-                        accept=".png, .jpeg, .jpg"
-                        style={{
-                          height: '100%',
-                          border: 'none',
-                          marginTop: '4px',
-                        }}
-                        //   onChange={handleChangeInfo}
+                        onChange={handleChangeInfo}
+                        type="text"
+                        defaultValue={data[0]?.company_name}
+                        name="company_name"
                       />
-                    </div> */}
+                    </div>
                     <div className="member__main_info_item">
                       <h5>Link Website:</h5>
                       <input

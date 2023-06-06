@@ -20,7 +20,7 @@ const Introduce = ({ company_description }) => {
     <Wrapper>
       <Row justify={'center'} style={{ marginBottom: '20px' }}>
         <h1 className={style.h1_title}>{t('INTRODUCTION')}</h1>
-        {user.company_name === data[0]?.company_name ? (
+        {user.email === data[0]?.email ? (
           <ModalIntroduce props={company_description} email={user.email} />
         ) : (
           ''

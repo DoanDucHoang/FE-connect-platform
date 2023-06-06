@@ -21,7 +21,7 @@ const Package = ({ company_products }) => {
     <Wrapper>
       <Row justify={'center'} style={{ marginBottom: '20px' }}>
         <h1 className={style.h1_title}>{t('MAIN SERVICES')}</h1>
-        {user.company_name === data[0]?.company_name ? (
+        {user.email === data[0]?.email ? (
           <Modal props={company_products} />
         ) : (
           ''

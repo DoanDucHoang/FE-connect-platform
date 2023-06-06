@@ -28,15 +28,15 @@ import { getAllCompannyJapanProfile } from '../../../../store/apiCall';
 import { scrollToTopSearch } from '../../../../helper';
 let numPages = 6;
 
-function CompanyList({ companys, page, isLoading }) {
+function CompanyList({ companys, page, category }) {
+  console.log('🚀 ~ file: index.jsx:32 ~ CompanyList ~ companys:', companys);
   const { t } = useTranslation();
   const location = useLocation();
   const currentPage = location.search.charAt(location.search.length - 1);
   const user = useSelector(state => state.auth.currentUser);
   const [pages, setPages] = useState({ minValue: 0, maxValue: numPages });
   const [current, setCurrent] = useState(1);
-  const [loading, setLoading] = useState(true);
-  console.log('🚀 ~ file: index.jsx:39 ~ CompanyList ~ loading:', loading);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   const navigate = useNavigate();
 
@@ -61,6 +61,7 @@ function CompanyList({ companys, page, isLoading }) {
 
   useEffect(() => {
     setCurrent(1);
+    setLoading(false);
     setPages({ minValue: 0, maxValue: numPages });
     if (page === 'search') {
       getData(currentPage);
@@ -98,7 +99,7 @@ function CompanyList({ companys, page, isLoading }) {
           </div>
         ) : (
           <>
-            {data?.map(item => (
+            {companys?.map(item => (
               <MDBCol
                 size="6"
                 md="6"

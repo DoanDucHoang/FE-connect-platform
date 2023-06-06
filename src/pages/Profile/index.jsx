@@ -19,7 +19,7 @@ import logo1 from '../../assets/logo1.png';
 import logo2 from '../../assets/logo2.png';
 import logo3 from '../../assets/logo3.png';
 import logo4 from '../../assets/logo4.png';
-import { getCompany } from '../../store/apiCall';
+import { getCompany, updateCompanyName } from '../../store/apiCall';
 import { useTranslation } from 'react-i18next';
 import Navbar from '../../components/Navbar';
 import Translate from '../../components/Translate';
@@ -31,7 +31,7 @@ import { scrollToTop } from '../../helper';
 import { HashLoader } from 'react-spinners';
 
 const Profile = () => {
-  const user = useSelector(state => state.auth.currentUser);
+  let user = useSelector(state => state.auth.currentUser);
   const edit = useSelector(state => state.edit.isFetching);
   //const [lang, setLang] = useState();
   const { t } = useTranslation();
@@ -43,6 +43,8 @@ const Profile = () => {
   const [queryParameters] = useSearchParams();
   const [lang, setLang] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [companyName, setCompanyName] = useState(company_name);
 
   useEffect(() => {
     setLang(localStorage.getItem('lang') || 'en');
@@ -60,28 +62,17 @@ const Profile = () => {
 
   useEffect(() => {
     setIsLoading(false);
-    username
-      ? getCompany(username)
-          .then(data => {
-            setInfo(data);
-            setIsLoading(true);
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      : getCompany(user.id)
-          .then(data => {
-            setInfo(data);
-            setIsLoading(true);
-          })
-          .catch(err => {
-            console.log(err);
-          });
+    getData();
     scrollToTop();
   }, [user.company_name, username, edit]);
 
   useEffect(() => {
     setIsLoading(false);
+    getData();
+    scrollToTop();
+  }, [edit]);
+
+  const getData = () => {
     username
       ? getCompany(username)
           .then(data => {
@@ -99,8 +90,49 @@ const Profile = () => {
           .catch(err => {
             console.log(err);
           });
-    scrollToTop();
-  }, [edit]);
+  };
+
+  const handleEditName = () => {
+    const data = { company_name: companyName, email };
+    user = { ...user, company_name: companyName };
+    localStorage.setItem('user', JSON.stringify(user));
+    updateCompanyName(data);
+    getData();
+    setIsEdit(false);
+  };
+
+  const changeEdit = () => {
+    setIsEdit(!isEdit);
+  };
+
+  const handleChangeName = e => {
+    setCompanyName(e.target.value);
+  };
+
+  const renderEditField = () => {
+    return (
+      <>
+        <h3 className={style.title}>
+          <input
+            type="text"
+            defaultValue={{
+              ...company_info,
+            }[0]?.company_name.toUpperCase()}
+            onChange={handleChangeName}
+          />
+          <button onClick={handleEditName}>Save</button>
+        </h3>
+      </>
+    );
+  };
+
+  const renderDefaultField = () => {
+    return (
+      <h3 className={style.title} onDoubleClick={changeEdit}>
+        {{ ...company_info }[0]?.company_name.toUpperCase()}
+      </h3>
+    );
+  };
 
   return (
     <>
@@ -150,17 +182,20 @@ const Profile = () => {
               alignSelf: 'center',
             }}
           >
-            {user.company_name === { ...company_info }[0]?.company_name
-              ? // <ModalInfo props={company_info} />
-                ''
-              : ''}
+            {user.email === { ...company_info }[0]?.email ? (
+              <ModalInfo props={company_info} />
+            ) : (
+              ''
+            )}
           </Col>
         </Row>
         <Row className={style.content}>
           <Col span={14}>
-            <h3 className={style.title}>
-              {{ ...company_info }[0]?.company_name.toUpperCase()}
-            </h3>
+            {user.email === { ...company_info }[0]?.email
+              ? isEdit
+                ? renderEditField()
+                : renderDefaultField()
+              : renderDefaultField()}
             <Row>
               <Col xl={12} xs={24}>
                 <Row align={'middle'} className={style.content__item}>

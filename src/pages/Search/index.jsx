@@ -93,9 +93,6 @@ const Search = () => {
         setIsLoading(true);
       });
     }
-    // if (!company_name) {
-    //   getAll();
-    // }
   }, [company_name]);
 
   useEffect(() => {
@@ -140,11 +137,7 @@ const Search = () => {
           >
             {t('Result For')}: {t(`${title}`)}
           </h2>
-          <CompanyList
-            companys={companyJP}
-            page="search"
-            isLoading={isLoading}
-          />
+          <CompanyList companys={companyJP} page="search" category={category} />
         </Col>
       </Row>
       <Footer />
