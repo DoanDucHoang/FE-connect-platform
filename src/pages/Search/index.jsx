@@ -56,10 +56,6 @@ const Search = () => {
   const handleCategory = value => {
     setCategory(value);
     setTitle(value);
-    if (value === 'All') {
-      setCategory('');
-      setTitle(t('All'));
-    }
   };
 
   const companyJP = companys
@@ -98,7 +94,11 @@ const Search = () => {
   useEffect(() => {
     if (category !== 'All') {
       setIsLoading(false);
-      getCompanyByCategory({ category }).then(data => {
+      getCompanyByCategory({
+        category,
+        pages: 0,
+        limit: companys?.length,
+      }).then(data => {
         setCompanys(data);
         setIsLoading(true);
       });

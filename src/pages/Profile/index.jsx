@@ -32,8 +32,8 @@ import { HashLoader } from 'react-spinners';
 
 const Profile = () => {
   let user = useSelector(state => state.auth.currentUser);
+  console.log('🚀 ~ file: index.jsx:35 ~ Profile ~ user:', user.id);
   const edit = useSelector(state => state.edit.isFetching);
-  //const [lang, setLang] = useState();
   const { t } = useTranslation();
   const { email, company_name } = user;
   const [info, setInfo] = useState({});

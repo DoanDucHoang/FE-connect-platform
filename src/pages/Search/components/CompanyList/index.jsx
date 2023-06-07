@@ -24,12 +24,15 @@ import Modal from '../Modal';
 import { useSelector } from 'react-redux';
 import { Pagination } from 'antd';
 import { useEffect } from 'react';
-import { getAllCompannyJapanProfile } from '../../../../store/apiCall';
+import {
+  getAllCompannyJapanProfile,
+  getCompanyByCategory,
+} from '../../../../store/apiCall';
 import { scrollToTopSearch } from '../../../../helper';
 let numPages = 6;
 
 function CompanyList({ companys, page, category }) {
-  console.log('🚀 ~ file: index.jsx:32 ~ CompanyList ~ companys:', companys);
+  console.log('🚀 ~ file: index.jsx:35 ~ CompanyList ~ category:', category);
   const { t } = useTranslation();
   const location = useLocation();
   const currentPage = location.search.charAt(location.search.length - 1);
@@ -38,16 +41,30 @@ function CompanyList({ companys, page, category }) {
   const [current, setCurrent] = useState(1);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
+  console.log('🚀 ~ file: index.jsx:43 ~ CompanyList ~ data:', data);
   const navigate = useNavigate();
 
   const getData = value => {
-    getAllCompannyJapanProfile({
-      pages: (value - 1) * numPages,
-      limit: numPages,
-    }).then(data => {
-      setData(data);
-      setLoading(false);
-    });
+    if (category != 'All' && category != undefined) {
+      navigate(`?pages=${value}`);
+      setPages({ minValue: 0, maxValue: value * numPages });
+      getCompanyByCategory({
+        category,
+        pages: (value - 1) * numPages,
+        limit: numPages,
+      }).then(data => {
+        setData(data);
+        setLoading(false);
+      });
+    } else {
+      getAllCompannyJapanProfile({
+        pages: (value - 1) * numPages,
+        limit: numPages,
+      }).then(data => {
+        setData(data);
+        setLoading(false);
+      });
+    }
   };
 
   const handlePagination = value => {
@@ -67,6 +84,7 @@ function CompanyList({ companys, page, category }) {
       getData(currentPage);
       setCurrent(currentPage);
     } else if (page === 'home') {
+      setData(companys);
       getData(1);
     } else {
       setData(companys);
@@ -104,7 +122,7 @@ function CompanyList({ companys, page, category }) {
                 size="6"
                 md="6"
                 xl={page === 'search' ? '6' : '5'}
-                key={item.company_name}
+                key={item.email}
               >
                 <MDBCard className="shadow-0 border rounded-3 mt-3 mb-3">
                   <MDBCardBody

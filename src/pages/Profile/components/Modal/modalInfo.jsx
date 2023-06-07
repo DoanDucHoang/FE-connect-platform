@@ -12,18 +12,21 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Editor } from '@tinymce/tinymce-react';
 import { Col, Row } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UPLOAD_IMAGE } from '../../../../constant/constant';
 import axios from 'axios';
-import { updateClient } from '../../../../store/apiCall';
+import { updateClient, updateInfo } from '../../../../store/apiCall';
 import logoVN from '../../../../assets/logo2.png';
 import logoEN from '../../../../assets/logo3.png';
 import logoJP from '../../../../assets/logo4.png';
+import { editProfile } from '../../../../store/editSlice';
 
 export default function ModalInfo({ props }) {
   //   console.log('🚀 ~ file: modalInfo.jsx:24 ~ ModalInfo ~ props:', props);
   const data = props || [];
   const user = useSelector(state => state.auth.currentUser);
+  const edit = useSelector(state => state.edit.isFetching);
+  const dispatch = useDispatch();
   const { email, company_name } = user;
   const { t } = useTranslation();
   const [centredModal, setCentredModal] = useState(false);
@@ -58,8 +61,8 @@ export default function ModalInfo({ props }) {
 
   const handleSubmit = () => {
     const data = info;
-    // console.log('🚀 ~ file: modalInfo.jsx:65 ~ handleSubmit ~ data:', data);
-    //updateClient(data);
+    console.log('🚀 ~ file: modalInfo.jsx:65 ~ handleSubmit ~ data:', data);
+    updateInfo(data);
   };
 
   const toggleShow = () => setCentredModal(!centredModal);
@@ -276,15 +279,7 @@ export default function ModalInfo({ props }) {
                         placeholder="Q12, TPHCM"
                       />
                     </div>
-                    <div className="member__main_info_item">
-                      <h5>Company Name:</h5>
-                      <input
-                        onChange={handleChangeInfo}
-                        type="text"
-                        defaultValue={data[0]?.company_name}
-                        name="company_name"
-                      />
-                    </div>
+
                     <div className="member__main_info_item">
                       <h5>Link Website:</h5>
                       <input
@@ -302,7 +297,15 @@ export default function ModalInfo({ props }) {
               <MDBBtn color="secondary" onClick={toggleShow}>
                 Close
               </MDBBtn>
-              <MDBBtn onClick={() => handleSubmit()}>Save changes</MDBBtn>
+              <MDBBtn
+                onClick={() => {
+                  handleSubmit();
+                  dispatch(editProfile(!edit));
+                  toggleShow();
+                }}
+              >
+                Save changes
+              </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

@@ -61,6 +61,14 @@ export const updateProduct = async data => {
   }
 };
 
+export const updateInfo = async data => {
+  try {
+    const res = await axios.put(`${DOMAIN}getcompany/update_info`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const updateFeatures = async data => {
   try {
     const res = await axios.put(`${DOMAIN}getcompany/update_specialties`, data);
@@ -164,7 +172,7 @@ export const getCompanyByName = async data => {
 export const getCompanyByCategory = async data => {
   try {
     const res = await axios.post(
-      `${DOMAIN}getcompany/searchcompanycategory/`,
+      `${DOMAIN}getcompany/searchcompanycategory`,
       data
     );
     return res.data;
