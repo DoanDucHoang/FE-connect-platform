@@ -69,6 +69,17 @@ export const updateInfo = async data => {
   }
 };
 
+export const deleteProduct = async data => {
+  try {
+    const res = await axios.post(
+      `http://localhost:8080/server/getcompany/delete_product`,
+      data
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const updateFeatures = async data => {
   try {
     const res = await axios.put(`${DOMAIN}getcompany/update_specialties`, data);

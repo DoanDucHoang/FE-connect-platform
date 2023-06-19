@@ -31,7 +31,6 @@ export default function ModalInfo({ props }) {
   const { t } = useTranslation();
   const [centredModal, setCentredModal] = useState(false);
   const [info, setInfo] = useState(props);
-  // console.log('🚀 ~ file: modalInfo.jsx:31 ~ ModalInfo ~ info:', info);
   const checkboxValue = [];
 
   const upload = async file => {
@@ -61,7 +60,6 @@ export default function ModalInfo({ props }) {
 
   const handleSubmit = () => {
     const data = info;
-    console.log('🚀 ~ file: modalInfo.jsx:65 ~ handleSubmit ~ data:', data);
     updateInfo(data);
   };
 

@@ -56,11 +56,6 @@ export default function ModalCoreMember({ props }) {
 
   const handleSubmit = () => {
     const data = core;
-    // console.log(
-    //   '🚀 ~ file: modalCoreMember.jsx:59 ~ handleSubmit ~ data:',
-    //   data
-    // );
-
     updateCoreMember(data);
   };
 
@@ -199,7 +194,7 @@ export default function ModalCoreMember({ props }) {
                       span={3}
                       className="delete_button"
                     >
-                      {/* <button>{translateDeleteButton(language)}</button> */}
+                      <button>delete</button>
                     </Col>
                   </Row>
                 ))}

@@ -41,7 +41,6 @@ function CompanyList({ companys, page, category }) {
   const [current, setCurrent] = useState(1);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
-  console.log('🚀 ~ file: index.jsx:43 ~ CompanyList ~ data:', data);
   const navigate = useNavigate();
 
   const getData = value => {

@@ -56,10 +56,6 @@ export default function ModalSpecialties({ props }) {
 
   const handleSubmit = () => {
     const data = features;
-    // console.log(
-    //   '🚀 ~ file: modalSpecialties.jsx:59 ~ handleSubmit ~ data:',
-    //   data
-    // );
     updateFeatures(data);
   };
 

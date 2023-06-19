@@ -11,30 +11,6 @@ import logoVN from '../../assets/logo2.png';
 import logoEN from '../../assets/logo3.png';
 import logoJP from '../../assets/logo4.png';
 import { Button, Checkbox, Form, Input } from 'antd';
-import {
-  translateEstablishment,
-  translateEmployee,
-  translateCompanyLogo,
-  translatePreferred,
-  translateLanguageWork,
-  translateTypeOfBusiness,
-  translateCapital,
-  translateAssociationlogo,
-  translateDescription,
-  translateServices,
-  translateServicePicture,
-  translateDeleteButton,
-  translateAddButton,
-  translateCompanyFeatures,
-  translateCompanyFeaturesDesc,
-  translateCompanyCoreMembers,
-  translateFullName,
-  translateMemberPicture,
-  translateCompanyClients,
-  translateCompanyClientsName,
-  translateCompanyClientsLogo,
-  translateSubmitButton,
-} from '../../constant/language.js';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import Translate from '../../components/Translate';
@@ -306,7 +282,7 @@ const MemberProfile = () => {
             <Row>
               <Col xl={12} lg={12} md={24}>
                 <div className="member__main_info_item">
-                  <h5>{translateEstablishment(language)}</h5>
+                  <h5>{t('Years Of Establishment')}</h5>
                   <input
                     onChange={handleChangeInfo}
                     name="estalishment"
@@ -316,7 +292,7 @@ const MemberProfile = () => {
                   />
                 </div>
                 <div className="member__main_info_item">
-                  <h5>{translateEmployee(language)}</h5>
+                  <h5>{t('Number Of Employees')}</h5>
                   <input
                     onChange={handleChangeInfo}
                     name="employers"
@@ -348,8 +324,10 @@ const MemberProfile = () => {
                   />
                 </div>
                 <div className="member__main_info_item">
-                  <h5>{translateCompanyLogo(language)}</h5>
-                  <label htmlFor="image">{translatePreferred(language)}</label>
+                  <h5>{t(`Company's Logo`)}</h5>
+                  <label htmlFor="image">
+                    {t('Preferred: ( .jpg, .jpeg, .png)')}
+                  </label>
                   <input
                     id="image"
                     type="file"
@@ -360,7 +338,7 @@ const MemberProfile = () => {
                   />
                 </div>
                 <div className="member__main_info_item">
-                  <h5>{translateLanguageWork(language)} </h5>
+                  <h5>{t('Language Can Work')} </h5>
                   <div className="flag_country_container">
                     <div className="flag_country">
                       <input
@@ -412,7 +390,7 @@ const MemberProfile = () => {
               </Col>
               <Col xl={12} lg={12} md={24}>
                 <div className="member__main_info_item">
-                  <h5>{translateTypeOfBusiness(language)}</h5>
+                  <h5>{t('Type Of Business:')}</h5>
                   <select
                     name="ceategory"
                     id=""
@@ -444,7 +422,7 @@ const MemberProfile = () => {
                   </select>
                 </div>
                 <div className="member__main_info_item">
-                  <h5>{translateCapital(language)}</h5>
+                  <h5>{t('Company Capital Amount:')}</h5>
                   <input
                     onChange={handleChangeInfo}
                     name="capital"
@@ -476,8 +454,10 @@ const MemberProfile = () => {
                   />
                 </div>
                 <div className="member__main_info_item">
-                  <h5>{translateAssociationlogo(language)}</h5>
-                  <label htmlFor="image">{translatePreferred(language)}</label>
+                  <h5>{t('Association logo:')}</h5>
+                  <label htmlFor="image">
+                    {t('Preferred: ( .jpg, .jpeg, .png)')}
+                  </label>
                   <input
                     id="image"
                     type="file"
@@ -501,7 +481,7 @@ const MemberProfile = () => {
 
           <div className="member__description">
             <div className="member__description_title">
-              {translateDescription(language)}
+              {t('Company Description:')}
               <span className="required">*</span>
               <h5>{t('Company Description (Vietnamese)')}</h5>
             </div>
@@ -629,13 +609,15 @@ const MemberProfile = () => {
 
           <div className="member__services">
             <div className="member__description_title">
-              {translateServices(language)} <span className="required">*</span>
+              {t('Company Services:')} <span className="required">*</span>
             </div>
             {services.map(item => (
               <Row key={item.id}>
                 <Col span={10} className="member__services_image">
-                  <h5>{translateServicePicture(language)}</h5>
-                  <label htmlFor="image">{translatePreferred(language)}</label>
+                  <h5>{t('Service Picture:')}</h5>
+                  <label htmlFor="image">
+                    {t('Preferred: ( .jpg, .jpeg, .png)')}
+                  </label>
                   <input
                     onChange={e => handelChangeService(e, item)}
                     id="image"
@@ -820,20 +802,19 @@ const MemberProfile = () => {
                 </Col>
                 <Col span={4} className="delete_button">
                   <button onClick={() => handleDeleteService(item)}>
-                    {translateDeleteButton(language)}
+                    {t('Delete')}
                   </button>
                 </Col>
               </Row>
             ))}
             <button className="member__button" onClick={addNewService}>
-              {translateAddButton(language)}
+              {t('Add New')}
             </button>
           </div>
 
           <div className="member__features">
             <div className="member__description_title">
-              {translateCompanyFeatures(language)}{' '}
-              <span className="required">*</span>
+              {t('Company Features')} <span className="required">*</span>
             </div>
             <Row>
               {features.map(item => (
@@ -844,7 +825,7 @@ const MemberProfile = () => {
                 >
                   <Row align={'middle'}>
                     <span>
-                      {translateCompanyFeaturesDesc(language)} {item.id}
+                      {t('Feature')} {item.id}
                     </span>
                     <div className="member__features_image">
                       {item.speciality_picture && (
@@ -887,15 +868,12 @@ const MemberProfile = () => {
 
           <div className="member__core">
             <div className="member__description_title">
-              {translateCompanyCoreMembers(language)}{' '}
-              <span className="required">*</span>
+              {t('Company Core Members')} <span className="required">*</span>
             </div>
             {core.map(item => (
               <Row gutter={16} style={{ marginBottom: '10px' }} key={item.id}>
                 <Col span={7}>
-                  <div className="member__core_title">
-                    {translateFullName(language)}
-                  </div>
+                  <div className="member__core_title">{t('Full Name')}</div>
                   <input
                     onChange={e => handleChangeCore(e, item)}
                     className="member__core_input"
@@ -932,10 +910,10 @@ const MemberProfile = () => {
                 </Col>
                 <Col span={7}>
                   <div className="member__core_title">
-                    {translateMemberPicture(language)}
+                    {t('Member Picture')}
                   </div>
                   <label htmlFor="coreImage">
-                    {translatePreferred(language)}
+                    {t('Preferred: ( .jpg, .jpeg, .png)')}
                   </label>
                   <input
                     onChange={e => handleChangeCore(e, item)}
@@ -989,25 +967,24 @@ const MemberProfile = () => {
                   span={3}
                   className="delete_button"
                 >
-                  <button>{translateDeleteButton(language)}</button>
+                  <button>{t('Delete')}</button>
                 </Col>
               </Row>
             ))}
             <button className="member__button" onClick={addNewMember}>
-              {translateAddButton(language)}
+              {t('Add New')}
             </button>
           </div>
 
           <div className="member__clients">
             <div className="member__description_title">
-              {translateCompanyClients(language)}{' '}
-              <span className="required">*</span>
+              {t('Company Main Clients')} <span className="required">*</span>
             </div>
             {clients.map(item => (
               <Row gutter={16} key={item.id}>
                 <Col span={7}>
                   <div className="member__core_title">
-                    {translateCompanyClientsName(language)}
+                    {t('Client Company Name')}
                   </div>
                   <input
                     onChange={e => handleChangeClient(e, item)}
@@ -1018,10 +995,10 @@ const MemberProfile = () => {
                 </Col>
                 <Col span={7}>
                   <div className="member__core_title">
-                    {translateCompanyClientsLogo(language)}
+                    {t('Client Company Logo')}
                   </div>
                   <label htmlFor="clientImage">
-                    {translatePreferred(language)}
+                    {t('Preferred: ( .jpg, .jpeg, .png)')}
                   </label>
                   <input
                     onChange={e => handleChangeClient(e, item)}
@@ -1062,18 +1039,18 @@ const MemberProfile = () => {
                   span={3}
                   className="delete_button"
                 >
-                  <button>{translateDeleteButton(language)}</button>
+                  <button>{t('Delete')}</button>
                 </Col>
               </Row>
             ))}
             <button className="member__button" onClick={addNewClient}>
-              {translateAddButton(language)}
+              {t('Add New')}
             </button>
           </div>
           {/* <Button className="member__button_submit" type="submit">
             <span>{translateSubmitButton(language)}</span>
           </Button> */}
-          <input type="submit" value={translateSubmitButton(language)} />
+          <input type="submit" value={t('Update')} />
         </div>
       </form>
     </div>

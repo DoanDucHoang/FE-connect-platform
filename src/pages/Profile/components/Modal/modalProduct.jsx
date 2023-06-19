@@ -15,7 +15,7 @@ import { Col, Row } from 'antd';
 import axios from 'axios';
 import { UPLOAD_IMAGE } from '../../../../constant/constant';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProduct } from '../../../../store/apiCall';
+import { deleteProduct, updateProduct } from '../../../../store/apiCall';
 import { editProfile } from '../../../../store/editSlice';
 
 export default function ModalProduct({ props }) {
@@ -66,6 +66,10 @@ export default function ModalProduct({ props }) {
   const handleSubmit = () => {
     const data = services;
     updateProduct(data);
+  };
+
+  const handleDelete = id => {
+    deleteProduct({ id });
   };
 
   return (
@@ -283,9 +287,14 @@ export default function ModalProduct({ props }) {
                     </div>
                   </Col>
                   <Col span={4} className="delete_button">
-                    {/* <button onClick={() => handleDeleteService(item)}>
-                      {translateDeleteButton(language)}
-                    </button> */}
+                    <button
+                      onClick={() => {
+                        handleDelete(item.id);
+                        toggleShow();
+                      }}
+                    >
+                      delete
+                    </button>
                   </Col>
                 </Row>
               ))}
